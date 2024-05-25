@@ -1,5 +1,26 @@
 import { z } from 'zod';
 import { createTRPCRouter, privateProcedure } from '../trpc';
+import { WorkoutStatus } from '@prisma/client';
+import { ValidationError } from '../errors';
+
+const getItDoneInput = z.object({
+    workoutId: z.string().min(1),
+    workoutExercises: z.array(
+        z.object({
+            exerciseId: z.string().min(1),
+            exerciseIndex: z.number(),
+            sets: z.array(
+                z.object({
+                    mins: z.number().optional(),
+                    distance: z.number().optional(),
+                    kcal: z.number().optional(),
+                    reps: z.number().optional(),
+                    lbs: z.number().optional(),
+                }),
+            ),
+        }),
+    ),
+});
 
 export const workoutRouter = createTRPCRouter({
     infinite: privateProcedure
@@ -161,5 +182,144 @@ export const workoutRouter = createTRPCRouter({
                     id: true,
                 },
             });
+        }),
+
+    partialSave: privateProcedure
+        .input(getItDoneInput)
+        .mutation(async ({ ctx, input }) => {
+            const workout = await ctx.db.workout.findUniqueOrThrow({
+                where: {
+                    userId: ctx.session.userId,
+                    id: input.workoutId,
+                },
+                select: {
+                    id: true,
+                    status: true,
+                },
+            });
+
+            if (workout.status === WorkoutStatus.DONE) {
+                return false;
+            }
+
+            const workoutExercisesIds = await ctx.db.workoutExercise.findMany({
+                where: { workoutId: workout.id },
+                select: { id: true },
+            });
+
+            const partialSave = await ctx.db.$transaction(async (db) => {
+                await ctx.db.workoutSet.deleteMany({
+                    where: {
+                        workoutExerciseId: {
+                            in: workoutExercisesIds.map((we) => we.id),
+                        },
+                    },
+                });
+
+                await ctx.db.workoutExercise.deleteMany({
+                    where: { workoutId: workout.id },
+                });
+
+                for (const workoutExercise of input.workoutExercises) {
+                    await ctx.db.workoutExercise.create({
+                        data: {
+                            userId: ctx.session.userId,
+                            workoutId: workout.id,
+                            exerciseId: workoutExercise.exerciseId,
+                            exerciseIndex: workoutExercise.exerciseIndex,
+                            sets: {
+                                createMany: {
+                                    data: workoutExercise.sets.map(
+                                        (set, setIdx) => ({
+                                            setIndex: setIdx,
+                                            mins: set.mins,
+                                            distance: set.distance,
+                                            kcal: set.kcal,
+                                            lbs: set.lbs,
+                                            reps: set.reps,
+                                        }),
+                                    ),
+                                },
+                            },
+                        },
+                    });
+                }
+
+                return true;
+            });
+
+            return partialSave;
+        }),
+
+    getItDone: privateProcedure
+        .input(getItDoneInput)
+        .mutation(async ({ ctx, input }) => {
+            const workout = await ctx.db.workout.findUniqueOrThrow({
+                where: {
+                    userId: ctx.session.userId,
+                    id: input.workoutId,
+                },
+                select: {
+                    id: true,
+                    status: true,
+                },
+            });
+
+            if (workout.status === WorkoutStatus.DONE) {
+                throw new ValidationError(
+                    'La rútina ya habia sido completada anteriormente.',
+                    {
+                        workoutId: workout.id,
+                    },
+                );
+            }
+
+            const workoutExercisesIds = await ctx.db.workoutExercise.findMany({
+                where: { workoutId: workout.id },
+                select: { id: true },
+            });
+
+            await ctx.db.$transaction(async (db) => {
+                await ctx.db.workoutSet.deleteMany({
+                    where: {
+                        workoutExerciseId: {
+                            in: workoutExercisesIds.map((we) => we.id),
+                        },
+                    },
+                });
+
+                await ctx.db.workoutExercise.deleteMany({
+                    where: { workoutId: workout.id },
+                });
+
+                for (const workoutExercise of input.workoutExercises) {
+                    await ctx.db.workoutExercise.create({
+                        data: {
+                            userId: ctx.session.userId,
+                            workoutId: workout.id,
+                            exerciseId: workoutExercise.exerciseId,
+                            exerciseIndex: workoutExercise.exerciseIndex,
+                            sets: {
+                                createMany: {
+                                    data: workoutExercise.sets.map(
+                                        (set, setIdx) => ({
+                                            setIndex: setIdx,
+                                            mins: set.mins,
+                                            distance: set.distance,
+                                            kcal: set.kcal,
+                                            lbs: set.lbs,
+                                            reps: set.reps,
+                                        }),
+                                    ),
+                                },
+                            },
+                        },
+                    });
+                }
+
+                return true;
+            });
+
+            return { id: workout.id };
         }),
 });

@@ -7,7 +7,6 @@ import {
     EllipsisVerticalIcon,
     TrashIcon,
 } from '@heroicons/react/24/outline';
-import { Button } from '~/components/shared/Button';
 import { useWorkoutExercise } from './useWorkoutExercise';
 import {
     Dropdown,
@@ -23,15 +22,11 @@ export function WorkoutExerciseActions() {
     return (
         <Dropdown
             className="mx-4 w-56"
-            trigger={
-                // <Button size="icon" variant="ghost">
-                    <EllipsisVerticalIcon className="size-5" />
-                // </Button>
-            }
+            trigger={<EllipsisVerticalIcon className="size-5" />}
         >
             <DropdownLabel>Cambio</DropdownLabel>
             <DropdownGroup>
-                <DropdownItem onSelect={() => {}}>
+                <DropdownItem onSelect={onChange}>
                     <ArrowsRightLeftIcon className="mr-1 size-4" />
                     <span>Cambiar ejercicio</span>
                 </DropdownItem>
@@ -65,7 +60,7 @@ export function WorkoutExerciseActions() {
 
             <DropdownLabel>Peligro</DropdownLabel>
             <DropdownGroup>
-                <DropdownItem onSelect={() => {}} className="text-red-600">
+                <DropdownItem onSelect={onRemove} className="text-red-600">
                     <TrashIcon className="mr-1 size-4" />
                     <span>Remover ejercicio</span>
                 </DropdownItem>
