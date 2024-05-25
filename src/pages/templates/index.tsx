@@ -3,4 +3,4 @@ import { authenticatedRoute } from '~/utils/redirects';
 
 export const getServerSideProps: GetServerSideProps = authenticatedRoute;
 
-export { Home as default } from '~/components/Home';
+export { Templates as default } from '~/components/Templates';

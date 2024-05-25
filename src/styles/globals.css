@@ -3,31 +3,68 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+
+    --color-brand-100: theme(colors.brand.100);
+    --color-brand-200: theme(colors.brand.200);
+    --color-brand-300: theme(colors.brand.300);
+    --color-brand-400: theme(colors.brand.400);
+    --color-brand-500: theme(colors.brand.500);
+    --color-brand-600: theme(colors.brand.600);
+    --color-brand-700: theme(colors.brand.700);
+    --color-brand-800: theme(colors.brand.800);
+    --color-brand-900: theme(colors.brand.900);
+    --color-brand-950: theme(colors.brand.950);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+html,
+body,
+#__next {
+    @apply h-dvh scroll-smooth bg-white font-sans text-brand-900 antialiased;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+/* This correctly styles the minimal progress bar that is displayed when navigating between pages */
+#nprogress {
+    @apply pointer-events-none z-50;
+}
+#nprogress .bar {
+    @apply fixed left-0 top-0 z-50 h-0.5 w-full bg-brand-500;
+}
+
+@keyframes swaying {
+    0%,
+    100% {
+        transform: rotate(5deg);
+        animation-timing-function: ease-in-out;
+    }
+    50% {
+        transform: rotate(-5deg);
+        animation-timing-function: ease-in-out;
+    }
+}
+
+.animate-swaying {
+    animation: swaying 2.5s infinite;
 }

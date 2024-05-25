@@ -1,0 +1,158 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(uuid())
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  username       String    @unique
+  hashedPassword Bytes
+  session        Session[]
+
+  categories       ExerciseCategory[]
+  exercises        Exercise[]
+  workoutExercises WorkoutExercise[]
+  workouts         Workout[]
+  workoutTemplates WorkoutTemplate[]
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expiresAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+enum ExerciseType {
+  STRENGTH
+  AEROBIC
+}
+
+model ExerciseCategory {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name      String
+  type      ExerciseType @default(STRENGTH)
+  exercises Exercise[]
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  @@unique([userId, name])
+}
+
+model Exercise {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+
+  category   ExerciseCategory @relation(fields: [categoryId], references: [id])
+  categoryId String
+
+  workoutExercises WorkoutExercise[]
+  workoutTemplates ExerciseOnWorkoutTemplate[]
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  @@unique([categoryId, name])
+}
+
+model WorkoutSet {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  setIndex Int
+
+  // Aerobic related
+  mins     Float @default(0)
+  distance Float @default(0)
+  kcal     Int   @default(0)
+
+  // Strength related
+  lbs  Float @default(0)
+  reps Int   @default(0)
+
+  workoutExercise   WorkoutExercise? @relation(fields: [workoutExerciseId], references: [id])
+  workoutExerciseId String?
+}
+
+model WorkoutExercise {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  exerciseIndex Int
+
+  sets WorkoutSet[]
+
+  notes String?
+
+  workout   Workout? @relation(fields: [workoutId], references: [id])
+  workoutId String?
+
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  exerciseId String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+enum WorkoutStatus {
+  DRAFTED
+  DONE
+}
+
+model Workout {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  status      WorkoutStatus @default(DRAFTED)
+  completedAt DateTime?
+
+  workoutExercises WorkoutExercise[]
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model WorkoutTemplate {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name      String
+  exercises ExerciseOnWorkoutTemplate[]
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model ExerciseOnWorkoutTemplate {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  exerciseIndex Int
+
+  exercise          Exercise         @relation(fields: [exerciseId], references: [id])
+  exerciseId        String
+  workoutTemplate   WorkoutTemplate? @relation(fields: [workoutTemplateId], references: [id])
+  workoutTemplateId String?
+}
