@@ -1,11 +1,12 @@
-import { Button } from '~/components/shared/Button';
-import { useWorkout } from './useWorkout';
-import { TrashIcon } from '@heroicons/react/24/outline';
 import { api } from '~/utils/api';
-import { useModal } from '~/components/shared/Modal';
+import { Button } from '~/components/shared/Button';
 import { ConfirmationModal } from '~/components/shared/ConfirmationModal';
-import toast from 'react-hot-toast';
+import { EditNameModal } from './EditNameModal';
+import { TrashIcon } from '@heroicons/react/24/outline';
+import { useModal } from '~/components/shared/Modal';
 import { useRouter } from 'next/router';
+import { useWorkout } from '../useWorkout';
+import toast from 'react-hot-toast';
 
 export function WorkoutHeader() {
     const { workoutId, name } = useWorkout();
@@ -20,11 +21,16 @@ export function WorkoutHeader() {
         },
     });
 
+    const editNameModal = useModal();
     const confirmationModal = useModal();
 
     return (
         <div className="flex items-center justify-between">
-            <Button className="text-2xl" variant="ghost">
+            <Button
+                className="text-2xl"
+                variant="ghost"
+                onClick={editNameModal.open}
+            >
                 {name}
             </Button>
 
@@ -35,6 +41,8 @@ export function WorkoutHeader() {
             >
                 <TrashIcon className="size-5" />
             </Button>
+
+            <EditNameModal {...editNameModal.props} />
 
             <ConfirmationModal
                 {...confirmationModal.props}

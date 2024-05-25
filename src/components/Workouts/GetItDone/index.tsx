@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { useWatch } from 'react-hook-form';
 import { useDebouncedWorkout } from './useDebouncedWorkout';
 import toast from 'react-hot-toast';
+import { Shimmer } from './Shimmer';
 
 export const getItDoneSchema = z.object({
     workoutExercises: z.array(
@@ -44,7 +45,7 @@ export function GetItDone() {
         onSuccess(data) {
             queryClient.workout.infinite.invalidate();
             queryClient.exercise.allByCategory.invalidate();
-            
+
             router.replace(`/workouts/${data.id}`);
         },
     });
@@ -151,21 +152,21 @@ export function GetItDone() {
 
     return (
         <Page>
-            {isLoading && <div>Cargando...</div>}
+            {isLoading && <Shimmer />}
 
             {data && (
                 <WorkoutProvider workout={data}>
-                    <Form form={form} onSubmit={handleSubmit}>
-                        <div className="space-y-4 rounded-xl bg-brand-50 p-4">
-                            <WorkoutHeader />
+                    <div className="space-y-4 rounded-xl bg-brand-50 p-4">
+                        <WorkoutHeader />
 
+                        <Form form={form} onSubmit={handleSubmit}>
                             <WorkoutExercisesList />
 
                             <SubmitButton className="w-full">
                                 Finalizar
                             </SubmitButton>
-                        </div>
-                    </Form>
+                        </Form>
+                    </div>
                 </WorkoutProvider>
             )}
         </Page>

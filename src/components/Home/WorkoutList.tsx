@@ -1,11 +1,10 @@
-import { SparklesIcon } from '@heroicons/react/24/outline';
-import { RouterOutputs, api } from '~/utils/api';
-import { InfiniteList } from '../shared/InfiniteList';
 import { cn } from '~/utils/cn';
-import { WorkoutStatus } from '@prisma/client';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { formatDate } from '~/utils/transforms';
+import { InfiniteList } from '../shared/InfiniteList';
+import { RouterOutputs, api } from '~/utils/api';
+import { SparklesIcon } from '@heroicons/react/24/outline';
+import { WorkoutStatus } from '@prisma/client';
+import Link from 'next/link';
 
 export function WorkoutList() {
     const { data, isLoading, fetchNextPage, hasNextPage } =
@@ -20,7 +19,7 @@ export function WorkoutList() {
         <div className="mt-4">
             <h2 className="mb-2 text-3xl font-medium">Últimas rútinas</h2>
 
-            {isLoading && <div>Cargando</div>}
+            {isLoading && <Shimmer />}
 
             {!isLoading &&
                 (workouts.length === 0 ? (
@@ -100,6 +99,33 @@ function EmptyWorkouts() {
         <div className="flex flex-col items-center space-y-2 rounded-md bg-brand-100 p-8 text-brand-700">
             <SparklesIcon className="h-10 w-10" />
             <p className="text-sm font-semibold">No se han creado rutinas...</p>
+        </div>
+    );
+}
+
+function Shimmer() {
+    return (
+        <div className="flex animate-pulse flex-col space-y-4">
+            {Array.from({ length: 3 }).map((_, i) => (
+                <div
+                    key={`shimmer-div-${i}`}
+                    className="rounded-lg bg-brand-200 px-5 py-4"
+                >
+                    <div className="flex flex-col space-y-2">
+                        <div className="mb-2 flex flex-col gap-y-1">
+                            <div className="h-4 w-40 rounded-md bg-brand-400"></div>
+                            <div className="h-3 w-20 rounded-md bg-brand-400"></div>
+                        </div>
+
+                        <div className="h-3 w-52 rounded-md bg-brand-400"></div>
+                        <div className="h-3 w-52 rounded-md bg-brand-400"></div>
+                        <div className="h-3 w-52 rounded-md bg-brand-400"></div>
+                        <div className="h-3 w-52 rounded-md bg-brand-400"></div>
+                        <div className="h-3 w-52 rounded-md bg-brand-400"></div>
+                        <div className="h-3 w-52 rounded-md bg-brand-400"></div>
+                    </div>
+                </div>
+            ))}
         </div>
     );
 }
