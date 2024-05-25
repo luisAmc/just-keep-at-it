@@ -102,6 +102,8 @@ model WorkoutExercise {
 
   notes String?
 
+  completedAt DateTime?
+
   workout   Workout? @relation(fields: [workoutId], references: [id])
   workoutId String?
 

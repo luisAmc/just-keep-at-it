@@ -10,6 +10,7 @@ import { z } from 'zod';
 import { useEffect, useState } from 'react';
 import { useWatch } from 'react-hook-form';
 import { useDebouncedWorkout } from './useDebouncedWorkout';
+import toast from 'react-hot-toast';
 
 export const getItDoneSchema = z.object({
     workoutExercises: z.array(
@@ -31,6 +32,8 @@ export const getItDoneSchema = z.object({
 export function GetItDone() {
     const router = useRouter();
 
+    const queryClient = api.useUtils();
+
     const { data, isLoading } = api.workout.byId.useQuery(
         { workoutId: router.query.workoutId as string },
         { refetchOnWindowFocus: false },
@@ -39,6 +42,9 @@ export function GetItDone() {
     const partialSave = api.workout.partialSave.useMutation();
     const getItDone = api.workout.getItDone.useMutation({
         onSuccess(data) {
+            queryClient.workout.infinite.invalidate();
+            queryClient.exercise.allByCategory.invalidate();
+            
             router.replace(`/workouts/${data.id}`);
         },
     });
@@ -136,7 +142,11 @@ export function GetItDone() {
             workoutExercises,
         };
 
-        getItDone.mutateAsync(input);
+        toast.promise(getItDone.mutateAsync(input), {
+            loading: 'Completando rútina...',
+            success: '¡Rútina completada!',
+            error: 'No se pudo completar la rútina.',
+        });
     }
 
     return (

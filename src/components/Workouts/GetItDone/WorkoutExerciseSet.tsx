@@ -20,7 +20,7 @@ export function WorkoutExerciseSet({
 
     return (
         <div className="flex justify-between py-2">
-            <div className="grid grid-cols-3 gap-x-2">
+            <div className="flex items-center gap-x-2">
                 {
                     {
                         [ExerciseType.AEROBIC]: <Aerobic name={name} />,
@@ -29,9 +29,9 @@ export function WorkoutExerciseSet({
                 }
             </div>
 
-            <LastSession setIndex={setIndex} />
+            <div className="flex gap-x-2">
+                <LastSession setIndex={setIndex} />
 
-            <div>
                 <Button size="icon" variant="ghost" onClick={onRemove}>
                     <TrashIcon className="size-5" />
                 </Button>
@@ -72,7 +72,7 @@ function Strength({ name }: StrengthProps) {
 }
 
 function LastSession({ setIndex }: { setIndex: number }) {
-    const { type, lastSession } = useWorkoutExercise();
+    const { formName, type, lastSession } = useWorkoutExercise();
 
     if (!lastSession) {
         return null;
@@ -84,9 +84,16 @@ function LastSession({ setIndex }: { setIndex: number }) {
         return null;
     }
 
+    const form = useFormContext();
+
+    function handleClick() {
+        form.setValue(`${formName}.sets.${setIndex}.lbs`, lastSessionSet.lbs);
+        form.setValue(`${formName}.sets.${setIndex}.reps`, lastSessionSet.reps);
+    }
+
     return (
         <div className="flex justify-end">
-            <Button variant="ghost" onClick={() => {}}>
+            <Button variant="ghost" onClick={handleClick}>
                 {type === ExerciseType.STRENGTH ? (
                     <>
                         <span>
@@ -107,11 +114,11 @@ function LastSession({ setIndex }: { setIndex: number }) {
                     </>
                 ) : (
                     <>
-                        <span>
+                        {/* <span>
                             <span className="text-sm">
                                 {lastSessionSet.mins}
                             </span>
-                            <span className="text-xs">mins</span>
+                            <span className="text-xs">m</span>
                         </span>
 
                         <span className="text-sm text-slate-500">x</span>
@@ -120,7 +127,7 @@ function LastSession({ setIndex }: { setIndex: number }) {
                             <span className="text-sm">
                                 {lastSessionSet.distance}
                             </span>
-                            <span className="text-xs">dist</span>
+                            <span className="text-xs">d</span>
                         </span>
 
                         <span className="text-sm text-slate-500">x</span>
@@ -129,8 +136,8 @@ function LastSession({ setIndex }: { setIndex: number }) {
                             <span className="text-sm">
                                 {lastSessionSet.kcal}
                             </span>
-                            <span className="text-xs">kcal</span>
-                        </span>
+                            <span className="text-xs">kc</span>
+                        </span> */}
                     </>
                 )}
             </Button>

@@ -16,12 +16,6 @@ import { WorkoutExerciseSet } from './WorkoutExerciseSet';
 import { WorkoutExerciseActions } from './WorkoutExerciseActions';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 
-const spring = {
-    type: 'spring',
-    damping: 20,
-    stiffness: 250,
-};
-
 export function WorkoutExercise() {
     const { name, formName } = useWorkoutExercise();
 

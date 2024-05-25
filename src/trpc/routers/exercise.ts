@@ -1,5 +1,6 @@
 import { WorkoutStatus } from '@prisma/client';
 import { createTRPCRouter, privateProcedure } from '../trpc';
+import { z } from 'zod';
 
 export const exerciseRouter = createTRPCRouter({
     allByCategory: privateProcedure.query(async ({ ctx }) => {
@@ -34,7 +35,7 @@ export const exerciseRouter = createTRPCRouter({
                                     status: { equals: WorkoutStatus.DONE },
                                 },
                             },
-                            orderBy: { workout: { completedAt: 'desc' } },
+                            orderBy: { completedAt: 'desc' },
                             take: 1,
                         },
                     },
@@ -57,4 +58,34 @@ export const exerciseRouter = createTRPCRouter({
 
         return exercisesByCategory;
     }),
+
+    create: privateProcedure
+        .input(
+            z.object({
+                name: z.string().min(1),
+                categoryId: z.string().min(1),
+            }),
+        )
+        .mutation(async ({ ctx, input }) => {
+            const category = await ctx.db.exerciseCategory.findFirstOrThrow({
+                where: {
+                    userId: ctx.session.userId,
+                    id: input.categoryId,
+                },
+                select: {
+                    id: true,
+                },
+            });
+
+            return ctx.db.exercise.create({
+                data: {
+                    userId: ctx.session.userId,
+                    categoryId: category.id,
+                    name: input.name,
+                },
+                select: {
+                    id: true,
+                },
+            });
+        }),
 });

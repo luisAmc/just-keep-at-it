@@ -26,7 +26,7 @@ export const workoutRouter = createTRPCRouter({
     infinite: privateProcedure
         .input(
             z.object({
-                limit: z.number().default(1),
+                limit: z.number().default(5),
                 cursor: z.string().nullish(),
             }),
         )
@@ -38,7 +38,7 @@ export const workoutRouter = createTRPCRouter({
                 },
                 cursor: input.cursor ? { id: input.cursor } : undefined,
                 orderBy: {
-                    id: 'desc',
+                    createdAt: 'desc',
                 },
                 select: {
                     id: true,
@@ -61,6 +61,9 @@ export const workoutRouter = createTRPCRouter({
                                     name: true,
                                 },
                             },
+                        },
+                        orderBy: {
+                            exerciseIndex: 'asc',
                         },
                     },
                 },
@@ -116,7 +119,13 @@ export const workoutRouter = createTRPCRouter({
                                     lbs: true,
                                     reps: true,
                                 },
+                                orderBy: {
+                                    setIndex: 'asc',
+                                },
                             },
+                        },
+                        orderBy: {
+                            exerciseIndex: 'asc',
                         },
                     },
                 },
@@ -279,7 +288,7 @@ export const workoutRouter = createTRPCRouter({
                 select: { id: true },
             });
 
-            await ctx.db.$transaction(async (db) => {
+            const completedWorkout = await ctx.db.$transaction(async (db) => {
                 await ctx.db.workoutSet.deleteMany({
                     where: {
                         workoutExerciseId: {
@@ -299,6 +308,7 @@ export const workoutRouter = createTRPCRouter({
                             workoutId: workout.id,
                             exerciseId: workoutExercise.exerciseId,
                             exerciseIndex: workoutExercise.exerciseIndex,
+                            completedAt: new Date(),
                             sets: {
                                 createMany: {
                                     data: workoutExercise.sets.map(
@@ -317,9 +327,62 @@ export const workoutRouter = createTRPCRouter({
                     });
                 }
 
-                return true;
+                return ctx.db.workout.update({
+                    where: {
+                        userId: ctx.session.userId,
+                        id: input.workoutId,
+                    },
+                    data: {
+                        status: WorkoutStatus.DONE,
+                        completedAt: new Date(),
+                    },
+                    select: {
+                        id: true,
+                    },
+                });
             });
 
-            return { id: workout.id };
+            return completedWorkout;
+        }),
+
+    doItAgain: privateProcedure
+        .input(z.object({ workoutId: z.string().min(1) }))
+        .mutation(async ({ ctx, input }) => {
+            const workoutToCopy = await ctx.db.workout.findUniqueOrThrow({
+                where: {
+                    userId: ctx.session.userId,
+                    id: input.workoutId,
+                },
+                include: {
+                    workoutExercises: {
+                        select: {
+                            exerciseId: true,
+                            exerciseIndex: true,
+                        },
+                    },
+                },
+            });
+
+            return ctx.db.workout.create({
+                data: {
+                    userId: ctx.session.userId,
+                    name: workoutToCopy.name,
+                    workoutExercises: {
+                        createMany: {
+                            data: workoutToCopy.workoutExercises.map(
+                                (workoutExercise) => ({
+                                    userId: ctx.session.userId,
+                                    exerciseId: workoutExercise.exerciseId,
+                                    exerciseIndex:
+                                        workoutExercise.exerciseIndex,
+                                }),
+                            ),
+                        },
+                    },
+                },
+                select: {
+                    id: true,
+                },
+            });
         }),
 });

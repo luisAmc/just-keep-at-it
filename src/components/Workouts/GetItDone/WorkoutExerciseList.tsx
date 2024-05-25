@@ -1,5 +1,5 @@
 import { Button } from '~/components/shared/Button';
-import { PlusIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, SparklesIcon } from '@heroicons/react/24/outline';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { WorkoutExercise } from './WorkoutExercise';
@@ -29,14 +29,17 @@ export function WorkoutExercisesList() {
     const addChangeExerciseSlideOver = useAddChangeExerciseSlideOver();
 
     function handleAdd(exerciseId: string) {
-        workoutExercisesFieldArray.append({ exerciseId, sets: [] });
+        workoutExercisesFieldArray.append({
+            exerciseId,
+            sets: [{ mins: '', distance: '', kcal: '', reps: '', lbs: '' }],
+        });
     }
 
     function handleChange(exerciseId: string, exerciseIndex: number) {
         workoutExercisesFieldArray.remove(exerciseIndex);
         workoutExercisesFieldArray.insert(exerciseIndex, {
             exerciseId,
-            sets: [],
+            sets: [{ mins: '', distance: '', kcal: '', reps: '', lbs: '' }],
         });
     }
 
@@ -58,29 +61,41 @@ export function WorkoutExercisesList() {
     return (
         <>
             <div ref={animateParent} className="space-y-2">
-                {workoutExercisesFieldArray.fields.map(
-                    (workoutExercise, idx) => (
-                        <div key={workoutExercise.id}>
-                            <WorkoutExerciseProvider
-                                exerciseId={(workoutExercise as any).exerciseId}
-                                formName={`${FIELD_ARRAY_NAME}.${idx}`}
-                                isFirst={idx === 0}
-                                isLast={idx === maxIndex}
-                                onRemove={() => handleRemove(idx)}
-                                onMove={(moveAction) =>
-                                    handleMove(moveAction, idx)
-                                }
-                                onChange={() =>
-                                    addChangeExerciseSlideOver.open({
-                                        type: 'change',
-                                        changeIndex: idx,
-                                    })
-                                }
-                            >
-                                <WorkoutExercise />
-                            </WorkoutExerciseProvider>
-                        </div>
-                    ),
+                {workoutExercisesFieldArray.fields.length > 0 ? (
+                    workoutExercisesFieldArray.fields.map(
+                        (workoutExercise, idx) => (
+                            <div key={workoutExercise.id}>
+                                <WorkoutExerciseProvider
+                                    exerciseId={
+                                        (workoutExercise as any).exerciseId
+                                    }
+                                    formName={`${FIELD_ARRAY_NAME}.${idx}`}
+                                    isFirst={idx === 0}
+                                    isLast={idx === maxIndex}
+                                    onRemove={() => handleRemove(idx)}
+                                    onMove={(moveAction) =>
+                                        handleMove(moveAction, idx)
+                                    }
+                                    onChange={() =>
+                                        addChangeExerciseSlideOver.open({
+                                            type: 'change',
+                                            changeIndex: idx,
+                                        })
+                                    }
+                                >
+                                    <WorkoutExercise />
+                                </WorkoutExerciseProvider>
+                            </div>
+                        ),
+                    )
+                ) : (
+                    <div className="flex flex-col items-center space-y-2 rounded-md bg-brand-100 p-8 text-brand-500">
+                        <SparklesIcon className="h-10 w-10" />
+
+                        <p className="text-sm font-semibold">
+                            La rútina no tiene ejercicios...
+                        </p>
+                    </div>
                 )}
             </div>
 

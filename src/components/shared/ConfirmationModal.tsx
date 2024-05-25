@@ -24,7 +24,7 @@ export function ConfirmationModal({
                 <div className="text-center font-medium">{children}</div>
 
                 <div className="grid grid-cols-1 gap-2 pt-4 sm:grid-cols-2">
-                    <Button onClick={onConfirm}>
+                    <Button variant="destructive" onClick={onConfirm}>
                         <TrashIcon className="mr-1 size-4" />
                         <span>Confirmar</span>
                     </Button>

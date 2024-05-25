@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 import colors from "tailwindcss/colors";
 
-const brand = colors.sky;
+const brand = colors.teal;
 
 const config: Config = {
   content: ["./src/**/*.{ts,tsx}"],

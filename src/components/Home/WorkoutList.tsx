@@ -5,6 +5,7 @@ import { cn } from '~/utils/cn';
 import { WorkoutStatus } from '@prisma/client';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { formatDate } from '~/utils/transforms';
 
 export function WorkoutList() {
     const { data, isLoading, fetchNextPage, hasNextPage } =
@@ -25,15 +26,20 @@ export function WorkoutList() {
                 (workouts.length === 0 ? (
                     <EmptyWorkouts />
                 ) : (
-                    <InfiniteList
-                        length={workouts.length}
-                        hasNext={!!hasNextPage}
-                        next={fetchNextPage}
-                    >
-                        {workouts.map((workout) => (
-                            <WorkoutCard key={workout.id} workout={workout} />
-                        ))}
-                    </InfiniteList>
+                    <div className="flex flex-col gap-y-2">
+                        <InfiniteList
+                            length={workouts.length}
+                            hasNext={!!hasNextPage}
+                            next={fetchNextPage}
+                        >
+                            {workouts.map((workout) => (
+                                <WorkoutCard
+                                    key={workout.id}
+                                    workout={workout}
+                                />
+                            ))}
+                        </InfiniteList>
+                    </div>
                 ))}
         </div>
     );
@@ -44,6 +50,8 @@ interface WorkoutCardProps {
 }
 
 function WorkoutCard({ workout }: WorkoutCardProps) {
+    const isDone = workout.status === WorkoutStatus.DONE;
+
     return (
         <Link
             href={
@@ -54,7 +62,7 @@ function WorkoutCard({ workout }: WorkoutCardProps) {
         >
             <div
                 className={cn(
-                    'w-full rounded-xl border p-4 text-start shadow-sm',
+                    'w-full rounded-lg border border-brand-500 p-4 text-start shadow-sm',
                     workout.status === WorkoutStatus.DRAFTED
                         ? 'bg-white'
                         : 'bg-brand-100',
@@ -62,12 +70,26 @@ function WorkoutCard({ workout }: WorkoutCardProps) {
             >
                 <h3 className="text-lg font-medium">{workout.name}</h3>
 
-                {workout.workoutExercises.map(({ id, exercise }, idx) => (
-                    <div key={id} className="space-x-1.5">
-                        <span className="text-xs font-medium">{idx + 1}.</span>
-                        <span className="text-sm">{exercise.name}</span>
-                    </div>
-                ))}
+                <span className="itmes-center flex gap-x-1 text-xs">
+                    <span>{isDone ? 'Finalizado el' : 'Creado el'}</span>
+                    <span className="font-medium capitalize">
+                        {formatDate(
+                            isDone ? workout.completedAt! : workout.createdAt,
+                            'EEEE, dd MMM h:mm aaaa',
+                        )}
+                    </span>
+                </span>
+
+                <div className="mt-2">
+                    {workout.workoutExercises.map(({ id, exercise }, idx) => (
+                        <div key={id} className="space-x-1.5">
+                            <span className="text-xs font-medium">
+                                {idx + 1}.
+                            </span>
+                            <span className="text-sm">{exercise.name}</span>
+                        </div>
+                    ))}
+                </div>
             </div>
         </Link>
     );
