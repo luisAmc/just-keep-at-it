@@ -19,6 +19,7 @@ export const exerciseRouter = createTRPCRouter({
                         workoutExercises: {
                             select: {
                                 id: true,
+                                notes: true,
                                 sets: {
                                     select: {
                                         id: true,

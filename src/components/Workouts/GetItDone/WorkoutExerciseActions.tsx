@@ -21,7 +21,7 @@ export function WorkoutExerciseActions() {
 
     return (
         <Dropdown
-            className="mx-4 w-56"
+            className="mx-4"
             trigger={<EllipsisVerticalIcon className="size-5" />}
         >
             <DropdownLabel>Cambio</DropdownLabel>

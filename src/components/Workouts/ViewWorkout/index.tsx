@@ -52,7 +52,7 @@ export function ViewWorkout() {
                         <h1 className="text-2xl">{data.name}</h1>
 
                         <Dropdown
-                            className="mx-4 w-56"
+                            className="mx-4"
                             trigger={
                                 <EllipsisVerticalIcon className="size-5" />
                             }
@@ -130,6 +130,12 @@ export function ViewWorkout() {
                                             {workoutExercise.sets.length} sets
                                         </span>
                                     </div>
+
+                                    {workoutExercise.notes && (
+                                        <p className="mt-2 text-pretty px-2 text-xs">
+                                            {workoutExercise.notes}
+                                        </p>
+                                    )}
 
                                     {/* Sets */}
                                     <div className="pt-2">

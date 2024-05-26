@@ -15,9 +15,10 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { WorkoutExerciseSet } from './WorkoutExerciseSet';
 import { WorkoutExerciseActions } from './WorkoutExerciseActions';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { SimpleInput } from '~/components/shared/SimpleInput';
 
 export function WorkoutExercise() {
-    const { name, formName } = useWorkoutExercise();
+    const { name, formName, lastSession } = useWorkoutExercise();
 
     const [animateParent] = useAutoAnimate<HTMLDivElement>();
 
@@ -89,14 +90,34 @@ export function WorkoutExercise() {
                             ))}
 
                             {setsFieldArray.fields.length > 0 ? (
-                                <Button
-                                    variant="dashed"
-                                    className="w-full"
-                                    onClick={handleAddSet}
-                                >
-                                    <PlusIcon className="mr-1 size-4" />
-                                    <span>Añadir set</span>
-                                </Button>
+                                <>
+                                    <Button
+                                        variant="dashed"
+                                        className="w-full"
+                                        onClick={handleAddSet}
+                                    >
+                                        <PlusIcon className="mr-1 size-4" />
+                                        <span>Añadir set</span>
+                                    </Button>
+
+                                    <SimpleInput
+                                        {...form.register(`${formName}.notes`)}
+                                        placeholder="Notas..."
+                                        className="border-none bg-transparent "
+                                    />
+
+                                    {lastSession?.notes && (
+                                        <div className="mt-4 px-2 text-xs">
+                                            <span className="font-bold">
+                                                Última vez:
+                                            </span>
+
+                                            <div className="text-pretty">
+                                                {lastSession.notes}
+                                            </div>
+                                        </div>
+                                    )}
+                                </>
                             ) : (
                                 <Button
                                     onClick={handleAddSet}
@@ -104,7 +125,6 @@ export function WorkoutExercise() {
                                     className="flex h-20 w-full flex-col border-brand-600"
                                 >
                                     <SparklesIcon className="size-6" />
-
                                     <span className="font-semibold">
                                         Comenzar
                                     </span>

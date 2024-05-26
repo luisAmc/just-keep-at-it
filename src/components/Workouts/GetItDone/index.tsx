@@ -1,7 +1,6 @@
 import { api } from '~/utils/api';
 import { Form, useZodForm } from '~/components/shared/Form';
 import { Page } from '~/components/shared/Page';
-import { SubmitButton } from '~/components/shared/SubmitButton';
 import { useRouter } from 'next/router';
 import { WorkoutExercisesList } from './WorkoutExerciseList';
 import { WorkoutHeader } from './WorkoutHeader';
@@ -12,6 +11,8 @@ import { useWatch } from 'react-hook-form';
 import { useDebouncedWorkout } from './useDebouncedWorkout';
 import toast from 'react-hot-toast';
 import { Shimmer } from './Shimmer';
+import { CheckIcon } from '@heroicons/react/24/outline';
+import { Button } from '~/components/shared/Button';
 
 export const getItDoneSchema = z.object({
     workoutExercises: z.array(
@@ -26,6 +27,7 @@ export const getItDoneSchema = z.object({
                     lbs: z.coerce.number().optional(),
                 }),
             ),
+            notes: z.string().trim().optional(),
         }),
     ),
 });
@@ -64,6 +66,7 @@ export function GetItDone() {
                 .sort((a, b) => a.exerciseIndex - b.exerciseIndex)
                 .map((workoutExercise) => ({
                     exerciseId: workoutExercise.exercise.id,
+                    notes: workoutExercise.notes ?? '',
                     sets: workoutExercise.sets.map((set, idx) => ({
                         mins: set.mins ?? 0,
                         distance: set.distance ?? 0,
@@ -89,6 +92,7 @@ export function GetItDone() {
                 workoutExercises: values.workoutExercises.map((we, i) => ({
                     exerciseIndex: i,
                     exerciseId: we.exerciseId,
+                    notes: we.notes,
                     sets: (we.sets as any[]).map((set) => ({
                         mins: Number(set.mins),
                         distance: Number(set.distance),
@@ -103,7 +107,9 @@ export function GetItDone() {
         }
     }, [debouncedWorkoutState]);
 
-    async function handleSubmit(values: z.infer<typeof getItDoneSchema>) {
+    async function handleSubmit() {
+        const values: z.infer<typeof getItDoneSchema> = form.getValues();
+
         const nonEmptyWorkoutExercises = values.workoutExercises.filter(
             (workoutExercise) => {
                 const setsCount = workoutExercise.sets.length;
@@ -133,7 +139,14 @@ export function GetItDone() {
                 return {
                     exerciseIndex: idx,
                     exerciseId: workoutExercise.exerciseId,
-                    sets: nonEmptySets,
+                    notes: workoutExercise.notes,
+                    sets: nonEmptySets.map((set) => ({
+                        mins: Number(set.mins),
+                        distance: Number(set.distance),
+                        kcal: Number(set.kcal),
+                        reps: Number(set.reps),
+                        lbs: Number(set.lbs),
+                    })),
                 };
             },
         );
@@ -159,12 +172,17 @@ export function GetItDone() {
                     <div className="space-y-4 rounded-xl bg-brand-50 p-4">
                         <WorkoutHeader />
 
-                        <Form form={form} onSubmit={handleSubmit}>
+                        <Form form={form} onSubmit={() => {}}>
                             <WorkoutExercisesList />
 
-                            <SubmitButton className="w-full">
-                                Finalizar
-                            </SubmitButton>
+                            <Button
+                                disabled={!form.formState.isValid}
+                                onClick={handleSubmit}
+                                className="w-full"
+                            >
+                                <CheckIcon className="mr-1 size-4" />
+                                <span>Finalizar</span>
+                            </Button>
                         </Form>
                     </div>
                 </WorkoutProvider>

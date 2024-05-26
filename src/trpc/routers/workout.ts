@@ -9,6 +9,7 @@ const getItDoneInput = z.object({
         z.object({
             exerciseId: z.string().min(1),
             exerciseIndex: z.number(),
+            notes: z.string().optional(),
             sets: z.array(
                 z.object({
                     mins: z.number().optional(),
@@ -99,6 +100,7 @@ export const workoutRouter = createTRPCRouter({
                         select: {
                             id: true,
                             exerciseIndex: true,
+                            notes: true,
                             exercise: {
                                 select: {
                                     id: true,
@@ -236,6 +238,7 @@ export const workoutRouter = createTRPCRouter({
                             workoutId: workout.id,
                             exerciseId: workoutExercise.exerciseId,
                             exerciseIndex: workoutExercise.exerciseIndex,
+                            notes: workoutExercise.notes,
                             sets: {
                                 createMany: {
                                     data: workoutExercise.sets.map(
@@ -308,6 +311,7 @@ export const workoutRouter = createTRPCRouter({
                             workoutId: workout.id,
                             exerciseId: workoutExercise.exerciseId,
                             exerciseIndex: workoutExercise.exerciseIndex,
+                            notes: workoutExercise.notes,
                             completedAt: new Date(),
                             sets: {
                                 createMany: {
