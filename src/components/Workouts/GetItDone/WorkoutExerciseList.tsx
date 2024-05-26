@@ -32,7 +32,7 @@ export function WorkoutExercisesList() {
         workoutExercisesFieldArray.append({
             exerciseId,
             sets: [{ mins: '', distance: '', kcal: '', reps: '', lbs: '' }],
-            notes: ''
+            notes: '',
         });
     }
 
@@ -41,7 +41,7 @@ export function WorkoutExercisesList() {
         workoutExercisesFieldArray.insert(exerciseIndex, {
             exerciseId,
             sets: [{ mins: '', distance: '', kcal: '', reps: '', lbs: '' }],
-            notes: ''
+            notes: '',
         });
     }
 

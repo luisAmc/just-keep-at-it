@@ -2,11 +2,7 @@ export function Shimmer() {
     return (
         <div className="flex animate-pulse flex-col space-y-4 rounded-xl bg-brand-100 p-4">
             <div className="flex items-center justify-between">
-                <div className="flex flex-1 items-center space-x-4">
-                    <div className="h-9 w-9 rounded-full bg-brand-200"></div>
-
-                    <div className="h-10 w-1/2 rounded-xl bg-brand-200"></div>
-                </div>
+                <div className="h-10 w-1/2 rounded-xl bg-brand-200"></div>
 
                 <div className="h-9 w-9 rounded-full bg-brand-200"></div>
             </div>
