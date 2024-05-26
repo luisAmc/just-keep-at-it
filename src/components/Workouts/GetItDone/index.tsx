@@ -37,7 +37,7 @@ export function GetItDone() {
 
     const queryClient = api.useUtils();
 
-    const { data, isLoading } = api.workout.byId.useQuery(
+    const { data, isFetching } = api.workout.byId.useQuery(
         { workoutId: router.query.workoutId as string },
         { refetchOnWindowFocus: false },
     );
@@ -143,7 +143,7 @@ export function GetItDone() {
 
     return (
         <div className="flex flex-col gap-y-4">
-            {isLoading && <Shimmer />}
+            {isFetching && <Shimmer />}
 
             {data && isSetupDone && (
                 <WorkoutProvider workout={data}>
