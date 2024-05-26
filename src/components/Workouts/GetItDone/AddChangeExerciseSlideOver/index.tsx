@@ -116,7 +116,7 @@ export function AddChangeExerciseSlideOver({
                 <input
                     className={inputVariants()}
                     onChange={(event) => setQuery(event.target.value)}
-                    placeholder="Filtar por nombre..."
+                    placeholder="Buscar por nombre / categoría..."
                 />
             }
         >

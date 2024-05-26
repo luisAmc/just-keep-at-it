@@ -7,6 +7,7 @@ import {
     EditExerciseNameModal,
     useEditExerciseNameModal,
 } from './EditExerciseNameModal';
+import { inputVariants } from '../shared/Input';
 
 export type CATEGORY_TYPE = {
     id: string;
@@ -64,6 +65,12 @@ export function Exercises() {
     return (
         <Page>
             <h1 className="text-2xl font-medium">Ejercicios</h1>
+
+            <input
+                className={inputVariants()}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Buscar por nombre / categoría..."
+            />
 
             {categories.map((category) => (
                 <CategorySection
