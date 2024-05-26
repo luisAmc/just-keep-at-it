@@ -2,7 +2,7 @@
 const runtimeCaching = require('next-pwa/cache');
 
 const nextDataIndex = runtimeCaching.findIndex(
-    (entry) => entry.options.cacheName === 'next-data'
+    (entry) => entry.options.cacheName === 'next-data',
 );
 
 if (nextDataIndex !== -1) {
@@ -16,11 +16,11 @@ const withPWA = require('next-pwa')({
     runtimeCaching,
     register: true,
     skipWaiting: true,
-    disable: process.env.NODE_ENV === 'development'
+    disable: process.env.NODE_ENV === 'development',
 });
 
 const nextConfig = {
-    reactStrictMode: true
+    reactStrictMode: true,
 };
 
 module.exports = withPWA(nextConfig);

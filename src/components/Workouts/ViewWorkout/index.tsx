@@ -46,7 +46,7 @@ export function ViewWorkout() {
             {isLoading && <Shimmer />}
 
             {data && (
-                <div className="space-y-4 rounded-xl bg-brand-50 p-4">
+                <div className="space-y-4 rounded-xl bg-brand-50 px-2 pb-8 pt-4">
                     <div className="flex items-center justify-between">
                         <h1 className="text-2xl">{data.name}</h1>
 
