@@ -145,7 +145,7 @@ export function GetItDone() {
         <div className="flex flex-col gap-y-4">
             {isFetching && <Shimmer />}
 
-            {data && isSetupDone && (
+            {!isFetching && data && isSetupDone && (
                 <WorkoutProvider workout={data}>
                     <div className="space-y-4 rounded-xl bg-brand-50 px-2 pb-8 pt-4">
                         <WorkoutHeader />
