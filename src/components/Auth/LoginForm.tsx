@@ -12,7 +12,7 @@ const loginSchema = z.object({
     username: z.string().min(1, 'Ingrese su usuario.'),
     password: z
         .string()
-        .min(6, 'El tamaño mínimo de la contraseña es seis caracteres.')
+        .min(6, 'El tamaño mínimo de la contraseña es seis caracteres.'),
 });
 
 export function LoginForm() {
@@ -26,15 +26,13 @@ export function LoginForm() {
         },
         onError() {
             form.reset(form.getValues());
-        }
+        },
     });
 
     return (
-        <div className="p-4 mx-2 mt-4 flex flex-1 items-center justify-center sm:mt-6">
+        <div className="mx-2 mt-4 flex flex-1 items-center justify-center p-4 sm:mt-6">
             <div className="relative mx-auto w-full max-w-md">
-                <div className="absolute inset-0 hidden -rotate-[3deg] rounded-xl bg-white/[.15] sm:block"></div>
-
-                <div className="relative h-full rounded-xl bg-white/[0.8]">
+                <div className="relative h-full rounded-xl">
                     <div className="flex items-center justify-center">
                         <Image
                             src="/images/login.webp"
@@ -51,7 +49,7 @@ export function LoginForm() {
                         onSubmit={(input) =>
                             login.mutateAsync({
                                 username: input.username,
-                                password: input.password
+                                password: input.password,
                             })
                         }
                     >
