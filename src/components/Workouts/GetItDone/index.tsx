@@ -168,7 +168,7 @@ export function GetItDone() {
 
             {data && (
                 <WorkoutProvider workout={data}>
-                    <div className="space-y-4 rounded-xl bg-brand-50 px-2 py-4">
+                    <div className="space-y-4 rounded-xl bg-brand-50 px-2 pb-8 pt-4">
                         <WorkoutHeader />
 
                         <Form form={form} onSubmit={() => {}}>
