@@ -72,6 +72,7 @@ function Strength({ name }: StrengthProps) {
 }
 
 function LastSession({ setIndex }: { setIndex: number }) {
+    const form = useFormContext();
     const { formName, type, lastSession } = useWorkoutExercise();
 
     if (!lastSession) {
@@ -83,8 +84,6 @@ function LastSession({ setIndex }: { setIndex: number }) {
     if (!lastSessionSet) {
         return null;
     }
-
-    const form = useFormContext();
 
     function handleClick() {
         form.setValue(`${formName}.sets.${setIndex}.lbs`, lastSessionSet.lbs);
