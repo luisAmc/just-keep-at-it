@@ -13,7 +13,6 @@ import { WorkoutHeader } from './WorkoutHeader';
 import { WorkoutProvider } from './useWorkout';
 import { z } from 'zod';
 import toast from 'react-hot-toast';
-import { AnimatePresence, motion } from 'framer-motion';
 
 export const getItDoneSchema = z.object({
     workoutExercises: z.array(
@@ -144,46 +143,28 @@ export function GetItDone() {
 
     return (
         <div className="flex flex-col gap-y-4">
-            <AnimatePresence mode="wait">
-                {isLoading && (
-                    <motion.div
-                        key="before-data"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 20 }}
-                    >
-                        <Shimmer />
-                    </motion.div>
-                )}
+            {isLoading && <Shimmer />}
 
-                {data && (
-                    <motion.div
-                        key="after-data"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                    >
-                        <WorkoutProvider workout={data}>
-                            <div className="space-y-4 rounded-xl bg-brand-50 px-2 pb-8 pt-4">
-                                <WorkoutHeader />
+            {data && isSetupDone && (
+                <WorkoutProvider workout={data}>
+                    <div className="space-y-4 rounded-xl bg-brand-50 px-2 pb-8 pt-4">
+                        <WorkoutHeader />
 
-                                <Form form={form} onSubmit={() => {}}>
-                                    <WorkoutExercisesList />
+                        <Form form={form} onSubmit={() => {}}>
+                            <WorkoutExercisesList />
 
-                                    <Button
-                                        disabled={!form.formState.isValid}
-                                        onClick={handleSubmit}
-                                        className="w-full"
-                                    >
-                                        <CheckIcon className="mr-1 size-4" />
-                                        <span>Finalizar</span>
-                                    </Button>
-                                </Form>
-                            </div>
-                        </WorkoutProvider>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                            <Button
+                                disabled={!form.formState.isValid}
+                                onClick={handleSubmit}
+                                className="w-full"
+                            >
+                                <CheckIcon className="mr-1 size-4" />
+                                <span>Finalizar</span>
+                            </Button>
+                        </Form>
+                    </div>
+                </WorkoutProvider>
+            )}
         </div>
     );
 }
