@@ -89,4 +89,36 @@ export const exerciseRouter = createTRPCRouter({
                 },
             });
         }),
+
+    editName: privateProcedure
+        .input(
+            z.object({
+                exerciseId: z.string().min(1),
+                name: z.string().min(1),
+            }),
+        )
+        .mutation(async ({ ctx, input }) => {
+            const exercise = await ctx.db.exercise.findFirstOrThrow({
+                where: {
+                    userId: ctx.session.userId,
+                    id: input.exerciseId,
+                },
+                select: {
+                    id: true,
+                },
+            });
+
+            return await ctx.db.exercise.update({
+                where: {
+                    id: exercise.id,
+                },
+                data: {
+                    name: input.name,
+                },
+                select: {
+                    id: true,
+                    name: true,
+                },
+            });
+        }),
 });

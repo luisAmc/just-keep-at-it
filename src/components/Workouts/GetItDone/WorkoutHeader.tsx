@@ -1,12 +1,12 @@
-import { api } from '~/utils/api';
 import { Button } from '~/components/shared/Button';
-import { ConfirmationModal } from '~/components/shared/ConfirmationModal';
-import { EditWorkoutNameModal } from './EditWorkoutNameModal';
+import { useWorkout } from './useWorkout';
 import { TrashIcon } from '@heroicons/react/24/outline';
+import { api } from '~/utils/api';
 import { useModal } from '~/components/shared/Modal';
-import { useRouter } from 'next/router';
-import { useWorkout } from '../useWorkout';
+import { ConfirmationModal } from '~/components/shared/ConfirmationModal';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import { EditWorkoutNameModal } from './WorkoutHeader/EditWorkoutNameModal';
 
 export function WorkoutHeader() {
     const { workoutId, name } = useWorkout();

@@ -10,9 +10,13 @@ const editNameSchema = z.object({
     name: z.string().trim().min(1, 'Ingrese el nuevo nombre.'),
 });
 
-interface EditNameModalProps extends Omit<ModalProps, 'title' | 'children'> {}
+interface EditWorkoutNameModalProps
+    extends Omit<ModalProps, 'title' | 'children'> {}
 
-export function EditNameModal({ open, onClose }: EditNameModalProps) {
+export function EditWorkoutNameModal({
+    open,
+    onClose,
+}: EditWorkoutNameModalProps) {
     const { workoutId, name, setName } = useWorkout();
 
     const form = useZodForm({
