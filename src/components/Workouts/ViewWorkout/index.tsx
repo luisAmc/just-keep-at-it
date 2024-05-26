@@ -16,6 +16,7 @@ import {
 import { useModal } from '~/components/shared/Modal';
 import { Page } from '~/components/shared/Page';
 import { api } from '~/utils/api';
+import { Shimmer } from './Shimmer';
 
 export function ViewWorkout() {
     const router = useRouter();
@@ -42,9 +43,8 @@ export function ViewWorkout() {
     const confirmationModal = useModal();
 
     return (
-        <Page>
-            {/* TODO: add shimmer */}
-            {isLoading && <div>Cargando...</div>}
+        <div className="flex flex-col gap-y-4">
+            {isLoading && <Shimmer />}
 
             {data && (
                 <div className="space-y-4 rounded-xl bg-brand-50 p-4">
@@ -158,7 +158,7 @@ export function ViewWorkout() {
                     </div>
                 </div>
             )}
-        </Page>
+        </div>
     );
 }
 

@@ -27,7 +27,7 @@ export function Layout({ children }: LayoutProps) {
 
     return (
         <div className="relative mx-auto w-full max-w-xl">
-            <nav className="sticky top-0 z-10 flex items-center justify-end bg-white/50 p-4 backdrop-blur">
+            <nav className="sticky top-0 z-10 flex items-center justify-end bg-white/50 px-2 py-4 backdrop-blur">
                 <Link
                     href="/"
                     className="absolute left-1/2 -translate-x-1/2 bg-gradient-to-r from-brand-400 to-brand-700 bg-clip-text text-xl font-semibold tracking-tight text-transparent"

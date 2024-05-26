@@ -164,12 +164,12 @@ export function GetItDone() {
     }
 
     return (
-        <Page>
+        <div className="flex flex-col gap-y-4">
             {isLoading && <Shimmer />}
 
             {data && (
                 <WorkoutProvider workout={data}>
-                    <div className="space-y-4 rounded-xl bg-brand-50 p-4">
+                    <div className="space-y-4 rounded-xl bg-brand-50 px-2 py-4">
                         <WorkoutHeader />
 
                         <Form form={form} onSubmit={() => {}}>
@@ -187,6 +187,6 @@ export function GetItDone() {
                     </div>
                 </WorkoutProvider>
             )}
-        </Page>
+        </div>
     );
 }
