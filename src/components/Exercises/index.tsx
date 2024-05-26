@@ -30,7 +30,7 @@ export function Exercises() {
             return [];
         }
 
-        const safeQuery = query?.trim() ?? '';
+        const safeQuery = query?.trim().toLowerCase() ?? '';
 
         const categories = [];
 

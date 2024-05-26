@@ -34,7 +34,7 @@ export function AddExerciseSlideOver({
             return [];
         }
 
-        const safeQuery = query?.trim() ?? '';
+        const safeQuery = query?.trim().toLowerCase() ?? '';
 
         const categories = [];
 

@@ -58,7 +58,7 @@ export function AddChangeExerciseSlideOver({
             return [];
         }
 
-        const safeQuery = query?.trim() ?? '';
+        const safeQuery = query?.trim().toLowerCase() ?? '';
 
         const categories = [];
 
