@@ -1,17 +1,18 @@
 import { api } from '~/utils/api';
+import { Button } from '~/components/shared/Button';
+import { CheckIcon } from '@heroicons/react/24/outline';
 import { Form, useZodForm } from '~/components/shared/Form';
+import { Shimmer } from './Shimmer';
+import { useDebouncedWorkout } from './useDebouncedWorkout';
+import { useEffect } from 'react';
+import { usePartiallySaveWorkout } from './usePartiallySaveWorkout';
 import { useRouter } from 'next/router';
+import { useWatch } from 'react-hook-form';
 import { WorkoutExercisesList } from './WorkoutExerciseList';
 import { WorkoutHeader } from './WorkoutHeader';
 import { WorkoutProvider } from './useWorkout';
 import { z } from 'zod';
-import { useEffect, useState } from 'react';
-import { useWatch } from 'react-hook-form';
-import { useDebouncedWorkout } from './useDebouncedWorkout';
 import toast from 'react-hot-toast';
-import { Shimmer } from './Shimmer';
-import { CheckIcon } from '@heroicons/react/24/outline';
-import { Button } from '~/components/shared/Button';
 
 export const getItDoneSchema = z.object({
     workoutExercises: z.array(
@@ -42,6 +43,7 @@ export function GetItDone() {
     );
 
     const partialSave = api.workout.partialSave.useMutation();
+
     const getItDone = api.workout.getItDone.useMutation({
         onSuccess(data) {
             queryClient.workout.infinite.invalidate();
@@ -53,33 +55,10 @@ export function GetItDone() {
 
     const form = useZodForm({ schema: getItDoneSchema });
 
-    const [isSetupDone, setIsSetupDone] = useState(false);
-
-    useEffect(() => {
-        if (!data) {
-            return;
-        }
-
-        form.reset({
-            workoutExercises: data.workoutExercises
-                .sort((a, b) => a.exerciseIndex - b.exerciseIndex)
-                .map((workoutExercise) => ({
-                    exerciseId: workoutExercise.exercise.id,
-                    notes: workoutExercise.notes ?? '',
-                    sets: workoutExercise.sets.map((set, idx) => ({
-                        mins: set.mins ?? 0,
-                        distance: set.distance ?? 0,
-                        kcal: set.kcal ?? 0,
-                        reps: set.reps ?? 0,
-                        lbs: set.lbs ?? 0,
-                    })),
-                })),
-        });
-
-        setIsSetupDone(true);
-    }, [data]);
+    const [isSetupDone] = usePartiallySaveWorkout({ form, data });
 
     const workoutState = useWatch({ control: form.control });
+
     const debouncedWorkoutState = useDebouncedWorkout(workoutState, 300);
 
     useEffect(() => {

@@ -16,8 +16,6 @@ import { WorkoutExerciseSet } from './WorkoutExerciseSet';
 import { WorkoutExerciseActions } from './WorkoutExerciseActions';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { SimpleInput } from '~/components/shared/SimpleInput';
-import { useEffect } from 'react';
-import { ExerciseType } from '@prisma/client';
 
 export function WorkoutExercise() {
     const { name, formName, lastSession, type } = useWorkoutExercise();
@@ -30,21 +28,6 @@ export function WorkoutExercise() {
         control: form.control,
         name: `${formName}.sets`,
     });
-
-    useEffect(() => {
-        if (
-            lastSession &&
-            lastSession.sets.length > setsFieldArray.fields.length &&
-            type === ExerciseType.STRENGTH
-        ) {
-            const differenceInSetsCount =
-                lastSession.sets.length - setsFieldArray.fields.length;
-
-            Array.from({ length: differenceInSetsCount }).forEach((_) =>
-                handleAddSet(),
-            );
-        }
-    }, [lastSession]);
 
     function handleAddSet() {
         setsFieldArray.append({
