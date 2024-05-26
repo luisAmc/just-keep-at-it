@@ -1,6 +1,5 @@
 import { api } from '~/utils/api';
 import { Form, useZodForm } from '~/components/shared/Form';
-import { Page } from '~/components/shared/Page';
 import { useRouter } from 'next/router';
 import { WorkoutExercisesList } from './WorkoutExerciseList';
 import { WorkoutHeader } from './WorkoutHeader';

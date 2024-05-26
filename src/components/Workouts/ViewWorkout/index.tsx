@@ -14,7 +14,6 @@ import {
     DropdownLabel,
 } from '~/components/shared/Dropdown';
 import { useModal } from '~/components/shared/Modal';
-import { Page } from '~/components/shared/Page';
 import { api } from '~/utils/api';
 import { Shimmer } from './Shimmer';
 
