@@ -147,7 +147,7 @@ export function GetItDone() {
 
             {!isFetching && data && isSetupDone && (
                 <WorkoutProvider workout={data}>
-                    <div className="space-y-4 rounded-xl bg-brand-50 px-2 pb-8 pt-4">
+                    <div className="space-y-4 rounded-xl bg-brand-50 px-4 pb-8 pt-4">
                         <WorkoutHeader />
 
                         <Form form={form} onSubmit={() => {}}>
