@@ -1,4 +1,3 @@
-import { WorkoutStatus } from '@prisma/client';
 import { createTRPCRouter, privateProcedure } from '../trpc';
 import { z } from 'zod';
 
@@ -32,9 +31,7 @@ export const exerciseRouter = createTRPCRouter({
                                 },
                             },
                             where: {
-                                workout: {
-                                    status: { equals: WorkoutStatus.DONE },
-                                },
+                                completedAt: { not: null },
                             },
                             orderBy: { completedAt: 'desc' },
                             take: 1,
