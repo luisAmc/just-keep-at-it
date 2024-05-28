@@ -100,8 +100,8 @@ export function GetItDone() {
             },
         );
 
-        const workoutExercises = nonEmptyWorkoutExercises.map(
-            (workoutExercise, idx) => {
+        const workoutExercises = nonEmptyWorkoutExercises
+            .map((workoutExercise, idx) => {
                 const nonEmptySets = workoutExercise.sets.filter((set) => {
                     const fullAerobicFields =
                         set.mins && set.distance && set.kcal;
@@ -126,8 +126,8 @@ export function GetItDone() {
                         lbs: Number(set.lbs),
                     })),
                 };
-            },
-        );
+            })
+            .filter((workoutExercise) => workoutExercise.sets.length > 0);
 
         const input = {
             workoutId: data!.id,

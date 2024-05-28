@@ -130,14 +130,8 @@ export function ViewWorkout() {
                                         </span>
                                     </div>
 
-                                    {workoutExercise.notes && (
-                                        <p className="mt-2 text-pretty px-2 text-xs">
-                                            {workoutExercise.notes}
-                                        </p>
-                                    )}
-
                                     {/* Sets */}
-                                    <div className="pt-2">
+                                    <div className="mt-2">
                                         {workoutExercise.sets.map((set) => (
                                             <div
                                                 key={set.id}
@@ -151,6 +145,17 @@ export function ViewWorkout() {
                                             </div>
                                         ))}
                                     </div>
+
+                                    {workoutExercise.notes && (
+                                        <div className="mt-2">
+                                            <div className="text-xs font-bold">
+                                                Notas:
+                                            </div>
+                                            <p className="whitespace-pre text-pretty text-xs">
+                                                {workoutExercise.notes}
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
                             );
                         })}

@@ -15,10 +15,10 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { WorkoutExerciseSet } from './WorkoutExerciseSet';
 import { WorkoutExerciseActions } from './WorkoutExerciseActions';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { SimpleInput } from '~/components/shared/SimpleInput';
+import { SimpleTextarea } from '~/components/shared/SimpleInput';
 
 export function WorkoutExercise() {
-    const { name, formName, lastSession, type } = useWorkoutExercise();
+    const { name, formName, lastSession, onHistory } = useWorkoutExercise();
 
     const [animateParent] = useAutoAnimate<HTMLDivElement>();
 
@@ -52,6 +52,7 @@ export function WorkoutExercise() {
                             <Button
                                 variant="ghost"
                                 className="text-wrap text-start text-base"
+                                onClick={onHistory}
                             >
                                 <span className="text-ellipsis">{name}</span>
                             </Button>
@@ -100,19 +101,19 @@ export function WorkoutExercise() {
                                         <span>Añadir set</span>
                                     </Button>
 
-                                    <SimpleInput
+                                    <SimpleTextarea
                                         {...form.register(`${formName}.notes`)}
                                         placeholder="Notas..."
                                         className="border-none bg-transparent "
                                     />
 
                                     {lastSession?.notes && (
-                                        <div className="mt-4 px-2 text-xs">
+                                        <div className="mt-2 px-2 text-xs">
                                             <span className="font-bold">
-                                                Última vez:
+                                                Últimas notas:
                                             </span>
 
-                                            <div className="text-pretty">
+                                            <div className="text-pretty whitespace-pre">
                                                 {lastSession.notes}
                                             </div>
                                         </div>

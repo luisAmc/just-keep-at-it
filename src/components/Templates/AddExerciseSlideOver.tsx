@@ -159,7 +159,7 @@ export function AddExerciseSlideOver({
                                         className={cn(
                                             'w-full rounded-md border px-4 py-2.5 text-start text-sm',
                                             isSelected &&
-                                                'border-brand-100 bg-brand-50',
+                                                'border-brand-300 bg-brand-50',
                                         )}
                                     >
                                         <span>{exercise.name}</span>

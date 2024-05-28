@@ -140,23 +140,21 @@ function SelectedExercises() {
                     </Button>
                 </div>
             ) : (
-                <div className="flex flex-col  rounded-lg px-4 py-6">
-                    <div className="flex flex-col items-center space-y-3 rounded-md ">
-                        <SparklesIcon className="size-8" />
+                <div className="flex flex-col items-center space-y-3 rounded-xl bg-brand-50 p-4">
+                    <SparklesIcon className="size-8" />
 
-                        <p className="text-sm font-semibold">
-                            No se han agregado ejercicios...
-                        </p>
+                    <p className="text-sm font-semibold">
+                        No se han agregado ejercicios...
+                    </p>
 
-                        <Button
-                            variant="secondary"
-                            onClick={addSlideOver.open}
-                            className="w-full"
-                        >
-                            <PlusIcon className="mr-1 size-4" />
-                            <span>Agregar ejercicios</span>
-                        </Button>
-                    </div>
+                    <Button
+                        variant="dashed"
+                        onClick={addSlideOver.open}
+                        className="w-full"
+                    >
+                        <PlusIcon className="mr-1 size-4" />
+                        <span>Agregar ejercicios</span>
+                    </Button>
                 </div>
             )}
 

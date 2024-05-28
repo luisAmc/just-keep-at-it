@@ -118,4 +118,56 @@ export const exerciseRouter = createTRPCRouter({
                 },
             });
         }),
+
+    history: privateProcedure
+        .input(
+            z.object({
+                exerciseId: z.string().min(1),
+                limit: z.number().default(5),
+            }),
+        )
+        .query(async ({ ctx, input }) => {
+            return ctx.db.workoutExercise.findMany({
+                where: {
+                    exerciseId: input.exerciseId,
+                    completedAt: { not: null },
+                },
+                orderBy: { completedAt: 'desc' },
+                take: input.limit,
+                select: {
+                    id: true,
+                    completedAt: true,
+                    notes: true,
+                    exercise: {
+                        select: {
+                            id: true,
+                            name: true,
+                            category: {
+                                select: {
+                                    type: true,
+                                },
+                            },
+                        },
+                    },
+                    sets: {
+                        select: {
+                            id: true,
+                            setIndex: true,
+                            mins: true,
+                            distance: true,
+                            kcal: true,
+                            lbs: true,
+                            reps: true,
+                        },
+                        orderBy: { setIndex: 'asc' },
+                    },
+                    workout: {
+                        select: {
+                            id: true,
+                            name: true,
+                        },
+                    },
+                },
+            });
+        }),
 });

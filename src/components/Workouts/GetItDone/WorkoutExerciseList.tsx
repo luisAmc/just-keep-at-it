@@ -11,6 +11,10 @@ import {
     MoveExerciseActionOption,
     WorkoutExerciseProvider,
 } from './useWorkoutExercise';
+import {
+    WorkoutExerciseHistorySlideOver,
+    useExerciseHistorySlideOver,
+} from './ExerciseHistorySlideOver';
 
 const FIELD_ARRAY_NAME = 'workoutExercises';
 
@@ -27,6 +31,7 @@ export function WorkoutExercisesList() {
     const maxIndex = workoutExercisesFieldArray.fields.length - 1;
 
     const addChangeExerciseSlideOver = useAddChangeExerciseSlideOver();
+    const historySlideOver = useExerciseHistorySlideOver();
 
     function handleAdd(exerciseId: string) {
         workoutExercisesFieldArray.append({
@@ -84,6 +89,11 @@ export function WorkoutExercisesList() {
                                             changeIndex: idx,
                                         })
                                     }
+                                    onHistory={() =>
+                                        historySlideOver.open(
+                                            (workoutExercise as any).exerciseId,
+                                        )
+                                    }
                                 >
                                     <WorkoutExercise />
                                 </WorkoutExerciseProvider>
@@ -115,6 +125,8 @@ export function WorkoutExercisesList() {
                 onChange={handleChange}
                 {...addChangeExerciseSlideOver.props}
             />
+
+            <WorkoutExerciseHistorySlideOver {...historySlideOver.props} />
         </>
     );
 }

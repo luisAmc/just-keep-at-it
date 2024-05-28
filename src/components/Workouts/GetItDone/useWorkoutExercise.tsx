@@ -8,6 +8,7 @@ interface WorkoutExerciseActions {
     onChange(): void;
     onRemove(): void;
     onMove(moveAction: MoveExerciseActionOption): void;
+    onHistory(): void;
     // onSelect(): void;
 }
 
@@ -47,6 +48,7 @@ export function WorkoutExerciseProvider({
     onChange,
     onRemove,
     onMove,
+    onHistory,
 }: WorkoutExerciseProviderProps) {
     const { getExerciseById } = useExercises();
 
@@ -71,6 +73,7 @@ export function WorkoutExerciseProvider({
                 onChange,
                 onRemove,
                 onMove,
+                onHistory,
             }}
         >
             {children}
