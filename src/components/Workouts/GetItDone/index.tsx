@@ -62,7 +62,14 @@ export function GetItDone() {
     const debouncedWorkoutState = useDebouncedWorkout(workoutState, 300);
 
     useEffect(() => {
-        if (data && isSetupDone) {
+        const isNotGettingItDone = !getItDone.isLoading || !getItDone.isSuccess;
+
+        if (
+            data &&
+            isSetupDone &&
+            !partialSave.isLoading &&
+            isNotGettingItDone
+        ) {
             const values: z.infer<typeof getItDoneSchema> = form.getValues();
 
             const input = {
@@ -154,12 +161,21 @@ export function GetItDone() {
                             <WorkoutExercisesList />
 
                             <Button
-                                disabled={!form.formState.isValid}
+                                disabled={
+                                    !form.formState.isValid ||
+                                    partialSave.isLoading
+                                }
                                 onClick={handleSubmit}
                                 className="w-full"
                             >
-                                <CheckIcon className="mr-1 size-4" />
-                                <span>Finalizar</span>
+                                {partialSave.isLoading ? (
+                                    <span>Guardando los cambios...</span>
+                                ) : (
+                                    <>
+                                        <CheckIcon className="mr-1 size-4" />
+                                        <span>Finalizar</span>
+                                    </>
+                                )}
                             </Button>
                         </Form>
                     </div>

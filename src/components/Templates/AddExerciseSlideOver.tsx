@@ -96,6 +96,7 @@ export function AddExerciseSlideOver({
         }
 
         onConfirm(exercisesToAdd);
+        setQuery(null);
         setSelectedExercises({});
         onClose();
     }
