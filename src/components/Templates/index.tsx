@@ -1,6 +1,10 @@
 import { api } from '~/utils/api';
 import { Page } from '../shared/Page';
-import { PlusIcon, SparklesIcon } from '@heroicons/react/24/outline';
+import {
+    ChevronLeftIcon,
+    PlusIcon,
+    SparklesIcon,
+} from '@heroicons/react/24/outline';
 import { Button } from '../shared/Button';
 import { useModal } from '../shared/Modal';
 import { CreateTemplateModal } from './CreateTemplateModal';
@@ -15,7 +19,13 @@ export function Templates() {
     return (
         <Page>
             <div className="flex items-center justify-between">
-                <h1 className="text-2xl font-medium">Bocetos</h1>
+                <div className="flex items-center gap-x-1.5">
+                    <Button href="/" variant="ghost" size="icon">
+                        <ChevronLeftIcon className="size-5 stroke-2" />
+                    </Button>
+
+                    <h1 className="text-2xl font-medium">Bocetos</h1>
+                </div>
 
                 <Button size="sm" onClick={createModal.open}>
                     <PlusIcon className="mr-1 size-4" />

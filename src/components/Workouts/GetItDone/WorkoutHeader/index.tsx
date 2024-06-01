@@ -1,8 +1,8 @@
 import { api } from '~/utils/api';
 import { Button } from '~/components/shared/Button';
+import { ChevronLeftIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { ConfirmationModal } from '~/components/shared/ConfirmationModal';
 import { EditWorkoutNameModal } from './EditWorkoutNameModal';
-import { TrashIcon } from '@heroicons/react/24/outline';
 import { useModal } from '~/components/shared/Modal';
 import { useRouter } from 'next/router';
 import { useWorkout } from '../useWorkout';
@@ -26,13 +26,19 @@ export function WorkoutHeader() {
 
     return (
         <div className="flex items-center justify-between">
-            <Button
-                className="text-2xl"
-                variant="ghost"
-                onClick={editNameModal.open}
-            >
-                {name}
-            </Button>
+            <div className="flex items-center">
+                <Button href="/" variant="ghost" size="icon">
+                    <ChevronLeftIcon className="size-5 stroke-2" />
+                </Button>
+
+                <Button
+                    className="text-2xl"
+                    variant="ghost"
+                    onClick={editNameModal.open}
+                >
+                    {name}
+                </Button>
+            </div>
 
             <Button
                 variant="destructive"

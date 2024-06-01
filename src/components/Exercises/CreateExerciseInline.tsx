@@ -6,6 +6,7 @@ import { Form, useZodForm } from '~/components/shared/Form';
 import { Input } from '~/components/shared/Input';
 import { z } from 'zod';
 import { SubmitButton } from '../shared/SubmitButton';
+import toast from 'react-hot-toast';
 
 const createExerciseSchema = z.object({
     name: z.string().trim().min(1, 'Ingrese el nombre.'),
@@ -33,10 +34,17 @@ export function CreateExerciseInline({
     async function handleSubmit() {
         const input = form.getValues();
 
-        createExercise.mutateAsync({
-            categoryId: categoryId,
-            name: input.name,
-        });
+        toast.promise(
+            createExercise.mutateAsync({
+                categoryId: categoryId,
+                name: input.name,
+            }),
+            {
+                loading: 'Creando ejercicio...',
+                success: '¡Ejercicio creado!',
+                error: 'No se pudo crear el ejercicio.',
+            },
+        );
     }
 
     return (

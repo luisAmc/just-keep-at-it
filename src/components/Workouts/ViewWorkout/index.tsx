@@ -1,5 +1,6 @@
 import {
     ArrowPathIcon,
+    ChevronLeftIcon,
     EllipsisVerticalIcon,
     TrashIcon,
 } from '@heroicons/react/24/outline';
@@ -16,6 +17,7 @@ import {
 import { useModal } from '~/components/shared/Modal';
 import { api } from '~/utils/api';
 import { Shimmer } from './Shimmer';
+import { Button } from '~/components/shared/Button';
 
 export function ViewWorkout() {
     const router = useRouter();
@@ -48,7 +50,13 @@ export function ViewWorkout() {
             {data && (
                 <div className="space-y-4 rounded-xl bg-brand-50 px-4 pb-8 pt-4">
                     <div className="flex items-center justify-between">
-                        <h1 className="text-2xl">{data.name}</h1>
+                        <div className="flex items-center gap-x-1.5">
+                            <Button href="/" variant="ghost" size="icon">
+                                <ChevronLeftIcon className="size-5 stroke-2" />
+                            </Button>
+
+                            <h1 className="text-2xl">{data.name}</h1>
+                        </div>
 
                         <Dropdown
                             className="mx-4"

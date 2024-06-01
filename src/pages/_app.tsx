@@ -12,7 +12,7 @@ function App({ Component, pageProps }: AppProps) {
         <>
             <NProgress />
             <Toaster
-                position="top-center"
+                position="bottom-center"
                 toastOptions={{
                     style: { padding: '1rem 1.5rem' },
                 }}

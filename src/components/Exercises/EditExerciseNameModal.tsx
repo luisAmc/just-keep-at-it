@@ -72,9 +72,9 @@ export function EditExerciseNameModal({
                             name: input.name,
                         }),
                         {
-                            loading: 'Editando ejercicio...',
-                            success: 'Ejercicio editado!',
-                            error: 'No se pudo editar el ejercicio.',
+                            loading: 'Editando el nombre...',
+                            success: '¡Nombre editado!',
+                            error: 'No se pudo editar el nombre.',
                         },
                     )
                 }

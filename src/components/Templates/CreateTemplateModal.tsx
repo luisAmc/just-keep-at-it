@@ -57,7 +57,7 @@ export function CreateTemplateModal({
                         }),
                         {
                             loading: 'Creando boceto...',
-                            success: 'Boceto creado!',
+                            success: '¡Boceto creado!',
                             error: 'No se pudo creada el boceto.',
                         },
                     )

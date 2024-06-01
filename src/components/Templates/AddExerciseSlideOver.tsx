@@ -96,9 +96,9 @@ export function AddExerciseSlideOver({
         }
 
         onConfirm(exercisesToAdd);
-        setQuery(null);
         setSelectedExercises({});
         onClose();
+        setQuery(null);
     }
 
     const selectedExercisesCount = Object.keys(selectedExercises).length;

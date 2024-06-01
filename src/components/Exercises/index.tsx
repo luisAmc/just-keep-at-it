@@ -1,13 +1,14 @@
 import { useExercises } from '~/contexts/useExercises';
 import { Page } from '../shared/Page';
 import { useMemo, useState } from 'react';
-import { SparklesIcon } from '@heroicons/react/24/outline';
+import { ChevronLeftIcon, SparklesIcon } from '@heroicons/react/24/outline';
 import { CategorySection } from './CategorySection';
 import {
     EditExerciseNameModal,
     useEditExerciseNameModal,
 } from './EditExerciseNameModal';
 import { inputVariants } from '../shared/Input';
+import { Button } from '../shared/Button';
 
 export type CATEGORY_TYPE = {
     id: string;
@@ -64,7 +65,13 @@ export function Exercises() {
 
     return (
         <Page>
-            <h1 className="text-2xl font-medium">Ejercicios</h1>
+            <div className="flex items-center gap-x-1.5">
+                <Button href="/" variant="ghost" size="icon">
+                    <ChevronLeftIcon className="size-5 stroke-2" />
+                </Button>
+
+                <h1 className="text-2xl font-medium">Ejercicios</h1>
+            </div>
 
             <input
                 className={inputVariants()}

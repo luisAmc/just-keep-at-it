@@ -51,7 +51,7 @@ export function WorkoutExercise() {
                         <div className="flex items-center justify-between">
                             <Button
                                 variant="ghost"
-                                className="text-wrap text-start text-base"
+                                className="text-wrap px-1.5 text-start text-base"
                                 onClick={onHistory}
                             >
                                 <span className="text-ellipsis">{name}</span>
@@ -61,7 +61,7 @@ export function WorkoutExercise() {
                                 <DisclosureButton
                                     className={buttonVariants({
                                         variant: 'ghost',
-                                        className: 'space-x-2 text-base',
+                                        className: 'space-x-2 px-1.5 text-base',
                                     })}
                                 >
                                     <span className="text-sm">
@@ -113,7 +113,7 @@ export function WorkoutExercise() {
                                                 Últimas notas:
                                             </span>
 
-                                            <div className="text-pretty whitespace-pre">
+                                            <div className="whitespace-pre text-pretty">
                                                 {lastSession.notes}
                                             </div>
                                         </div>

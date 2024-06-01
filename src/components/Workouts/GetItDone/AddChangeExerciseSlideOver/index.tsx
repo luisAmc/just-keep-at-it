@@ -101,6 +101,7 @@ export function AddChangeExerciseSlideOver({
         }
 
         onClose();
+        setQuery(null);
     }
 
     return (

@@ -5,6 +5,7 @@ import { Form, useZodForm } from '~/components/shared/Form';
 import { api } from '~/utils/api';
 import { SubmitButton } from '~/components/shared/SubmitButton';
 import { Input } from '~/components/shared/Input';
+import toast from 'react-hot-toast';
 
 const editNameSchema = z.object({
     name: z.string().trim().min(1, 'Ingrese el nuevo nombre.'),
@@ -36,10 +37,17 @@ export function EditWorkoutNameModal({
             <Form
                 form={form}
                 onSubmit={(input) =>
-                    editName.mutateAsync({
-                        workoutId: workoutId,
-                        name: input.name,
-                    })
+                    toast.promise(
+                        editName.mutateAsync({
+                            workoutId: workoutId,
+                            name: input.name,
+                        }),
+                        {
+                            loading: 'Editando el nombre...',
+                            success: '¡Nombre editado!',
+                            error: 'No se pudo editar el nombre.',
+                        },
+                    )
                 }
             >
                 <Input {...form.register('name')} label="Nuevo nombre" />
