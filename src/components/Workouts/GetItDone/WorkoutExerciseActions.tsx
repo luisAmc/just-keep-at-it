@@ -20,7 +20,7 @@ export function WorkoutExerciseActions() {
     }
 
     return (
-        <Drawer.Root>
+        <Drawer.Root noBodyStyles preventScrollRestoration={false}>
             <Drawer.Trigger asChild>
                 <Button size="icon" variant="ghost">
                     <EllipsisVerticalIcon className="size-5" />
@@ -47,7 +47,7 @@ export function WorkoutExerciseActions() {
 
                                 <Button
                                     variant="secondary"
-                                    className="justify-start bg-slate-300"
+                                    className="justify-start bg-slate-200"
                                     onClick={() => handleClick(onChange)}
                                 >
                                     <ArrowsRightLeftIcon className="mr-1 size-4" />
@@ -63,7 +63,7 @@ export function WorkoutExerciseActions() {
                                 <Button
                                     disabled={isFirst}
                                     variant="secondary"
-                                    className="justify-start bg-slate-300"
+                                    className="justify-start bg-slate-200"
                                     onClick={() =>
                                         handleClick(() => onMove('first'))
                                     }
@@ -75,7 +75,7 @@ export function WorkoutExerciseActions() {
                                 <Button
                                     disabled={isFirst}
                                     variant="secondary"
-                                    className="justify-start bg-slate-300"
+                                    className="justify-start bg-slate-200"
                                     onClick={() =>
                                         handleClick(() => onMove('up'))
                                     }
@@ -87,7 +87,7 @@ export function WorkoutExerciseActions() {
                                 <Button
                                     disabled={isLast}
                                     variant="secondary"
-                                    className="justify-start bg-slate-300"
+                                    className="justify-start bg-slate-200"
                                     onClick={() =>
                                         handleClick(() => onMove('down'))
                                     }
@@ -99,7 +99,7 @@ export function WorkoutExerciseActions() {
                                 <Button
                                     disabled={isLast}
                                     variant="secondary"
-                                    className="justify-start bg-slate-300"
+                                    className="justify-start bg-slate-200"
                                     onClick={() =>
                                         handleClick(() => onMove('last'))
                                     }
@@ -110,7 +110,7 @@ export function WorkoutExerciseActions() {
                             </div>
 
                             <div className="flex flex-col gap-y-1">
-                                <div className="text-xs font-medium text-red-700">
+                                <div className="text-xs font-medium text-rose-700">
                                     Peligro
                                 </div>
 
