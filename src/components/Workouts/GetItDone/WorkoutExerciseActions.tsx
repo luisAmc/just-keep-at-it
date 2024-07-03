@@ -8,98 +8,125 @@ import {
     TrashIcon,
 } from '@heroicons/react/24/outline';
 import { useWorkoutExercise } from './useWorkoutExercise';
-import { Modal, useModal } from '~/components/shared/Modal';
 import { Button } from '~/components/shared/Button';
+import { Drawer } from 'vaul';
 
 export function WorkoutExerciseActions() {
-    const actionModal = useModal();
-
-    const { isFirst, isLast, onChange, onMove, onRemove } =
+    const { name, isFirst, isLast, onChange, onMove, onRemove } =
         useWorkoutExercise();
 
     function handleClick(action: () => void) {
-        actionModal.close();
         action();
     }
 
     return (
-        <>
-            <Button size="icon" variant="ghost" onClick={actionModal.open}>
-                <EllipsisVerticalIcon className="size-5" />
-            </Button>
+        <Drawer.Root>
+            <Drawer.Trigger asChild>
+                <Button size="icon" variant="ghost">
+                    <EllipsisVerticalIcon className="size-5" />
+                </Button>
+            </Drawer.Trigger>
 
-            <Modal title="Acciones" {...actionModal.props}>
-                <div className="flex flex-col gap-y-1.5">
-                    <div className="mb-1 text-xs font-medium">Cambio</div>
+            <Drawer.Portal>
+                <Drawer.Overlay className="fixed inset-0 z-20 bg-black/40" />
 
-                    <Button
-                        variant="secondary"
-                        className="justify-start bg-gray-100"
-                        onClick={() => handleClick(onChange)}
-                    >
-                        <ArrowsRightLeftIcon className="mr-1 size-4" />
-                        <span>Cambiar ejercicio</span>
-                    </Button>
-                </div>
+                <Drawer.Content className="fixed bottom-0 left-0 right-0 z-30 mb-4 mt-24 flex flex-col rounded-t-lg bg-white">
+                    <div className="flex-1 bg-white p-4">
+                        {/* Top pill */}
+                        <div className="mx-auto mb-6 h-1.5 w-12 flex-shrink-0 rounded-full bg-gray-300" />
 
-                <div className="mt-6 flex flex-col gap-y-1.5">
-                    <div className="mb-1 text-xs font-medium">Ubicación</div>
+                        <div className="mx-auto max-w-md space-y-4">
+                            <Drawer.Title className="text-lg font-medium">
+                                {name}
+                            </Drawer.Title>
 
-                    <Button
-                        disabled={isFirst}
-                        variant="secondary"
-                        className="justify-start bg-gray-100"
-                        onClick={() => handleClick(() => onMove('first'))}
-                    >
-                        <ChevronDoubleUpIcon className="mr-1 size-4" />
-                        <span>Mover al incio</span>
-                    </Button>
+                            <div className="flex flex-col gap-y-1">
+                                <div className="text-xs font-medium">
+                                    Cambio
+                                </div>
 
-                    <Button
-                        disabled={isFirst}
-                        variant="secondary"
-                        className="justify-start bg-gray-100"
-                        onClick={() => handleClick(() => onMove('up'))}
-                    >
-                        <ArrowUpIcon className="mr-1 size-4" />
-                        <span>Mover arriba</span>
-                    </Button>
+                                <Button
+                                    variant="secondary"
+                                    className="justify-start bg-slate-300"
+                                    onClick={() => handleClick(onChange)}
+                                >
+                                    <ArrowsRightLeftIcon className="mr-1 size-4" />
+                                    <span>Cambiar ejercicio</span>
+                                </Button>
+                            </div>
 
-                    <Button
-                        disabled={isLast}
-                        variant="secondary"
-                        className="justify-start bg-gray-100"
-                        onClick={() => handleClick(() => onMove('down'))}
-                    >
-                        <ArrowDownIcon className="mr-1 size-4" />
-                        <span>Mover abajo</span>
-                    </Button>
+                            <div className="flex flex-col gap-y-2">
+                                <div className="text-xs font-medium">
+                                    Ubicación
+                                </div>
 
-                    <Button
-                        disabled={isLast}
-                        variant="secondary"
-                        className="justify-start bg-gray-100"
-                        onClick={() => handleClick(() => onMove('last'))}
-                    >
-                        <ChevronDoubleDownIcon className="mr-1 size-4" />
-                        <span>Mover al final</span>
-                    </Button>
-                </div>
+                                <Button
+                                    disabled={isFirst}
+                                    variant="secondary"
+                                    className="justify-start bg-slate-300"
+                                    onClick={() =>
+                                        handleClick(() => onMove('first'))
+                                    }
+                                >
+                                    <ChevronDoubleUpIcon className="mr-1 size-4" />
+                                    <span>Mover al incio</span>
+                                </Button>
 
-                <div className="mt-6 flex flex-col gap-y-1.5">
-                    <div className="mb-1 text-xs font-medium text-red-700">
-                        Peligro
+                                <Button
+                                    disabled={isFirst}
+                                    variant="secondary"
+                                    className="justify-start bg-slate-300"
+                                    onClick={() =>
+                                        handleClick(() => onMove('up'))
+                                    }
+                                >
+                                    <ArrowUpIcon className="mr-1 size-4" />
+                                    <span>Mover arriba</span>
+                                </Button>
+
+                                <Button
+                                    disabled={isLast}
+                                    variant="secondary"
+                                    className="justify-start bg-slate-300"
+                                    onClick={() =>
+                                        handleClick(() => onMove('down'))
+                                    }
+                                >
+                                    <ArrowDownIcon className="mr-1 size-4" />
+                                    <span>Mover abajo</span>
+                                </Button>
+
+                                <Button
+                                    disabled={isLast}
+                                    variant="secondary"
+                                    className="justify-start bg-slate-300"
+                                    onClick={() =>
+                                        handleClick(() => onMove('last'))
+                                    }
+                                >
+                                    <ChevronDoubleDownIcon className="mr-1 size-4" />
+                                    <span>Mover al final</span>
+                                </Button>
+                            </div>
+
+                            <div className="flex flex-col gap-y-1">
+                                <div className="text-xs font-medium text-red-700">
+                                    Peligro
+                                </div>
+
+                                <Button
+                                    variant="destructive"
+                                    className="h-10"
+                                    onClick={() => handleClick(onRemove)}
+                                >
+                                    <TrashIcon className="mr-1 size-4" />
+                                    <span>Remover ejercicio</span>
+                                </Button>
+                            </div>
+                        </div>
                     </div>
-
-                    <Button
-                        variant="destructive"
-                        onClick={() => handleClick(onRemove)}
-                    >
-                        <TrashIcon className="mr-1 size-4" />
-                        <span>Remover ejercicio</span>
-                    </Button>
-                </div>
-            </Modal>
-        </>
+                </Drawer.Content>
+            </Drawer.Portal>
+        </Drawer.Root>
     );
 }
