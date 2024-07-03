@@ -10,30 +10,37 @@ import {
 import { useWorkoutExercise } from './useWorkoutExercise';
 import { Button } from '~/components/shared/Button';
 import { Drawer } from 'vaul';
+import { useModal } from '~/components/shared/Modal';
 
 export function WorkoutExerciseActions() {
+    const actionModal = useModal();
+
     const { name, isFirst, isLast, onChange, onMove, onRemove } =
         useWorkoutExercise();
 
     function handleClick(action: () => void) {
+        actionModal.close();
         action();
     }
 
     return (
-        <Drawer.Root noBodyStyles preventScrollRestoration={false}>
-            <Drawer.Trigger asChild>
-                <Button size="icon" variant="ghost">
-                    <EllipsisVerticalIcon className="size-5" />
-                </Button>
-            </Drawer.Trigger>
+        <Drawer.Root disablePreventScroll {...actionModal.props}>
+            {/* To prevent double drawers for the extra drawer after clicking `Change exercise` */}
+            {/* <Drawer.Trigger asChild> */}
+            <Button size="icon" variant="ghost" onClick={actionModal.open}>
+                <EllipsisVerticalIcon className="size-5" />
+            </Button>
+            {/* </Drawer.Trigger> */}
 
             <Drawer.Portal>
-                <Drawer.Overlay className="fixed inset-0 z-20 bg-black/40" />
+                <Drawer.Overlay
+                    className="fixed inset-0 z-20 bg-black/40"
+                    onClick={actionModal.close}
+                />
 
-                <Drawer.Content className="fixed bottom-0 left-0 right-0 z-30 mb-4 mt-24 flex flex-col rounded-t-lg bg-white">
-                    <div className="flex-1 bg-white p-4">
-                        {/* Top pill */}
-                        <div className="mx-auto mb-6 h-1.5 w-12 flex-shrink-0 rounded-full bg-gray-300" />
+                <Drawer.Content className="fixed bottom-0 left-0 right-0 z-30 mt-24 flex flex-col rounded-t-xl bg-zinc-100">
+                    <div className="h-full flex-1 rounded-t-xl bg-white p-4">
+                        <div className="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-gray-300" />
 
                         <div className="mx-auto max-w-md space-y-4">
                             <Drawer.Title className="text-lg font-medium">
