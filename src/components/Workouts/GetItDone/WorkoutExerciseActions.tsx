@@ -39,7 +39,7 @@ export function WorkoutExerciseActions() {
                 />
 
                 <Drawer.Content className="fixed bottom-0 left-0 right-0 z-30 mt-24 flex flex-col rounded-t-xl bg-zinc-100">
-                    <div className="h-full flex-1 rounded-t-xl bg-white p-4">
+                    <div className="h-full flex-1 rounded-t-xl bg-white p-4 pb-8">
                         <div className="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-gray-300" />
 
                         <div className="mx-auto max-w-md space-y-4">

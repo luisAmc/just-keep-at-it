@@ -1,10 +1,12 @@
 import { ExerciseType } from '@prisma/client';
 import { useEffect, useState } from 'react';
-import { SlideOver, SlideOverProps } from '~/components/shared/SlideOver';
+import { SlideOverProps } from '~/components/shared/SlideOver';
 import { RouterOutputs, api } from '~/utils/api';
 import { formatDate } from '~/utils/transforms';
-import { SparklesIcon } from '@heroicons/react/24/outline';
+import { SparklesIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useExercises } from '~/contexts/useExercises';
+import { Drawer } from 'vaul';
+import { Button } from '~/components/shared/Button';
 
 export function useExerciseHistorySlideOver() {
     const [_exerciseId, _setExerciseId] = useState<string | null>(null);
@@ -44,51 +46,73 @@ export function WorkoutExerciseHistorySlideOver({
     const [exercise, setExercise] = useState({ name: '', isAerobic: false });
 
     useEffect(() => {
-        if (data && data.length > 0) {
-            const exerciseInfo = getExerciseById(exerciseId ?? '');
-            setExercise({
-                name: exerciseInfo?.name ?? '',
-                isAerobic: exerciseInfo?.type === ExerciseType.AEROBIC,
-            });
-        }
+        const exerciseInfo = getExerciseById(exerciseId ?? '');
+        setExercise({
+            name: exerciseInfo?.name ?? '',
+            isAerobic: exerciseInfo?.type === ExerciseType.AEROBIC,
+        });
     }, [data]);
 
     const workoutExercises = data ?? [];
 
     return (
-        <SlideOver title="Últimas rútinas" open={open} onClose={onClose}>
-            {isFetching && <Shimmer />}
+        <Drawer.Root
+            direction="right"
+            open={open}
+            onClose={onClose}
+            disablePreventScroll
+        >
+            <Drawer.Portal>
+                <Drawer.Overlay
+                    className="fixed inset-0 z-20 bg-black/40"
+                    onClick={onClose}
+                />
 
-            {!isFetching &&
-                (workoutExercises.length > 0 ? (
-                    <div>
-                        <h2 className="px-2 text-lg font-semibold tracking-tight">
-                            {exercise.name}
-                        </h2>
+                <Drawer.Content className="fixed bottom-0 right-0 z-30 mt-24 flex h-full w-[90%] max-w-[400px] flex-col bg-white">
+                    <div className="space-y-4 overflow-auto bg-white p-4">
+                        <div className="flex items-center justify-between">
+                            <Drawer.Title className="text-xl font-semibold tracking-tight">
+                                {exercise.name}
+                            </Drawer.Title>
 
-                        <div className="mt-2 space-y-1">
-                            {workoutExercises.map((workoutExercise) => (
-                                <WorkoutExercise
-                                    key={workoutExercise.id}
-                                    workoutExercise={workoutExercise}
-                                    isAerobic={exercise.isAerobic}
-                                />
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={onClose}
+                            >
+                                <XMarkIcon className="size-6" />
+                            </Button>
+                        </div>
+
+                        {isFetching && <Shimmer />}
+
+                        {!isFetching &&
+                            (workoutExercises.length > 0 ? (
+                                <div className="mt-2 space-y-2">
+                                    {workoutExercises.map((workoutExercise) => (
+                                        <WorkoutExercise
+                                            key={workoutExercise.id}
+                                            workoutExercise={workoutExercise}
+                                            isAerobic={exercise.isAerobic}
+                                        />
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="flex flex-col divide-brand-700 rounded-lg bg-brand-50 px-4 py-6">
+                                    <div className="flex flex-col items-center space-y-3 rounded-md text-brand-600">
+                                        <SparklesIcon className="size-8" />
+
+                                        <p className="text-pretty text-center text-sm font-medium">
+                                            No se han completado rútinas con
+                                            este ejercicio...
+                                        </p>
+                                    </div>
+                                </div>
                             ))}
-                        </div>
                     </div>
-                ) : (
-                    <div className="flex flex-col divide-brand-700 rounded-lg bg-brand-50 px-4 py-6">
-                        <div className="flex flex-col items-center space-y-3 rounded-md text-brand-600">
-                            <SparklesIcon className="size-8" />
-
-                            <p className="text-pretty text-center text-sm font-medium">
-                                No se han completado rútinas con este
-                                ejercicio...
-                            </p>
-                        </div>
-                    </div>
-                ))}
-        </SlideOver>
+                </Drawer.Content>
+            </Drawer.Portal>
+        </Drawer.Root>
     );
 }
 

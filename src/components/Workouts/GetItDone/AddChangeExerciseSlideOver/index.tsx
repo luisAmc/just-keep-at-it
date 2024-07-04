@@ -1,10 +1,11 @@
-import { SparklesIcon } from '@heroicons/react/24/outline';
+import { SparklesIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useMemo, useState } from 'react';
 import { inputVariants } from '~/components/shared/Input';
 import { SlideOverProps } from '~/components/shared/SlideOver';
 import { useExercises } from '~/contexts/useExercises';
 import { CategorySection } from './CategorySection';
 import { Drawer } from 'vaul';
+import { Button } from '~/components/shared/Button';
 
 type ACTION_TYPE = { type: 'add' } | { type: 'change'; changeIndex: number };
 
@@ -118,14 +119,24 @@ export function AddChangeExerciseSlideOver({
                     onClick={onClose}
                 />
 
-                <Drawer.Content className="fixed bottom-0 right-0 z-30 mt-24 flex h-full w-[90%] flex-col bg-white">
+                <Drawer.Content className="fixed bottom-0 right-0 z-30 mt-24 flex h-full w-[90%] max-w-[400px] flex-col bg-white">
                     <div className="overflow-auto bg-white">
                         <div className="sticky top-0 space-y-2 border-b bg-white px-4 pb-4 pt-6">
-                            <Drawer.Title className="text-xl font-medium">
-                                {action?.type === 'add'
-                                    ? 'Agregar ejercicio'
-                                    : 'Cambiar ejercicio'}
-                            </Drawer.Title>
+                            <div className="flex items-center justify-between">
+                                <Drawer.Title className="text-xl font-medium">
+                                    {action?.type === 'add'
+                                        ? 'Agregar ejercicio'
+                                        : 'Cambiar ejercicio'}
+                                </Drawer.Title>
+
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={onClose}
+                                >
+                                    <XMarkIcon className="size-6" />
+                                </Button>
+                            </div>
 
                             <input
                                 className={inputVariants()}

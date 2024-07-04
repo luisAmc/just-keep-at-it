@@ -7,7 +7,7 @@ import { WorkoutStatus } from '@prisma/client';
 import Link from 'next/link';
 
 export function WorkoutList() {
-    const { data, isLoading, fetchNextPage, hasNextPage } =
+    const { data, isLoading, isFetching, fetchNextPage, hasNextPage } =
         api.workout.infinite.useInfiniteQuery(
             {},
             { getNextPageParam: (lastPage) => lastPage.nextCursor },
@@ -25,7 +25,12 @@ export function WorkoutList() {
                 (workouts.length === 0 ? (
                     <EmptyWorkouts />
                 ) : (
-                    <div className="flex flex-col gap-y-2">
+                    <div
+                        className={cn(
+                            'flex flex-col gap-y-2',
+                            isFetching && 'animate-pulse',
+                        )}
+                    >
                         <InfiniteList
                             length={workouts.length}
                             hasNext={!!hasNextPage}
