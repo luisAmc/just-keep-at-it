@@ -1,4 +1,3 @@
-import { ExerciseType } from '@prisma/client';
 import { useEffect, useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { useExercises } from '~/contexts/useExercises';
@@ -41,10 +40,7 @@ export function usePartiallySaveWorkout({ data, form }: Params) {
                 const lastSessionHadMoreSets =
                     exercise.lastSession.sets.length > sets.length;
 
-                const isStregthExercise =
-                    exercise.type === ExerciseType.STRENGTH;
-
-                if (lastSessionHadMoreSets && isStregthExercise) {
+                if (lastSessionHadMoreSets) {
                     const differenceInSetsCount =
                         exercise.lastSession.sets.length - sets.length;
 
