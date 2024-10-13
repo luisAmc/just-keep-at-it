@@ -12,7 +12,7 @@ const loginSchema = z.object({
     username: z.string().min(1, 'Ingrese su usuario.'),
     password: z
         .string()
-        .min(6, 'El tamaño mínimo de la contraseña es seis caracteres.'),
+        .min(6, 'El tamaño mínimo es seis caracteres.'),
 });
 
 export function LoginForm() {
