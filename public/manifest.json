@@ -4,6 +4,7 @@
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
+    "id": "/",
     "name": "Just keep at It!",
     "short_name": "Just keep at It!",
     "description": "A workout tracking app",
