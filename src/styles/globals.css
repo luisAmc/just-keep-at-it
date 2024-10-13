@@ -30,7 +30,7 @@
 html,
 body,
 #__next {
-    @apply h-dvh scroll-smooth bg-white font-sans text-brand-900 antialiased;
+    @apply h-dvh scroll-smooth bg-brand-50 font-sans text-brand-900 antialiased;
 }
 
 @layer utilities {
