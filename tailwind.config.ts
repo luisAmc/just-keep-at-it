@@ -1,18 +1,18 @@
-import type { Config } from "tailwindcss";
-import colors from "tailwindcss/colors";
+import type { Config } from 'tailwindcss';
+import colors from 'tailwindcss/colors';
 
 const brand = colors.teal;
 
 const config: Config = {
-  content: ["./src/**/*.{ts,tsx}"],
-  theme: {
-    extend: {
-      colors: {
-        ...colors,
-        brand,
-      },
+    content: ['./src/**/*.{ts,tsx}'],
+    theme: {
+        extend: {
+            colors: {
+                ...colors,
+                brand,
+            },
+        },
     },
-  },
-  plugins: [],
+    plugins: [],
 };
 export default config;

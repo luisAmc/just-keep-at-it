@@ -25,7 +25,7 @@ export function WorkoutHeader() {
     const confirmationModal = useModal();
 
     return (
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between px-2">
             <div className="flex items-center">
                 <Button href="/" variant="ghost" size="icon">
                     <ChevronLeftIcon className="size-5 stroke-2" />

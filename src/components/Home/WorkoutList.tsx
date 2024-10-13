@@ -68,8 +68,8 @@ function WorkoutCard({ workout }: WorkoutCardProps) {
                 className={cn(
                     'w-full rounded-lg border border-brand-500 p-4 text-start shadow-sm',
                     workout.status === WorkoutStatus.DRAFTED
-                        ? 'bg-white'
-                        : 'bg-brand-100',
+                        ? 'border-2 border-dashed bg-brand-100'
+                        : 'bg-brand-200',
                 )}
             >
                 <h3 className="text-lg font-medium">{workout.name}</h3>
