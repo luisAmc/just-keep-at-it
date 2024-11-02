@@ -9,12 +9,12 @@ export const buttonVariants = cva(
         variants: {
             variant: {
                 default: 'bg-brand-700 text-brand-50 hover:bg-brand-700/90',
-                secondary: 'bg-gray-300 text-gray-900 hover:bg-gray-300/80',
+                secondary: 'bg-brand-300 text-brand-900 hover:bg-brand-300/80',
                 destructive: 'bg-red-500 text-red-50 hover:bg-red-500/90',
                 ghost: 'bg-transparent hover:bg-brand-200',
                 outline:
                     'border border-brand-500 hover:border-brand-300 hover:bg-brand-100',
-                dashed: 'border border-dashed border-brand-300 hover:border-transparent hover:bg-brand-200',
+                dashed: 'text-brand-800 border-2 border-dashed border-brand-500 hover:border-transparent hover:bg-brand-200',
             },
             size: {
                 default: 'h-10 px-4 py-2',

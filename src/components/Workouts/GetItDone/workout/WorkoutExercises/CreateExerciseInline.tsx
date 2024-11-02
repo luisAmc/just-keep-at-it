@@ -48,7 +48,7 @@ export function CreateExerciseInline({
 
     return (
         <Form form={form} onSubmit={handleSubmit}>
-            <div className="space-y-2 border-t border-brand-300 pt-2">
+            <div className="space-y-2 border-t border-gray-200 pt-2">
                 <ErrorMessage
                     title="Ocurrió un error..."
                     error={createExercise.error?.message}
@@ -57,6 +57,7 @@ export function CreateExerciseInline({
                 <Input
                     {...form.register('name')}
                     placeholder="Nombre del nuevo ejercicio..."
+                    className="border-gray-400 placeholder:text-gray-400 focus:border-gray-200 focus:ring-gray-600"
                 />
 
                 <div className="flex items-center gap-x-2">
@@ -71,9 +72,9 @@ export function CreateExerciseInline({
                     </Button>
 
                     <Button
-                        variant="ghost"
+                        variant="secondary"
                         onClick={onClose}
-                        className="w-full"
+                        className="w-full bg-gray-200"
                     >
                         <XMarkIcon className="mr-1 size-4" />
                         <span>Cancelar</span>

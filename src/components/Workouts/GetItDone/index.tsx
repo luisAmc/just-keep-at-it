@@ -8,9 +8,9 @@ import { useEffect } from 'react';
 import { usePartiallySaveWorkout } from './usePartiallySaveWorkout';
 import { useRouter } from 'next/router';
 import { useWatch } from 'react-hook-form';
-import { WorkoutExercisesList } from './WorkoutExerciseList';
-import { WorkoutHeader } from './WorkoutHeader';
-import { WorkoutProvider } from './useWorkout';
+import { WorkoutExercises } from './workout/WorkoutExercises';
+import { WorkoutHeader } from './workout/WorkoutHeader';
+import { WorkoutProvider } from './context/useWorkout';
 import { z } from 'zod';
 import toast from 'react-hot-toast';
 
@@ -37,7 +37,7 @@ export function GetItDone() {
 
     const queryClient = api.useUtils();
 
-    const { data, isFetching } = api.workout.byId.useQuery(
+    const { data, isLoading } = api.workout.byId.useQuery(
         { workoutId: router.query.workoutId as string },
         { refetchOnWindowFocus: false },
     );
@@ -55,11 +55,11 @@ export function GetItDone() {
 
     const form = useZodForm({ schema: getItDoneSchema });
 
-    const [isSetupDone] = usePartiallySaveWorkout({ form, data });
+    const [isSetupDone] = usePartiallySaveWorkout({ data, form });
 
     const workoutState = useWatch({ control: form.control });
 
-    const debouncedWorkoutState = useDebouncedWorkout(workoutState, 300);
+    const debouncedWorkoutState = useDebouncedWorkout(workoutState, 1000);
 
     useEffect(() => {
         const isNotGettingItDone = !getItDone.isLoading || !getItDone.isSuccess;
@@ -79,11 +79,11 @@ export function GetItDone() {
                     exerciseId: we.exerciseId,
                     notes: we.notes,
                     sets: (we.sets as any[]).map((set) => ({
-                        mins: Number(set.mins),
-                        distance: Number(set.distance),
-                        kcal: Number(set.kcal),
-                        reps: Number(set.reps),
-                        lbs: Number(set.lbs),
+                        mins: Number(set.mins ?? 0),
+                        distance: Number(set.distance ?? 0),
+                        kcal: Number(set.kcal ?? 0),
+                        reps: Number(set.reps ?? 0),
+                        lbs: Number(set.lbs ?? 0),
                     })),
                 })),
             };
@@ -126,11 +126,11 @@ export function GetItDone() {
                     exerciseId: workoutExercise.exerciseId,
                     notes: workoutExercise.notes,
                     sets: nonEmptySets.map((set) => ({
-                        mins: Number(set.mins),
-                        distance: Number(set.distance),
-                        kcal: Number(set.kcal),
-                        reps: Number(set.reps),
-                        lbs: Number(set.lbs),
+                        mins: Number(set.mins ?? 0),
+                        distance: Number(set.distance ?? 0),
+                        kcal: Number(set.kcal ?? 0),
+                        reps: Number(set.reps ?? 0),
+                        lbs: Number(set.lbs ?? 0),
                     })),
                 };
             })
@@ -149,37 +149,24 @@ export function GetItDone() {
     }
 
     return (
-        <div className="flex flex-col gap-y-4">
-            {isFetching && <Shimmer />}
+        <div className="flex flex-col gap-x-4 pb-8">
+            {isLoading && <Shimmer />}
 
-            {!isFetching && data && isSetupDone && (
-                <WorkoutProvider workout={data}>
-                    <div className="space-y-4 rounded-xl bg-brand-50 px-2 pb-8 pt-4">
+            {!isLoading && data && (
+                <Form form={form} onSubmit={() => {}}>
+                    <WorkoutProvider workout={data}>
                         <WorkoutHeader />
 
-                        <Form form={form} onSubmit={() => {}}>
-                            <WorkoutExercisesList />
+                        <div className="flex flex-col gap-y-4 px-2">
+                            <WorkoutExercises />
 
-                            <Button
-                                disabled={
-                                    !form.formState.isValid ||
-                                    partialSave.isLoading
-                                }
-                                onClick={handleSubmit}
-                                className="w-full"
-                            >
-                                {partialSave.isLoading ? (
-                                    <span>Guardando los cambios...</span>
-                                ) : (
-                                    <>
-                                        <CheckIcon className="mr-1 size-4" />
-                                        <span>Finalizar</span>
-                                    </>
-                                )}
+                            <Button className="h-12" onClick={handleSubmit}>
+                                <CheckIcon className="mr-1 size-4" />
+                                <span>Finalizar</span>
                             </Button>
-                        </Form>
-                    </div>
-                </WorkoutProvider>
+                        </div>
+                    </WorkoutProvider>
+                </Form>
             )}
         </div>
     );

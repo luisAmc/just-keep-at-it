@@ -1,14 +1,14 @@
+import { SparklesIcon } from '@heroicons/react/24/outline';
 import { ExerciseType } from '@prisma/client';
 import { useEffect, useState } from 'react';
-import { SlideOverProps } from '~/components/shared/SlideOver';
-import { RouterOutputs, api } from '~/utils/api';
-import { formatDate } from '~/utils/transforms';
-import { SparklesIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { useExercises } from '~/contexts/useExercises';
-import { Drawer } from 'vaul';
 import { Button } from '~/components/shared/Button';
+import { Drawer } from '~/components/shared/Drawer';
+import { Modal } from '~/components/shared/Modal';
+import { useExercises } from '~/contexts/useExercises';
+import { api, RouterOutputs } from '~/utils/api';
+import { formatDate } from '~/utils/transforms';
 
-export function useExerciseHistorySlideOver() {
+export function useExerciseHistoryDrawer() {
     const [_exerciseId, _setExerciseId] = useState<string | null>(null);
     const [open, setOpen] = useState(false);
 
@@ -27,16 +27,17 @@ export function useExerciseHistorySlideOver() {
     };
 }
 
-interface WorkoutExerciseHistorySlideOverProps
-    extends Omit<SlideOverProps, 'title' | 'children'> {
+interface ExerciseHistoryDrawerProps {
     exerciseId: string | null;
+    open: boolean;
+    onClose: () => void;
 }
 
-export function WorkoutExerciseHistorySlideOver({
+export function ExerciseHistoryDrawer({
     exerciseId,
     open,
     onClose,
-}: WorkoutExerciseHistorySlideOverProps) {
+}: ExerciseHistoryDrawerProps) {
     const { data, isFetching } = api.exercise.history.useQuery(
         { exerciseId: exerciseId ?? '' },
         { enabled: !!exerciseId },
@@ -56,63 +57,43 @@ export function WorkoutExerciseHistorySlideOver({
     const workoutExercises = data ?? [];
 
     return (
-        <Drawer.Root
-            direction="right"
-            open={open}
-            onClose={onClose}
-            disablePreventScroll
-        >
-            <Drawer.Portal>
-                <Drawer.Overlay
-                    className="fixed inset-0 z-20 bg-black/40"
-                    onClick={onClose}
-                />
+        <Modal title={exercise.name} open={open} onClose={onClose}>
+            <div className="space-y-4">
+                {isFetching && <Shimmer />}
 
-                <Drawer.Content className="fixed bottom-0 right-0 z-30 mt-24 flex h-full w-[90%] max-w-[400px] flex-col bg-white">
-                    <div className="space-y-4 overflow-auto bg-white p-4">
-                        <div className="flex items-center justify-between">
-                            <Drawer.Title className="text-xl font-semibold tracking-tight">
-                                {exercise.name}
-                            </Drawer.Title>
-
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={onClose}
-                            >
-                                <XMarkIcon className="size-6" />
-                            </Button>
-                        </div>
-
-                        {isFetching && <Shimmer />}
-
-                        {!isFetching &&
-                            (workoutExercises.length > 0 ? (
-                                <div className="mt-2 space-y-2">
-                                    {workoutExercises.map((workoutExercise) => (
-                                        <WorkoutExercise
-                                            key={workoutExercise.id}
-                                            workoutExercise={workoutExercise}
-                                            isAerobic={exercise.isAerobic}
-                                        />
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className="flex flex-col divide-brand-700 rounded-lg bg-brand-50 px-4 py-6">
-                                    <div className="flex flex-col items-center space-y-3 rounded-md text-brand-600">
-                                        <SparklesIcon className="size-8" />
-
-                                        <p className="text-pretty text-center text-sm font-medium">
-                                            No se han completado rútinas con
-                                            este ejercicio...
-                                        </p>
-                                    </div>
-                                </div>
+                {!isFetching &&
+                    (workoutExercises.length > 0 ? (
+                        <div className="mt-2 space-y-2">
+                            {workoutExercises.map((workoutExercise) => (
+                                <WorkoutExercise
+                                    key={workoutExercise.id}
+                                    workoutExercise={workoutExercise}
+                                    isAerobic={exercise.isAerobic}
+                                />
                             ))}
-                    </div>
-                </Drawer.Content>
-            </Drawer.Portal>
-        </Drawer.Root>
+                        </div>
+                    ) : (
+                        <div className="flex flex-col divide-brand-700 rounded-lg bg-brand-50 px-4 py-6">
+                            <div className="flex flex-col items-center space-y-3 rounded-md text-brand-600">
+                                <SparklesIcon className="size-8" />
+
+                                <p className="text-pretty text-center text-sm font-medium">
+                                    No se han completado rútinas con este
+                                    ejercicio...
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+
+                <Button
+                    variant="secondary"
+                    className="w-full bg-gray-200"
+                    onClick={onClose}
+                >
+                    Cerrar
+                </Button>
+            </div>
+        </Modal>
     );
 }
 
