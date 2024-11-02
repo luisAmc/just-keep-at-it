@@ -13,6 +13,7 @@ import { WorkoutHeader } from './workout/WorkoutHeader';
 import { WorkoutProvider } from './context/useWorkout';
 import { z } from 'zod';
 import toast from 'react-hot-toast';
+import { ErrorMessage } from '~/components/shared/ErrorMessage';
 
 export const getItDoneSchema = z.object({
     workoutExercises: z.array(
@@ -150,6 +151,16 @@ export function GetItDone() {
 
     return (
         <div className="flex flex-col gap-x-4 pb-8">
+            <ErrorMessage
+                title="No se pudo guardar los cambios"
+                error={partialSave.error?.message}
+            />
+
+            <ErrorMessage
+                title="No completar la rútina"
+                error={getItDone.error?.message}
+            />
+
             {isLoading && <Shimmer />}
 
             {!isLoading && data && (
