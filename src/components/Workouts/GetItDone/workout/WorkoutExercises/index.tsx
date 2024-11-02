@@ -5,13 +5,13 @@ import { useWorkout } from '../../context/useWorkout';
 import { motion } from 'framer-motion';
 import { AddExerciseDrawer } from './AddExerciseDrawer';
 import {
-    ExerciseHistoryDrawer,
-    useExerciseHistoryDrawer,
-} from './ExerciseHistoryDrawer';
+    ExerciseHistoryModal,
+    useExerciseHistoryModal,
+} from './ExerciseHistoryModal';
 
 export function WorkoutExercises() {
     const { workoutExercisesFieldArray } = useWorkout();
-    const historyDrawer = useExerciseHistoryDrawer();
+    const historyDrawer = useExerciseHistoryModal();
 
     return (
         <DisclosureProvider>
@@ -42,7 +42,7 @@ export function WorkoutExercises() {
 
                 <AddExerciseDrawer />
 
-                <ExerciseHistoryDrawer {...historyDrawer.props} />
+                <ExerciseHistoryModal {...historyDrawer.props} />
             </div>
         </DisclosureProvider>
     );

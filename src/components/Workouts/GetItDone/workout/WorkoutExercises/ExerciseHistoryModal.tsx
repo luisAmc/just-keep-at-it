@@ -2,13 +2,12 @@ import { SparklesIcon } from '@heroicons/react/24/outline';
 import { ExerciseType } from '@prisma/client';
 import { useEffect, useState } from 'react';
 import { Button } from '~/components/shared/Button';
-import { Drawer } from '~/components/shared/Drawer';
 import { Modal } from '~/components/shared/Modal';
 import { useExercises } from '~/contexts/useExercises';
 import { api, RouterOutputs } from '~/utils/api';
 import { formatDate } from '~/utils/transforms';
 
-export function useExerciseHistoryDrawer() {
+export function useExerciseHistoryModal() {
     const [_exerciseId, _setExerciseId] = useState<string | null>(null);
     const [open, setOpen] = useState(false);
 
@@ -27,17 +26,17 @@ export function useExerciseHistoryDrawer() {
     };
 }
 
-interface ExerciseHistoryDrawerProps {
+interface ExerciseHistoryModalProps {
     exerciseId: string | null;
     open: boolean;
     onClose: () => void;
 }
 
-export function ExerciseHistoryDrawer({
+export function ExerciseHistoryModal({
     exerciseId,
     open,
     onClose,
-}: ExerciseHistoryDrawerProps) {
+}: ExerciseHistoryModalProps) {
     const { data, isFetching } = api.exercise.history.useQuery(
         { exerciseId: exerciseId ?? '' },
         { enabled: !!exerciseId },
@@ -203,24 +202,19 @@ function StrengthSet({ lbs, reps }: StrengthSetProps) {
 function Shimmer() {
     return (
         <div className="flex animate-pulse flex-col space-y-4">
-            {Array.from({ length: 3 }).map((_, i) => (
-                <div
-                    key={`shimmer-div-${i}`}
-                    className="rounded-xl bg-brand-100 p-3"
-                >
-                    <div className="flex flex-col space-y-2">
-                        <div className="h-4 w-1/2 rounded-md bg-brand-300"></div>
-                        <div className="h-3 w-3/4 rounded-md bg-brand-400"></div>
+            <div className="rounded-xl bg-brand-100 p-3">
+                <div className="flex flex-col space-y-2">
+                    <div className="h-4 w-1/2 rounded-md bg-brand-300"></div>
+                    <div className="h-3 w-3/4 rounded-md bg-brand-400"></div>
 
-                        {/* Spacer */}
-                        <div></div>
+                    {/* Spacer */}
+                    <div></div>
 
-                        <div className="h-4 w-3/5 rounded-md bg-brand-300"></div>
-                        <div className="h-4 w-3/5 rounded-md bg-brand-300"></div>
-                        <div className="h-4 w-3/5 rounded-md bg-brand-300"></div>
-                    </div>
+                    <div className="h-4 w-3/5 rounded-md bg-brand-300"></div>
+                    <div className="h-4 w-3/5 rounded-md bg-brand-300"></div>
+                    <div className="h-4 w-3/5 rounded-md bg-brand-300"></div>
                 </div>
-            ))}
+            </div>
         </div>
     );
 }
