@@ -30,7 +30,6 @@ interface WorkoutContextType {
     workoutExercises: Array<WorkoutType['workoutExercises'][number]>;
     workoutExerciseCount: number;
     addExercise: (exerciseId: string) => void;
-    reorder: (exercisesIds: Array<string>) => void;
 
     // Workout exercise's position
     onMove: (index: number, action: MoveAction) => number;
@@ -62,30 +61,6 @@ export function WorkoutProvider({ workout, children }: WorkoutProviderProps) {
             sets: [{ mins: 0, distance: 0, kcal: 0, reps: 0, lbs: 0 }],
             notes: '',
         });
-    }
-
-    function reorder(ids: Array<string>) {
-        console.log(ids);
-
-        for (let i = 0; i < ids.length; i++) {
-            const oldIndex = workoutExercisesFieldArray.fields.findIndex(
-                (item) => item.id === ids[i],
-            );
-
-            workoutExercisesFieldArray.move(oldIndex, i);
-        }
-
-        console.log(workoutExercisesFieldArray.fields);
-
-        // console.log(ids);
-
-        // const sortedFields = fields
-        //     .slice()
-        //     .sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
-
-        // console.log(sortedFields);
-
-        // workoutExercisesFieldArray.replace(sortedFields);
     }
 
     function onMove(index: number, action: MoveAction) {
@@ -132,7 +107,6 @@ export function WorkoutProvider({ workout, children }: WorkoutProviderProps) {
                 workoutExercises: workout.workoutExercises,
                 workoutExerciseCount: workoutExercisesFieldArray.fields.length,
                 addExercise,
-                reorder,
 
                 onMove,
                 onChange,
