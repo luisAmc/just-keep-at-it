@@ -171,9 +171,22 @@ export function GetItDone() {
                         <div className="flex flex-col gap-y-4 px-2">
                             <WorkoutExercises />
 
-                            <Button className="h-12" onClick={handleSubmit}>
-                                <CheckIcon className="mr-1 size-4" />
-                                <span>Finalizar</span>
+                            <Button
+                                disabled={
+                                    !form.formState.isValid ||
+                                    partialSave.isLoading
+                                }
+                                className="h-12"
+                                onClick={handleSubmit}
+                            >
+                                {partialSave.isLoading ? (
+                                    <span>Guardando los cambios...</span>
+                                ) : (
+                                    <>
+                                        <CheckIcon className="mr-1 size-4" />
+                                        <span>Finalizar</span>
+                                    </>
+                                )}
                             </Button>
                         </div>
                     </WorkoutProvider>
