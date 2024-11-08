@@ -17,14 +17,18 @@ export function ReorderExercisesDrawer() {
         Array<{ id: string; exerciseId: string }>
     >([]);
 
-    useEffect(() => {
-        setItems(
-            workoutExercisesFieldArray.fields.map((workoutExercise) => ({
-                id: workoutExercise.id,
-                exerciseId: (workoutExercise as any).exerciseId,
-            })),
-        );
-    }, [workoutExercisesFieldArray]);
+    useEffect(
+        () => {
+            setItems(
+                workoutExercisesFieldArray.fields.map((workoutExercise) => ({
+                    id: workoutExercise.id,
+                    exerciseId: (workoutExercise as any).exerciseId,
+                })),
+            );
+        },
+        // workoutExercisesFieldArray doesn't work well here
+        [reorderModal.props.open],
+    );
 
     function handleDragEnd(event: DragEndEvent) {
         const { active, over } = event;
@@ -48,7 +52,7 @@ export function ReorderExercisesDrawer() {
             <Button
                 disabled={workoutExerciseCount < 2}
                 variant="secondary"
-                className='bg-gray-200'
+                className="bg-gray-200"
                 size="icon"
                 onClick={reorderModal.open}
             >
@@ -102,7 +106,7 @@ function SortableCard({
         useSortable({
             id: workoutExercise.id,
             transition: {
-                duration: 150, // milliseconds
+                duration: 150,
                 easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
             },
         });
@@ -112,7 +116,7 @@ function SortableCard({
             ref={setNodeRef}
             {...attributes}
             {...listeners}
-            className="rounded-md bg-brand-100 px-4 py-4 font-medium text-sm"
+            className="select-none rounded-md bg-brand-100 px-4 py-4 text-sm font-medium"
             style={{
                 transform: CSS.Transform.toString(transform),
                 transition,

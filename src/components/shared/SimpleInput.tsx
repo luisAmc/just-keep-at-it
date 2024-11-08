@@ -24,6 +24,7 @@ export const SimpleTextarea = forwardRef<
             onWheel={(event) =>
                 event.target instanceof HTMLElement && event.target.blur()
             }
+            rows={1}
             {...props}
         />
     );
