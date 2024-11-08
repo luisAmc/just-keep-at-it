@@ -7,28 +7,41 @@ import { Drawer, useDrawer } from '~/components/shared/Drawer';
 import { useEffect, useState } from 'react';
 import { useExercises } from '~/contexts/useExercises';
 import { useWorkout } from '../../context/useWorkout';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 export function ReorderExercisesDrawer() {
     const reorderModal = useDrawer();
 
+    const form = useFormContext();
+
     const { workoutExercisesFieldArray, workoutExerciseCount } = useWorkout();
+
+    const watchedWorkoutExercisesFieldArray = useWatch({
+        control: form.control,
+        name: 'workoutExercises',
+    });
 
     const [items, setItems] = useState<
         Array<{ id: string; exerciseId: string }>
     >([]);
 
-    useEffect(
-        () => {
-            setItems(
-                workoutExercisesFieldArray.fields.map((workoutExercise) => ({
-                    id: workoutExercise.id,
-                    exerciseId: (workoutExercise as any).exerciseId,
-                })),
-            );
-        },
-        // workoutExercisesFieldArray doesn't work well here
-        [reorderModal.props.open],
-    );
+    useEffect(() => {
+        if (!Array.isArray(watchedWorkoutExercisesFieldArray)) {
+            return;
+        }
+
+        setItems(
+            watchedWorkoutExercisesFieldArray.map((workoutExercise) => {
+                const exerciseId = (workoutExercise as any).exerciseId;
+                const id = workoutExercise.id + '-' + exerciseId;
+
+                return {
+                    id: id,
+                    exerciseId: exerciseId,
+                };
+            }),
+        );
+    }, [JSON.stringify(watchedWorkoutExercisesFieldArray)]);
 
     function handleDragEnd(event: DragEndEvent) {
         const { active, over } = event;
@@ -70,10 +83,10 @@ export function ReorderExercisesDrawer() {
                         onDragEnd={handleDragEnd}
                     >
                         <SortableContext items={items}>
-                            {items.map((workoutExercises) => (
+                            {items.map((item) => (
                                 <SortableCard
-                                    key={workoutExercises.id}
-                                    workoutExercise={workoutExercises}
+                                    key={item.id}
+                                    workoutExercise={item}
                                 />
                             ))}
                         </SortableContext>
@@ -93,11 +106,14 @@ export function ReorderExercisesDrawer() {
     );
 }
 
-function SortableCard({
-    workoutExercise,
-}: {
-    workoutExercise: { id: string; exerciseId: string };
-}) {
+interface SortableCardProps {
+    workoutExercise: {
+        id: string;
+        exerciseId: string;
+    };
+}
+
+function SortableCard({ workoutExercise }: SortableCardProps) {
     const { getExerciseById } = useExercises();
 
     const exercise = getExerciseById(workoutExercise.exerciseId)!;
