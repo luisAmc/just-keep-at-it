@@ -48,6 +48,7 @@ export function CardActions() {
                         onExerciseClick={(exerciseId) => {
                             changeExercise(exerciseId);
                             changeExerciseDrawer.close();
+                            actionDrawer.close();
                         }}
                         {...changeExerciseDrawer.props}
                     />
