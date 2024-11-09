@@ -84,7 +84,7 @@ export function CardBody() {
                                 className="col-span-1"
                                 onClick={openNext}
                             >
-                                <ArrowDownIcon className="mr-1 size-4" />
+                                <ArrowDownIcon className="mr-1 size-4 shrink-0" />
                                 <span>Sig.</span>
                             </Button>
                         </div>
