@@ -1,8 +1,8 @@
 import { api } from '~/utils/api';
 import { Button } from '~/components/shared/Button';
-import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
+import { PlusIcon } from 'lucide-react';
 
 export function CreateWorkoutButton() {
     const router = useRouter();
@@ -50,7 +50,7 @@ export function CreateWorkoutButton() {
                 </svg>
             )}
 
-            <PlusCircleIcon className="mr-1 size-4" />
+            <PlusIcon className="mr-1 size-4" />
             <span>Crear una nueva rútina</span>
         </Button>
     );

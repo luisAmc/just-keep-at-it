@@ -1,9 +1,3 @@
-import {
-    ArrowPathIcon,
-    ChevronLeftIcon,
-    EllipsisVerticalIcon,
-    TrashIcon,
-} from '@heroicons/react/24/outline';
 import { ExerciseType } from '@prisma/client';
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
@@ -18,6 +12,12 @@ import { useModal } from '~/components/shared/Modal';
 import { api } from '~/utils/api';
 import { Shimmer } from './Shimmer';
 import { Button } from '~/components/shared/Button';
+import {
+    ChevronLeftIcon,
+    EllipsisVerticalIcon,
+    RefreshCcw,
+    Trash2Icon,
+} from 'lucide-react';
 
 export function ViewWorkout() {
     const router = useRouter();
@@ -80,7 +80,7 @@ export function ViewWorkout() {
                                         )
                                     }
                                 >
-                                    <ArrowPathIcon className="mr-1 size-4" />
+                                    <RefreshCcw className="mr-1 size-4" />
                                     <span>Crear de nuevo</span>
                                 </DropdownItem>
                             </DropdownGroup>
@@ -91,7 +91,7 @@ export function ViewWorkout() {
                                     onSelect={confirmationModal.open}
                                     className="text-red-600"
                                 >
-                                    <TrashIcon className="mr-1 size-4" />
+                                    <Trash2Icon className="mr-1 size-4" />
                                     <span>Remover ejercicio</span>
                                 </DropdownItem>
                             </DropdownGroup>

@@ -4,10 +4,10 @@ import {
     DialogPanel,
     DialogTitle,
 } from '@headlessui/react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
 import { type ReactNode, useState } from 'react';
 import { Button } from './Button';
 import { cn } from '~/utils/cn';
+import { XIcon } from 'lucide-react';
 
 export function useSlideOver() {
     const [open, setOpen] = useState(false);
@@ -66,7 +66,7 @@ export function SlideOver({
                                             size="icon"
                                             onClick={onClose}
                                         >
-                                            <XMarkIcon className="size-6" />
+                                            <XIcon className="size-6" />
                                         </Button>
                                     </div>
 

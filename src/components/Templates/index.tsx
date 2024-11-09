@@ -1,13 +1,9 @@
 import { api } from '~/utils/api';
 import { Page } from '../shared/Page';
-import {
-    ChevronLeftIcon,
-    PlusIcon,
-    SparklesIcon,
-} from '@heroicons/react/24/outline';
 import { Button } from '../shared/Button';
 import { useModal } from '../shared/Modal';
 import { CreateTemplateModal } from './CreateTemplateModal';
+import { ChevronLeftIcon, CatIcon, PlusIcon } from 'lucide-react';
 
 export function Templates() {
     const createModal = useModal();
@@ -68,7 +64,7 @@ export function Templates() {
                 ) : (
                     <div className="flex flex-col divide-brand-700 rounded-lg bg-brand-50 px-4 py-6">
                         <div className="flex flex-col items-center space-y-3 rounded-md text-brand-600">
-                            <SparklesIcon className="size-8" />
+                            <CatIcon className="size-8" />
 
                             <p className="text-sm font-semibold">
                                 No se han creado bocetos...

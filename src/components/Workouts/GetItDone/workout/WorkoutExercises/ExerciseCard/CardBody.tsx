@@ -1,11 +1,11 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '~/components/shared/Button';
 import { ExerciseSet } from '../ExerciseSet';
-import { ArrowDownIcon, PlusIcon } from '@heroicons/react/24/outline';
 import { useWorkoutExercise } from '../../../context/useWorkoutExercise';
 import { SimpleTextarea } from '~/components/shared/SimpleInput';
 import { useFormContext } from 'react-hook-form';
 import { useEffect } from 'react';
+import { ArrowDownIcon, PlusIcon } from 'lucide-react';
 
 export function CardBody() {
     const {

@@ -1,15 +1,10 @@
-import {
-    ArrowRightStartOnRectangleIcon,
-    Cog6ToothIcon,
-    DocumentTextIcon,
-    ListBulletIcon,
-} from '@heroicons/react/24/outline';
 import { type ReactNode } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Dropdown, DropdownGroup, DropdownItem } from './shared/Dropdown';
 import { api } from '~/utils/api';
 import { useAuthRedirect } from '~/utils/useAuthRedirect';
+import { BookDashedIcon, SettingsIcon, ListIcon, LogOutIcon } from 'lucide-react';
 
 interface LayoutProps {
     children: ReactNode;
@@ -36,22 +31,20 @@ export function Layout({ children }: LayoutProps) {
                 </Link>
                 <Dropdown
                     className="mx-4"
-                    trigger={
-                        <Cog6ToothIcon className="size-6 text-brand-600" />
-                    }
+                    trigger={<SettingsIcon className="size-6 text-brand-600" />}
                 >
                     <DropdownGroup>
                         <DropdownItem
                             onSelect={() => router.push('/exercises')}
                         >
-                            <ListBulletIcon className="mr-1 size-4" />
+                            <ListIcon className="mr-1 size-4" />
                             <span>Ejercicios</span>
                         </DropdownItem>
 
                         <DropdownItem
                             onSelect={() => router.push('/templates')}
                         >
-                            <DocumentTextIcon className="mr-1 size-4" />
+                            <BookDashedIcon className="mr-1 size-4" />
                             <span>Bocetos</span>
                         </DropdownItem>
 
@@ -59,7 +52,7 @@ export function Layout({ children }: LayoutProps) {
                             onSelect={() => logout.mutateAsync()}
                             className="text-red-600"
                         >
-                            <ArrowRightStartOnRectangleIcon className="mr-1 size-4" />
+                            <LogOutIcon className="mr-1 size-4" />
                             <span>Cerrar sesión</span>
                         </DropdownItem>
                     </DropdownGroup>

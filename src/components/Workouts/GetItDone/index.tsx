@@ -1,6 +1,5 @@
 import { api } from '~/utils/api';
 import { Button } from '~/components/shared/Button';
-import { CheckIcon } from '@heroicons/react/24/outline';
 import { Form, useZodForm } from '~/components/shared/Form';
 import { Shimmer } from './Shimmer';
 import { useDebouncedWorkout } from './useDebouncedWorkout';
@@ -14,6 +13,7 @@ import { WorkoutProvider } from './context/useWorkout';
 import { z } from 'zod';
 import toast from 'react-hot-toast';
 import { ErrorMessage } from '~/components/shared/ErrorMessage';
+import { CheckIcon } from 'lucide-react';
 
 export const getItDoneSchema = z.object({
     workoutExercises: z.array(

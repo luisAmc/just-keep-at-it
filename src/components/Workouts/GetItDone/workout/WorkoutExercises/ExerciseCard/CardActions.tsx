@@ -1,18 +1,18 @@
-import {
-    ArrowDownIcon,
-    ArrowsRightLeftIcon,
-    ArrowUpIcon,
-    ChevronDoubleDownIcon,
-    ChevronDoubleUpIcon,
-    EllipsisVerticalIcon,
-    TrashIcon,
-} from '@heroicons/react/24/outline';
 import { Button } from '~/components/shared/Button';
 import { Drawer, useDrawer } from '~/components/shared/Drawer';
 import { useWorkoutExercise } from '../../../context/useWorkoutExercise';
 import { type ReactNode } from 'react';
 import { useWorkout } from '../../../context/useWorkout';
 import { AddOrChangeExercise } from '../AddOrChangeExercise';
+import {
+    ArrowDownIcon,
+    ArrowRightLeftIcon,
+    ArrowUpIcon,
+    ChevronsDownIcon,
+    ChevronsUpIcon,
+    EllipsisVerticalIcon,
+    Trash2Icon,
+} from 'lucide-react';
 
 export function CardActions() {
     const { onMove, onRemove } = useWorkout();
@@ -40,7 +40,7 @@ export function CardActions() {
                         className="justify-start bg-slate-200"
                         onClick={changeExerciseDrawer.open}
                     >
-                        <ArrowsRightLeftIcon className="mr-1 size-4" />
+                        <ArrowRightLeftIcon className="mr-1 size-4" />
                         <span>Cambiar ejercicio</span>
                     </Button>
 
@@ -63,7 +63,7 @@ export function CardActions() {
                             handleClick(() => onMove(index, 'first'))
                         }
                     >
-                        <ChevronDoubleUpIcon className="mr-1 size-4" />
+                        <ChevronsUpIcon className="mr-1 size-4" />
                         <span>Mover al incio</span>
                     </Button>
 
@@ -93,7 +93,7 @@ export function CardActions() {
                         className="justify-start bg-slate-200"
                         onClick={() => handleClick(() => onMove(index, 'last'))}
                     >
-                        <ChevronDoubleDownIcon className="mr-1 size-4" />
+                        <ChevronsDownIcon className="mr-1 size-4" />
                         <span>Mover al final</span>
                     </Button>
                 </Section>
@@ -104,7 +104,7 @@ export function CardActions() {
                         className="h-10"
                         onClick={() => handleClick(() => onRemove(index))}
                     >
-                        <TrashIcon className="mr-1 size-4" />
+                        <Trash2Icon className="mr-1 size-4" />
                         <span>Remover ejercicio</span>
                     </Button>
                 </DangerSection>

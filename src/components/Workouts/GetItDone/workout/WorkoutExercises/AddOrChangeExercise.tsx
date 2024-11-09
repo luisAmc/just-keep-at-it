@@ -1,4 +1,3 @@
-import { PlusIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 import { useMemo, useState } from 'react';
 import { CATEGORY_TYPE } from '~/components/Exercises';
 import { Button } from '~/components/shared/Button';
@@ -6,6 +5,7 @@ import { Drawer } from '~/components/shared/Drawer';
 import { inputVariants } from '~/components/shared/Input';
 import { useExercises } from '~/contexts/useExercises';
 import { CreateExerciseInline } from './CreateExerciseInline';
+import { CircleHelp, PlusIcon } from 'lucide-react';
 
 interface AddOrChangeExerciseProps {
     open: boolean;
@@ -88,7 +88,7 @@ export function AddOrChangeExercise({
                 {searchQuery && categories.length === 0 && (
                     <div className="flex flex-col divide-brand-700 rounded-lg bg-brand-50 px-4 py-6">
                         <div className="flex flex-col items-center space-y-3 rounded-md text-brand-600">
-                            <QuestionMarkCircleIcon className="size-10" />
+                            <CircleHelp className="size-10" />
 
                             <p className="text-pretty text-center text-sm font-semibold">
                                 No hay ejercicios que cumplan con la búsqueda...

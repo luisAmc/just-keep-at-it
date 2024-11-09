@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CATEGORY_TYPE } from '.';
 import { CreateExerciseInline } from './CreateExerciseInline';
 import { Button } from '../shared/Button';
-import { PencilSquareIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { PencilIcon, PlusIcon } from 'lucide-react';
 
 interface CategorySectionProps {
     category: CATEGORY_TYPE;
@@ -38,7 +38,7 @@ export function CategorySection({
                                     onEditName(exercise.name, exercise.id)
                                 }
                             >
-                                <PencilSquareIcon className="size-5" />
+                                <PencilIcon className="size-4" />
                             </Button>
                         </div>
                     );

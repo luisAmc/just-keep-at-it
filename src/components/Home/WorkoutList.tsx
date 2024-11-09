@@ -2,9 +2,9 @@ import { cn } from '~/utils/cn';
 import { formatDate } from '~/utils/transforms';
 import { InfiniteList } from '../shared/InfiniteList';
 import { RouterOutputs, api } from '~/utils/api';
-import { SparklesIcon } from '@heroicons/react/24/outline';
 import { WorkoutStatus } from '@prisma/client';
 import Link from 'next/link';
+import { CatIcon } from 'lucide-react';
 
 export function WorkoutList() {
     const { data, isLoading, isFetching, fetchNextPage, hasNextPage } =
@@ -102,7 +102,7 @@ function WorkoutCard({ workout }: WorkoutCardProps) {
 function EmptyWorkouts() {
     return (
         <div className="flex flex-col items-center space-y-2 rounded-md bg-brand-100 p-8 text-brand-700">
-            <SparklesIcon className="h-10 w-10" />
+            <CatIcon className="h-10 w-10" />
             <p className="text-sm font-semibold">No se han creado rutinas...</p>
         </div>
     );

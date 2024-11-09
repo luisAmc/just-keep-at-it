@@ -5,8 +5,8 @@ import { EmptyTemplates } from './EmptyTemplates';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { Button } from '~/components/shared/Button';
-import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
+import { CheckIcon, XIcon } from 'lucide-react';
 
 interface NewWorkoutSlideOverProps
     extends Omit<SlideOverProps, 'title' | 'children'> {}
@@ -111,7 +111,7 @@ function TemplateCard({ template, onClick }: TemplateCardProps) {
                             size="sm"
                             onClick={() => setShowConfirmation(false)}
                         >
-                            <XMarkIcon className="mr-1 size-4" />
+                            <XIcon className="mr-1 size-4" />
                             <span>Cancelar</span>
                         </Button>
                     </div>

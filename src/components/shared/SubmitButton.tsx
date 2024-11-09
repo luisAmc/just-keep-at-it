@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 import { Button, ButtonProps } from './Button';
-import { CheckIcon } from '@heroicons/react/24/outline';
+import { CheckIcon } from 'lucide-react';
 
 export function SubmitButton({ children, ...props }: ButtonProps) {
     const { formState } = useFormContext();
@@ -33,7 +33,7 @@ export function SubmitButton({ children, ...props }: ButtonProps) {
                 </svg>
             )}
 
-            <CheckIcon className="size-4 mr-1.5" />
+            <CheckIcon className="mr-1.5 size-4" />
 
             {children}
         </Button>

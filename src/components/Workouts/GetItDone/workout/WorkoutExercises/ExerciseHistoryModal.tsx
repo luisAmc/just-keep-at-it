@@ -1,5 +1,5 @@
-import { SparklesIcon } from '@heroicons/react/24/outline';
 import { ExerciseType } from '@prisma/client';
+import { CatIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Button } from '~/components/shared/Button';
 import { Modal } from '~/components/shared/Modal';
@@ -74,7 +74,7 @@ export function ExerciseHistoryModal({
                     ) : (
                         <div className="flex flex-col divide-brand-700 rounded-lg bg-brand-50 px-4 py-6">
                             <div className="flex flex-col items-center space-y-3 rounded-md text-brand-600">
-                                <SparklesIcon className="size-8" />
+                                <CatIcon className="size-8" />
 
                                 <p className="text-pretty text-center text-sm font-medium">
                                     No se han completado rútinas con este

@@ -1,9 +1,9 @@
 import { Button } from '~/components/shared/Button';
 import { ExerciseType } from '@prisma/client';
 import { NumberInput } from '~/components/shared/NumberInput';
-import { TrashIcon } from '@heroicons/react/24/outline';
 import { useFormContext } from 'react-hook-form';
 import { useWorkoutExercise } from '../../context/useWorkoutExercise';
+import { Trash2Icon } from 'lucide-react';
 
 export function ExerciseSet({
     name,
@@ -41,7 +41,7 @@ export function ExerciseSet({
                     onClick={onRemove}
                     className="mt-1"
                 >
-                    <TrashIcon className="size-5" />
+                    <Trash2Icon className="size-5" />
                 </Button>
             </div>
         </div>

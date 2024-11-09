@@ -1,5 +1,4 @@
 import { type ReactNode, useState } from 'react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
 import { Button } from './Button';
 import {
     Dialog,
@@ -7,6 +6,7 @@ import {
     DialogPanel,
     DialogTitle,
 } from '@headlessui/react';
+import { XIcon } from 'lucide-react';
 
 export function useModal() {
     const [open, setOpen] = useState(false);
@@ -53,7 +53,7 @@ export function Modal({ title, open, onClose, children }: ModalProps) {
                                 size="icon"
                                 onClick={onClose}
                             >
-                                <XMarkIcon className="size-6" />
+                                <XIcon className="size-6" />
                             </Button>
                         </div>
 

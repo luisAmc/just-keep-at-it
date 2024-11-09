@@ -1,10 +1,10 @@
 import { api } from '~/utils/api';
 import { Button } from '~/components/shared/Button';
 import { Drawer, useDrawer } from '~/components/shared/Drawer';
-import { TrashIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
 import { useWorkout } from '../../context/useWorkout';
 import toast from 'react-hot-toast';
+import { Trash2Icon } from 'lucide-react';
 
 export function DeleteDrawer() {
     const { workoutId } = useWorkout();
@@ -27,7 +27,7 @@ export function DeleteDrawer() {
                 size="icon"
                 onClick={deleteDrawer.open}
             >
-                <TrashIcon className="size-5" />
+                <Trash2Icon className="size-5" />
             </Button>
 
             <Drawer {...deleteDrawer.props}>
@@ -58,7 +58,7 @@ export function DeleteDrawer() {
                         )
                     }
                 >
-                    <TrashIcon className="mr-1 size-4" />
+                    <Trash2Icon className="mr-1 size-4" />
                     <span>Confirmar</span>
                 </Button>
             </Drawer>

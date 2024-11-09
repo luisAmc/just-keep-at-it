@@ -1,8 +1,8 @@
 import { AddOrChangeExercise } from './AddOrChangeExercise';
 import { Button } from '~/components/shared/Button';
-import { PlusIcon, SparklesIcon } from '@heroicons/react/24/outline';
 import { useDrawer } from '~/components/shared/Drawer';
 import { useWorkout } from '../../context/useWorkout';
+import { CatIcon, PlusIcon } from 'lucide-react';
 
 export function AddExerciseDrawer() {
     const addExerciseDrawer = useDrawer();
@@ -46,8 +46,8 @@ function BigButton({ onClick }: { onClick: () => void }) {
             className="h-auto w-full flex-col px-6 py-8"
             onClick={onClick}
         >
-            <SparklesIcon className="size-10 mb-3" />
-            <span className="font-bold text-base">Añadir un ejercicio</span>
+            <CatIcon className="mb-3 size-10" />
+            <span className="text-base font-bold">Añadir un ejercicio</span>
         </Button>
     );
 }

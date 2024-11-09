@@ -3,8 +3,8 @@ import { useExercises } from '~/contexts/useExercises';
 import { SlideOver, SlideOverProps } from '../shared/SlideOver';
 import { inputVariants } from '../shared/Input';
 import { Button } from '../shared/Button';
-import { PlusIcon, SparklesIcon } from '@heroicons/react/24/outline';
 import { cn } from '~/utils/cn';
+import { CatIcon, PlusIcon } from 'lucide-react';
 
 export type SelectedExerciseType = {
     exerciseId: string;
@@ -174,7 +174,7 @@ export function AddExerciseSlideOver({
                 {query && categories.length === 0 && (
                     <div className="flex flex-col divide-brand-700 rounded-lg bg-brand-50 px-4 py-6">
                         <div className="flex flex-col items-center space-y-3 rounded-md text-brand-600">
-                            <SparklesIcon className="size-8" />
+                            <CatIcon className="size-8" />
 
                             <p className="text-pretty text-center text-sm font-medium">
                                 No hay ejercicios que cumplan con la búsqueda...

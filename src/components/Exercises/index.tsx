@@ -1,7 +1,6 @@
 import { useExercises } from '~/contexts/useExercises';
 import { Page } from '../shared/Page';
 import { useMemo, useState } from 'react';
-import { ChevronLeftIcon, SparklesIcon } from '@heroicons/react/24/outline';
 import { CategorySection } from './CategorySection';
 import {
     EditExerciseNameModal,
@@ -9,6 +8,7 @@ import {
 } from './EditExerciseNameModal';
 import { inputVariants } from '../shared/Input';
 import { Button } from '../shared/Button';
+import { ChevronLeft, CatIcon } from 'lucide-react';
 
 export type CATEGORY_TYPE = {
     id: string;
@@ -67,7 +67,7 @@ export function Exercises() {
         <Page>
             <div className="flex items-center gap-x-1.5">
                 <Button href="/" variant="ghost" size="icon">
-                    <ChevronLeftIcon className="size-5 stroke-2" />
+                    <ChevronLeft className="size-5 stroke-2" />
                 </Button>
 
                 <h1 className="text-2xl font-medium">Ejercicios</h1>
@@ -90,7 +90,7 @@ export function Exercises() {
             {query && categories.length === 0 && (
                 <div className="flex flex-col divide-brand-700 rounded-lg bg-brand-50 px-4 py-6">
                     <div className="flex flex-col items-center space-y-3 rounded-md text-brand-600">
-                        <SparklesIcon className="size-8" />
+                        <CatIcon className="size-8" />
 
                         <p className="text-pretty text-center text-sm font-medium">
                             No hay ejercicios que cumplan con la búsqueda...

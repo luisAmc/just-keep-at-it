@@ -1,8 +1,8 @@
 import { Button } from '~/components/shared/Button';
-import { ChevronLeftIcon } from '@heroicons/react/24/outline';
 import { EditNameDrawer } from './EditNameDrawer';
 import { DeleteDrawer } from './DeleteDrawer';
 import { ReorderExercisesDrawer } from './ReorderExercisesDrawer';
+import { ChevronLeftIcon } from 'lucide-react';
 
 export function WorkoutHeader() {
     return (

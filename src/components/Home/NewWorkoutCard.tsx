@@ -1,8 +1,8 @@
 import { formatDate } from '~/utils/transforms';
 import { MountainsSVG } from './MountainsSVG';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import { useSlideOver } from '../shared/SlideOver';
 import { NewWorkoutSlideOver } from './NewWorkoutSlideOver';
+import { ArrowRight } from 'lucide-react';
 
 export function NewWorkoutCard() {
     const newWorkoutSlideOver = useSlideOver();
@@ -29,7 +29,7 @@ export function NewWorkoutCard() {
                             onClick={newWorkoutSlideOver.open}
                         >
                             <span className="text-xl">Comenzar</span>
-                            <ArrowRightIcon className="size-6" />
+                            <ArrowRight className="size-6" />
                         </button>
                     </div>
                 </div>

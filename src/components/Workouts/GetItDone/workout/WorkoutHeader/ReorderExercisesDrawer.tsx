@@ -1,5 +1,4 @@
 import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
-import { ArrowsUpDownIcon, CheckIcon } from '@heroicons/react/24/outline';
 import { Button } from '~/components/shared/Button';
 import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
@@ -8,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useExercises } from '~/contexts/useExercises';
 import { useWorkout } from '../../context/useWorkout';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { ArrowUpDownIcon, CheckIcon } from 'lucide-react';
 
 export function ReorderExercisesDrawer() {
     const reorderModal = useDrawer();
@@ -69,7 +69,7 @@ export function ReorderExercisesDrawer() {
                 size="icon"
                 onClick={reorderModal.open}
             >
-                <ArrowsUpDownIcon className="size-5" />
+                <ArrowUpDownIcon className="size-5" />
             </Button>
 
             <Drawer

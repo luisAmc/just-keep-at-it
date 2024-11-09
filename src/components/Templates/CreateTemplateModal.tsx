@@ -5,7 +5,6 @@ import { Modal, ModalProps } from '../shared/Modal';
 import { SubmitButton } from '../shared/SubmitButton';
 import { Button } from '../shared/Button';
 import { useSlideOver } from '../shared/SlideOver';
-import { PlusIcon, SparklesIcon, TrashIcon } from '@heroicons/react/24/outline';
 import {
     AddExerciseSlideOver,
     SelectedExerciseType,
@@ -14,6 +13,7 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { api } from '~/utils/api';
 import toast from 'react-hot-toast';
 import { ErrorMessage } from '../shared/ErrorMessage';
+import { CatIcon, PlusIcon, Trash2Icon } from 'lucide-react';
 
 const createTemplateSchema = z.object({
     name: z.string().trim().min(1, 'Ingrese el nombre.'),
@@ -124,7 +124,7 @@ function SelectedExercises() {
                                     size="icon"
                                     onClick={() => exercises.remove(idx)}
                                 >
-                                    <TrashIcon className="size-4" />
+                                    <Trash2Icon className="size-4" />
                                 </Button>
                             </div>
                         ))}
@@ -141,7 +141,7 @@ function SelectedExercises() {
                 </div>
             ) : (
                 <div className="flex flex-col items-center space-y-3 rounded-xl bg-brand-50 p-4">
-                    <SparklesIcon className="size-8" />
+                    <CatIcon className="size-8" />
 
                     <p className="text-sm font-semibold">
                         No se han agregado ejercicios...
