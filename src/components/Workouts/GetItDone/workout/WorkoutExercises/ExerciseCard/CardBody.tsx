@@ -32,7 +32,7 @@ export function CardBody() {
     }
 
     return (
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
             {isOpen && (
                 <motion.div
                     initial={{ height: 0, opacity: 0 }}
@@ -47,7 +47,7 @@ export function CardBody() {
                             className="rounded-md border-none bg-transparent focus:bg-brand-200"
                         />
 
-                        <AnimatePresence>
+                        <AnimatePresence initial={false}>
                             {sets.fields.map((field, idx) => (
                                 <motion.div
                                     key={field.id}

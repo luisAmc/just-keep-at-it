@@ -58,6 +58,11 @@ export function AddOrChangeExercise({
         return categories;
     }, [exercisesByCategory, searchQuery]);
 
+    function handleClose() {
+        setSearchQuery(null);
+        onClose();
+    }
+
     return (
         <Drawer
             title="Añadir otro ejercicio"
@@ -65,7 +70,7 @@ export function AddOrChangeExercise({
             stacked
             scrollable
             open={open}
-            onClose={onClose}
+            onClose={handleClose}
         >
             <input
                 className={inputVariants({
