@@ -161,8 +161,6 @@ export function GetItDone() {
                 error={getItDone.error?.message}
             />
 
-            {(isLoading || !isSetupDone) && <Shimmer />}
-
             {!isLoading && isSetupDone && data && (
                 <Form form={form} onSubmit={() => {}}>
                     <WorkoutProvider workout={data}>
