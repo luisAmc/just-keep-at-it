@@ -6,10 +6,12 @@ import { SimpleTextarea } from '~/components/shared/SimpleInput';
 import { useFormContext } from 'react-hook-form';
 import { useEffect } from 'react';
 import { ArrowDownIcon, PlusIcon } from 'lucide-react';
+import { getDefaultExerciseSet } from '~/utils/constants';
 
 export function CardBody() {
     const {
         fieldName,
+        type,
         setsFieldArray: sets,
         isLast,
         isOpen,
@@ -17,18 +19,12 @@ export function CardBody() {
     } = useWorkoutExercise();
     const form = useFormContext();
 
-    useEffect(() => {
-        if (sets.fields.length === 0) {
-            addSet();
-        }
-    }, []);
-
     function addSet() {
-        sets.append({ mins: 0, distance: 0, kcal: 0, reps: 0, lbs: 0 });
+        sets.append(getDefaultExerciseSet(type));
     }
 
-    function removeSet(indexToRemove: number) {
-        sets.remove(indexToRemove);
+    function removeSet(index: number) {
+        sets.remove(index);
     }
 
     return (

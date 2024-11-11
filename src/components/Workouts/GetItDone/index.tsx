@@ -1,7 +1,6 @@
 import { api } from '~/utils/api';
 import { Button } from '~/components/shared/Button';
 import { Form, useZodForm } from '~/components/shared/Form';
-import { Shimmer } from './Shimmer';
 import { useDebouncedWorkout } from './useDebouncedWorkout';
 import { useEffect } from 'react';
 import { usePartiallySaveWorkout } from './usePartiallySaveWorkout';
@@ -14,6 +13,8 @@ import { z } from 'zod';
 import toast from 'react-hot-toast';
 import { ErrorMessage } from '~/components/shared/ErrorMessage';
 import { CheckIcon } from 'lucide-react';
+import { LocalDataType, usePersistedLocalStorage } from '~/utils/usePersistedLocalStorage';
+import { Shimmer } from './Shimmer';
 
 export const getItDoneSchema = z.object({
     workoutExercises: z.array(
@@ -43,8 +44,6 @@ export function GetItDone() {
         { refetchOnWindowFocus: false },
     );
 
-    const partialSave = api.workout.partialSave.useMutation();
-
     const getItDone = api.workout.getItDone.useMutation({
         onSuccess(data) {
             queryClient.workout.infinite.invalidate();
@@ -54,23 +53,24 @@ export function GetItDone() {
         },
     });
 
+    const persistedLocalStorage = usePersistedLocalStorage();
     const form = useZodForm({ schema: getItDoneSchema });
 
     const [isSetupDone] = usePartiallySaveWorkout({ data, form });
 
     const workoutState = useWatch({ control: form.control });
 
-    const debouncedWorkoutState = useDebouncedWorkout(workoutState, 5_000);
+    const debouncedWorkoutState = useDebouncedWorkout(workoutState, 250);
 
     useEffect(() => {
         if (!data || !isSetupDone) {
             return;
         }
+        const values = debouncedWorkoutState as z.infer<typeof getItDoneSchema>;
 
-        const values: z.infer<typeof getItDoneSchema> = form.getValues();
-
-        const input = {
-            workoutId: data.id,
+        const input: LocalDataType = {
+            id: data.id,
+            updatedAt: Date.now(),
             workoutExercises: values.workoutExercises.map((we, i) => ({
                 exerciseIndex: i,
                 exerciseId: we.exerciseId,
@@ -85,12 +85,7 @@ export function GetItDone() {
             })),
         };
 
-        const isNotSaving = !partialSave.isLoading;
-        const isNotGettingItDone = !getItDone.isLoading || !getItDone.isSuccess;
-
-        if (isNotSaving && isNotGettingItDone) {
-            partialSave.mutateAsync(input);
-        }
+        persistedLocalStorage.save(data.id, input);
     }, [debouncedWorkoutState]);
 
     async function handleSubmit() {
@@ -113,6 +108,7 @@ export function GetItDone() {
                 const nonEmptySets = workoutExercise.sets.filter((set) => {
                     const fullAerobicFields =
                         set.mins && set.distance && set.kcal;
+                        
                     const fullStrengthFields = set.lbs && set.reps;
 
                     if (fullAerobicFields || fullStrengthFields) {
@@ -152,11 +148,6 @@ export function GetItDone() {
     return (
         <div className="flex flex-col gap-x-4 pb-8">
             <ErrorMessage
-                title="No se pudo guardar los cambios"
-                error={partialSave.error?.message}
-            />
-
-            <ErrorMessage
                 title="No completar la rútina"
                 error={getItDone.error?.message}
             />
@@ -170,21 +161,12 @@ export function GetItDone() {
                             <WorkoutExercises />
 
                             <Button
-                                disabled={
-                                    !form.formState.isValid ||
-                                    partialSave.isLoading
-                                }
+                                disabled={!form.formState.isValid}
                                 className="h-12"
                                 onClick={handleSubmit}
                             >
-                                {partialSave.isLoading ? (
-                                    <span>Guardando los cambios...</span>
-                                ) : (
-                                    <>
-                                        <CheckIcon className="mr-1 size-4" />
-                                        <span>Finalizar</span>
-                                    </>
-                                )}
+                                <CheckIcon className="mr-1 size-4" />
+                                <span>Finalizar</span>
                             </Button>
                         </div>
                     </WorkoutProvider>

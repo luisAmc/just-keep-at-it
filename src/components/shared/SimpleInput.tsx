@@ -25,6 +25,7 @@ export const SimpleTextarea = forwardRef<
                 event.target instanceof HTMLElement && event.target.blur()
             }
             rows={1}
+            autoFocus={false}
             {...props}
         />
     );
