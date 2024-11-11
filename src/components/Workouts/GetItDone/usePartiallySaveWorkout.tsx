@@ -5,23 +5,6 @@ import { RouterOutputs } from '~/utils/api';
 import { getDefaultExerciseSet } from '~/utils/constants';
 import { usePersistedLocalStorage } from '~/utils/usePersistedLocalStorage';
 
-export type LocalDataType = {
-    id: string;
-    updatedAt: number;
-    workoutExercises: {
-        exerciseIndex: number;
-        exerciseId: string;
-        notes: string | undefined;
-        sets: {
-            mins: number;
-            distance: number;
-            kcal: number;
-            reps: number;
-            lbs: number;
-        }[];
-    }[];
-};
-
 type RemoveDataType = Pick<
     RouterOutputs['workout']['byId'],
     'id' | 'workoutExercises' | 'updatedAt'
@@ -44,7 +27,7 @@ export function usePartiallySaveWorkout({ data, form }: Params) {
             return;
         }
 
-        const localData = persistedLocalStorage.get<LocalDataType>(data.id);
+        const localData = persistedLocalStorage.get(data.id);
 
         const isLocalMostRecent =
             localData && localData.updatedAt > data.updatedAt.valueOf();

@@ -3,10 +3,7 @@ import { Button } from '~/components/shared/Button';
 import { Form, useZodForm } from '~/components/shared/Form';
 import { useDebouncedWorkout } from './useDebouncedWorkout';
 import { useEffect } from 'react';
-import {
-    LocalDataType,
-    usePartiallySaveWorkout,
-} from './usePartiallySaveWorkout';
+import { usePartiallySaveWorkout } from './usePartiallySaveWorkout';
 import { useRouter } from 'next/router';
 import { useWatch } from 'react-hook-form';
 import { WorkoutExercises } from './workout/WorkoutExercises';
@@ -16,7 +13,7 @@ import { z } from 'zod';
 import toast from 'react-hot-toast';
 import { ErrorMessage } from '~/components/shared/ErrorMessage';
 import { CheckIcon } from 'lucide-react';
-import { usePersistedLocalStorage } from '~/utils/usePersistedLocalStorage';
+import { LocalDataType, usePersistedLocalStorage } from '~/utils/usePersistedLocalStorage';
 import { Shimmer } from './Shimmer';
 
 export const getItDoneSchema = z.object({
@@ -63,7 +60,7 @@ export function GetItDone() {
 
     const workoutState = useWatch({ control: form.control });
 
-    const debouncedWorkoutState = useDebouncedWorkout(workoutState, 500);
+    const debouncedWorkoutState = useDebouncedWorkout(workoutState, 250);
 
     useEffect(() => {
         if (!data || !isSetupDone) {
@@ -111,6 +108,7 @@ export function GetItDone() {
                 const nonEmptySets = workoutExercise.sets.filter((set) => {
                     const fullAerobicFields =
                         set.mins && set.distance && set.kcal;
+                        
                     const fullStrengthFields = set.lbs && set.reps;
 
                     if (fullAerobicFields || fullStrengthFields) {

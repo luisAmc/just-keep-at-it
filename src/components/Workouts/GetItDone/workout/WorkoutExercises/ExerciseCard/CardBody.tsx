@@ -19,12 +19,6 @@ export function CardBody() {
     } = useWorkoutExercise();
     const form = useFormContext();
 
-    useEffect(() => {
-        if (sets.fields.length === 0) {
-            addSet();
-        }
-    }, []);
-
     function addSet() {
         sets.append(getDefaultExerciseSet(type));
     }

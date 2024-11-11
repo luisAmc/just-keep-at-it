@@ -5,6 +5,8 @@ import { RouterOutputs, api } from '~/utils/api';
 import { WorkoutStatus } from '@prisma/client';
 import Link from 'next/link';
 import { CatIcon } from 'lucide-react';
+import { usePersistedLocalStorage } from '~/utils/usePersistedLocalStorage';
+import { useExercises } from '~/contexts/useExercises';
 
 export function WorkoutList() {
     const { data, isLoading, isFetching, fetchNextPage, hasNextPage } =
@@ -56,6 +58,12 @@ interface WorkoutCardProps {
 function WorkoutCard({ workout }: WorkoutCardProps) {
     const isDone = workout.status === WorkoutStatus.DONE;
 
+    const { getExerciseById } = useExercises();
+    const persistedLocalStorage = usePersistedLocalStorage();
+    const persistedData = persistedLocalStorage.get(workout.id);
+
+    const hasLocalData = !!persistedData.workoutExercises;
+
     return (
         <Link
             href={
@@ -85,14 +93,38 @@ function WorkoutCard({ workout }: WorkoutCardProps) {
                 </span>
 
                 <div className="mt-2">
-                    {workout.workoutExercises.map(({ id, exercise }, idx) => (
-                        <div key={id} className="space-x-1.5">
-                            <span className="text-xs font-medium">
-                                {idx + 1}.
-                            </span>
-                            <span className="text-sm">{exercise.name}</span>
-                        </div>
-                    ))}
+                    {hasLocalData
+                        ? persistedData.workoutExercises.map(
+                              ({ exerciseIndex, exerciseId }) => {
+                                  const exercise = getExerciseById(exerciseId);
+
+                                  return (
+                                      <div
+                                          key={exerciseIndex}
+                                          className="space-x-1.5"
+                                      >
+                                          <span className="text-xs font-medium">
+                                              {exerciseIndex + 1}.
+                                          </span>
+                                          <span className="text-sm">
+                                              {exercise!.name}
+                                          </span>
+                                      </div>
+                                  );
+                              },
+                          )
+                        : workout.workoutExercises.map(
+                              ({ id, exercise }, idx) => (
+                                  <div key={id} className="space-x-1.5">
+                                      <span className="text-xs font-medium">
+                                          {idx + 1}.
+                                      </span>
+                                      <span className="text-sm">
+                                          {exercise.name}
+                                      </span>
+                                  </div>
+                              ),
+                          )}
                 </div>
             </div>
         </Link>

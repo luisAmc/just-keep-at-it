@@ -58,7 +58,7 @@ export function WorkoutProvider({ workout, children }: WorkoutProviderProps) {
     function addExercise(exerciseId: string) {
         workoutExercisesFieldArray.append({
             exerciseId: exerciseId,
-            // sets: [{}],
+            sets: [{}],
             notes: '',
         });
     }

@@ -3,9 +3,9 @@ export function usePersistedLocalStorage() {
         localStorage.setItem(workoutId, JSON.stringify(workoutData));
     }
 
-    function get<T>(workoutId: string) {
+    function get(workoutId: string) {
         const item = localStorage.getItem(workoutId);
-        return JSON.parse(item || '{}') as T | undefined;
+        return JSON.parse(item || '{}') as LocalDataType;
     }
 
     function remove(workoutId: string) {
@@ -14,3 +14,20 @@ export function usePersistedLocalStorage() {
 
     return { save, get, remove };
 }
+
+export type LocalDataType = {
+    id: string;
+    updatedAt: number;
+    workoutExercises: {
+        exerciseIndex: number;
+        exerciseId: string;
+        notes: string | undefined;
+        sets: {
+            mins: number;
+            distance: number;
+            kcal: number;
+            reps: number;
+            lbs: number;
+        }[];
+    }[];
+};
