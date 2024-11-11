@@ -60,7 +60,7 @@ export function GetItDone() {
 
     const workoutState = useWatch({ control: form.control });
 
-    const debouncedWorkoutState = useDebouncedWorkout(workoutState, 500);
+    const debouncedWorkoutState = useDebouncedWorkout(workoutState, 5_000);
 
     useEffect(() => {
         if (!data || !isSetupDone) {
