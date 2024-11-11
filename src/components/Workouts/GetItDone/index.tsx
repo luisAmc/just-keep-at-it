@@ -60,35 +60,35 @@ export function GetItDone() {
 
     const workoutState = useWatch({ control: form.control });
 
-    const debouncedWorkoutState = useDebouncedWorkout(workoutState, 1000);
+    const debouncedWorkoutState = useDebouncedWorkout(workoutState, 500);
 
     useEffect(() => {
+        if (!data || !isSetupDone) {
+            return;
+        }
+
+        const values: z.infer<typeof getItDoneSchema> = form.getValues();
+
+        const input = {
+            workoutId: data.id,
+            workoutExercises: values.workoutExercises.map((we, i) => ({
+                exerciseIndex: i,
+                exerciseId: we.exerciseId,
+                notes: we.notes,
+                sets: (we.sets as any[]).map((set) => ({
+                    mins: Number(set.mins ?? 0),
+                    distance: Number(set.distance ?? 0),
+                    kcal: Number(set.kcal ?? 0),
+                    reps: Number(set.reps ?? 0),
+                    lbs: Number(set.lbs ?? 0),
+                })),
+            })),
+        };
+
+        const isNotSaving = !partialSave.isLoading;
         const isNotGettingItDone = !getItDone.isLoading || !getItDone.isSuccess;
 
-        if (
-            data &&
-            isSetupDone &&
-            !partialSave.isLoading &&
-            isNotGettingItDone
-        ) {
-            const values: z.infer<typeof getItDoneSchema> = form.getValues();
-
-            const input = {
-                workoutId: data.id,
-                workoutExercises: values.workoutExercises.map((we, i) => ({
-                    exerciseIndex: i,
-                    exerciseId: we.exerciseId,
-                    notes: we.notes,
-                    sets: (we.sets as any[]).map((set) => ({
-                        mins: Number(set.mins ?? 0),
-                        distance: Number(set.distance ?? 0),
-                        kcal: Number(set.kcal ?? 0),
-                        reps: Number(set.reps ?? 0),
-                        lbs: Number(set.lbs ?? 0),
-                    })),
-                })),
-            };
-
+        if (isNotSaving && isNotGettingItDone) {
             partialSave.mutateAsync(input);
         }
     }, [debouncedWorkoutState]);
