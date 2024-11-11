@@ -95,6 +95,7 @@ export const workoutRouter = createTRPCRouter({
                     name: true,
                     status: true,
                     createdAt: true,
+                    updatedAt: true,
                     completedAt: true,
                     workoutExercises: {
                         select: {
