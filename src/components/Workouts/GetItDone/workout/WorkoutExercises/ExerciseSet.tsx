@@ -59,8 +59,8 @@ function Aerobic({ name }: { name: string }) {
 function Strength({ name }: { name: string }) {
     return (
         <>
-            <NumberInput name={`${name}.reps`} label="reps" />
             <NumberInput name={`${name}.lbs`} label="lbs" />
+            <NumberInput name={`${name}.reps`} label="reps" />
         </>
     );
 }
