@@ -9,6 +9,7 @@ import { ExerciseType, useExercises } from '~/contexts/useExercises';
 import { useDisclosure } from './useDisclosure';
 import { useWorkout } from './useWorkout';
 import { useExerciseHistoryModal } from '../workout/WorkoutExercises/ExerciseHistoryModal';
+import { getDefaultExerciseSet } from '~/utils/constants';
 
 interface WorkoutExerciseType {
     index: number;
@@ -83,9 +84,9 @@ export function WorkoutExerciseProvider({
     function changeExercise(newExerciseId: string) {
         onChange(index, newExerciseId);
         setExerciseId(newExerciseId);
-        setsFieldArray.replace([
-            { mins: 0, distance: 0, kcal: 0, reps: 0, lbs: 0 },
-        ]);
+
+        const defaultSet = getDefaultExerciseSet(exercise.type);
+        setsFieldArray.replace([defaultSet]);
     }
 
     return (
