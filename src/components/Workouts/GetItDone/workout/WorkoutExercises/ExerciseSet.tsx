@@ -5,15 +5,13 @@ import { useFormContext } from 'react-hook-form';
 import { useWorkoutExercise } from '../../context/useWorkoutExercise';
 import { Trash2Icon } from 'lucide-react';
 
-export function ExerciseSet({
-    name,
-    setIdx,
-    onRemove,
-}: {
+interface ExerciseSetProps {
     name: string;
     setIdx: number;
     onRemove(): void;
-}) {
+}
+
+export function ExerciseSet({ name, setIdx, onRemove }: ExerciseSetProps) {
     const { type } = useWorkoutExercise();
 
     return (
@@ -49,24 +47,20 @@ export function ExerciseSet({
 }
 
 function Aerobic({ name }: { name: string }) {
-    const form = useFormContext();
-
     return (
         <>
-            <NumberInput {...form.register(`${name}.mins`)} label="mins" />
-            <NumberInput {...form.register(`${name}.distance`)} label="dist" />
-            <NumberInput {...form.register(`${name}.kcal`)} label="kcal" />
+            <NumberInput name={`${name}.mins`} label="mins" />
+            <NumberInput name={`${name}.distance`} label="dist" />
+            <NumberInput name={`${name}.kcal`} label="kcal" />
         </>
     );
 }
 
 function Strength({ name }: { name: string }) {
-    const form = useFormContext();
-
     return (
         <>
-            <NumberInput {...form.register(`${name}.lbs`)} label="lbs" />
-            <NumberInput {...form.register(`${name}.reps`)} label="reps" />
+            <NumberInput name={`${name}.reps`} label="reps" />
+            <NumberInput name={`${name}.lbs`} label="lbs" />
         </>
     );
 }
@@ -115,6 +109,35 @@ function LastSession({ setIndex }: { setIndex: number }) {
                         </span>
                     </>
                 )}
+
+                {/* {type === ExerciseType.AEROBIC && (
+                    <>
+                        <span>
+                            <span className="text-sm">
+                                {lastSessionSet.mins}
+                            </span>
+                            <span className="text-xs">m</span>
+                        </span>
+
+                        <span className="text-sm text-slate-500">x</span>
+
+                        <span>
+                            <span className="text-sm">
+                                {lastSessionSet.distance}
+                            </span>
+                            <span className="text-xs">d</span>
+                        </span>
+
+                        <span className="text-sm text-slate-500">x</span>
+
+                        <span>
+                            <span className="text-sm">
+                                {lastSessionSet.kcal}
+                            </span>
+                            <span className="text-xs">k</span>
+                        </span>
+                    </>
+                )} */}
             </Button>
         </div>
     );
