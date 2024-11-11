@@ -73,11 +73,9 @@ export function Drawer({
                         <div className="mx-auto mb-6 h-2 w-[100px] flex-shrink-0 rounded-full bg-gray-200" />
 
                         <div className="mx-auto w-full max-w-sm">
-                            {title && (
-                                <VaulDrawer.Title className="text-xl font-medium">
-                                    {title}
-                                </VaulDrawer.Title>
-                            )}
+                            <VaulDrawer.Title className="text-xl font-medium">
+                                {title}
+                            </VaulDrawer.Title>
 
                             <div className="mt-6 flex flex-col gap-y-4">
                                 {children}

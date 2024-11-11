@@ -1,12 +1,17 @@
 import { ComponentProps, forwardRef } from 'react';
 import clsx from 'clsx';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 interface Props extends ComponentProps<'input'> {
+    name: string;
     label: string;
 }
 
 export const NumberInput = forwardRef<HTMLInputElement, Props>(
-    function NumberInput({ label, ...props }, ref) {
+    function NumberInput({ label, name, ...props }, ref) {
+        const form = useFormContext();
+        const value = useWatch({ control: form.control, name });
+
         return (
             <label className="flex flex-col items-center justify-center">
                 <input
@@ -16,11 +21,17 @@ export const NumberInput = forwardRef<HTMLInputElement, Props>(
                         'placeholder:text-brand-500 disabled:bg-gray-500 disabled:bg-opacity-20 disabled:opacity-60',
                     )}
                     ref={ref}
-                    type='number'
+                    type="number"
                     inputMode="decimal"
                     step="any"
                     placeholder="0"
+                    value={value ?? ''}
+                    onChange={(e) => form.setValue(name, e.target.value)}
                     onFocus={(e) => e.target.select()}
+                    onWheel={(event) =>
+                        event.target instanceof HTMLElement &&
+                        event.target.blur()
+                    }
                     {...props}
                 />
 
