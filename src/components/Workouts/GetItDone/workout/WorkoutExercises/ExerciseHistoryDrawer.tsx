@@ -2,12 +2,12 @@ import { ExerciseType } from '@prisma/client';
 import { CatIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Button } from '~/components/shared/Button';
-import { Modal } from '~/components/shared/Modal';
+import { Drawer } from '~/components/shared/Drawer';
 import { useExercises } from '~/contexts/useExercises';
 import { api, RouterOutputs } from '~/utils/api';
 import { formatDate } from '~/utils/transforms';
 
-export function useExerciseHistoryModal() {
+export function useExerciseHistoryDrawer() {
     const [_exerciseId, _setExerciseId] = useState<string | null>(null);
     const [open, setOpen] = useState(false);
 
@@ -26,17 +26,17 @@ export function useExerciseHistoryModal() {
     };
 }
 
-interface ExerciseHistoryModalProps {
+interface ExerciseHistoryDrawerProps {
     exerciseId: string | null;
     open: boolean;
     onClose: () => void;
 }
 
-export function ExerciseHistoryModal({
+export function ExerciseHistoryDrawer({
     exerciseId,
     open,
     onClose,
-}: ExerciseHistoryModalProps) {
+}: ExerciseHistoryDrawerProps) {
     const { data, isFetching } = api.exercise.history.useQuery(
         { exerciseId: exerciseId ?? '' },
         { enabled: !!exerciseId },
@@ -56,7 +56,7 @@ export function ExerciseHistoryModal({
     const workoutExercises = data ?? [];
 
     return (
-        <Modal title={exercise.name} open={open} onClose={onClose}>
+        <Drawer scrollable title={exercise.name} open={open} onClose={onClose}>
             <div className="space-y-4">
                 {isFetching && <Shimmer />}
 
@@ -92,7 +92,7 @@ export function ExerciseHistoryModal({
                     Cerrar
                 </Button>
             </div>
-        </Modal>
+        </Drawer>
     );
 }
 

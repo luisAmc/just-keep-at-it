@@ -8,7 +8,7 @@ import {
 import { ExerciseType, useExercises } from '~/contexts/useExercises';
 import { useDisclosure } from './useDisclosure';
 import { useWorkout } from './useWorkout';
-import { useExerciseHistoryModal } from '../workout/WorkoutExercises/ExerciseHistoryModal';
+import { useExerciseHistoryDrawer } from '../workout/WorkoutExercises/ExerciseHistoryDrawer';
 import { getDefaultExerciseSet } from '~/utils/constants';
 
 interface WorkoutExerciseType {
@@ -45,7 +45,7 @@ const WorkoutExerciseContext = createContext<
 
 interface WorkoutExerciseProviderProps {
     workoutExercise: WorkoutExerciseType;
-    onHistory: ReturnType<typeof useExerciseHistoryModal>['open'];
+    onHistory: ReturnType<typeof useExerciseHistoryDrawer>['open'];
     children: ReactNode;
 }
 
