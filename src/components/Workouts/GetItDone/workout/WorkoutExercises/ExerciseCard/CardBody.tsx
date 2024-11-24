@@ -4,7 +4,6 @@ import { ExerciseSet } from '../ExerciseSet';
 import { useWorkoutExercise } from '../../../context/useWorkoutExercise';
 import { SimpleTextarea } from '~/components/shared/SimpleInput';
 import { useFormContext } from 'react-hook-form';
-import { useEffect } from 'react';
 import { ArrowDownIcon, PlusIcon } from 'lucide-react';
 import { getDefaultExerciseSet } from '~/utils/constants';
 

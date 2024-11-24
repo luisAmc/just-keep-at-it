@@ -13,7 +13,10 @@ import { z } from 'zod';
 import toast from 'react-hot-toast';
 import { ErrorMessage } from '~/components/shared/ErrorMessage';
 import { CheckIcon } from 'lucide-react';
-import { LocalDataType, usePersistedLocalStorage } from '~/utils/usePersistedLocalStorage';
+import {
+    LocalDataType,
+    usePersistedLocalStorage,
+} from '~/utils/usePersistedLocalStorage';
 import { Shimmer } from './Shimmer';
 
 export const getItDoneSchema = z.object({
@@ -107,9 +110,13 @@ export function GetItDone() {
             .map((workoutExercise, idx) => {
                 const nonEmptySets = workoutExercise.sets.filter((set) => {
                     const fullAerobicFields =
-                        set.mins && set.distance && set.kcal;
-                        
-                    const fullStrengthFields = set.lbs && set.reps;
+                        Number(set.mins ?? 0) !== 0 &&
+                        Number(set.distance ?? 0) !== 0 &&
+                        Number(set.kcal ?? 0) !== 0;
+
+                    const fullStrengthFields =
+                        Number(set.lbs ?? 0) !== 0 &&
+                        Number(set.reps ?? 0) !== 0;
 
                     if (fullAerobicFields || fullStrengthFields) {
                         return true;
