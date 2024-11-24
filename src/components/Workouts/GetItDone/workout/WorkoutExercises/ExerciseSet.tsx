@@ -49,7 +49,7 @@ export function ExerciseSet({ name, setIdx, onRemove }: ExerciseSetProps) {
 function Aerobic({ name }: { name: string }) {
     return (
         <>
-            <NumberInput name={`${name}.mins`} label="mins" />
+            <NumberInput name={`${name}.mins`} label="mins" autoFocus />
             <NumberInput name={`${name}.distance`} label="dist" />
             <NumberInput name={`${name}.kcal`} label="kcal" />
         </>
@@ -59,7 +59,7 @@ function Aerobic({ name }: { name: string }) {
 function Strength({ name }: { name: string }) {
     return (
         <>
-            <NumberInput name={`${name}.lbs`} label="lbs" />
+            <NumberInput name={`${name}.lbs`} label="lbs" autoFocus />
             <NumberInput name={`${name}.reps`} label="reps" />
         </>
     );
