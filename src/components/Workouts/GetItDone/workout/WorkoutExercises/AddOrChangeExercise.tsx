@@ -58,6 +58,11 @@ export function AddOrChangeExercise({
         return categories;
     }, [exercisesByCategory, searchQuery]);
 
+    function handleExerciseClick(exerciseId: string) {
+        setSearchQuery(null);
+        onExerciseClick(exerciseId);
+    }
+
     function handleClose() {
         setSearchQuery(null);
         onClose();
@@ -86,7 +91,7 @@ export function AddOrChangeExercise({
                     <CategorySection
                         key={category.id}
                         category={category}
-                        onExerciseClick={onExerciseClick}
+                        onExerciseClick={handleExerciseClick}
                     />
                 ))}
 
