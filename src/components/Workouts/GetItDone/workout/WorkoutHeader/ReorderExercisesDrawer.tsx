@@ -31,9 +31,9 @@ export function ReorderExercisesDrawer() {
         }
 
         setItems(
-            watchedWorkoutExercisesFieldArray.map((workoutExercise) => {
+            watchedWorkoutExercisesFieldArray.map((workoutExercise, index) => {
                 const exerciseId = (workoutExercise as any).exerciseId;
-                const id = workoutExercise.id + '-' + exerciseId;
+                const id = workoutExercise.id + '-' + index + '-' + exerciseId;
 
                 return {
                     id: id,
