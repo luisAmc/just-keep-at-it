@@ -2,8 +2,8 @@ import { Button } from '~/components/shared/Button';
 import { ExerciseType } from '@prisma/client';
 import { NumberInput } from '~/components/shared/NumberInput';
 import { useFormContext } from 'react-hook-form';
-import { useWorkoutExercise } from '../../context/useWorkoutExercise';
 import { Trash2Icon } from 'lucide-react';
+import { useWorkoutExercise } from '../../../context/useWorkoutExercise';
 
 interface ExerciseSetProps {
     name: string;
@@ -47,20 +47,24 @@ export function ExerciseSet({ name, setIdx, onRemove }: ExerciseSetProps) {
 }
 
 function Aerobic({ name }: { name: string }) {
+    const form = useFormContext();
+
     return (
         <>
-            <NumberInput name={`${name}.mins`} label="mins" autoFocus />
-            <NumberInput name={`${name}.distance`} label="dist" />
-            <NumberInput name={`${name}.kcal`} label="kcal" />
+            <NumberInput {...form.register(`${name}.mins`)} label="mins" />
+            <NumberInput {...form.register(`${name}.distance`)} label="dist" />
+            <NumberInput {...form.register(`${name}.kcal`)} label="kcal" />
         </>
     );
 }
 
 function Strength({ name }: { name: string }) {
+    const form = useFormContext();
+
     return (
         <>
-            <NumberInput name={`${name}.lbs`} label="lbs" autoFocus />
-            <NumberInput name={`${name}.reps`} label="reps" />
+            <NumberInput {...form.register(`${name}.lbs`)} label="lbs" />
+            <NumberInput {...form.register(`${name}.reps`)} label="reps" />
         </>
     );
 }

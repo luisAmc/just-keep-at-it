@@ -1,13 +1,16 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '~/components/shared/Button';
-import { ExerciseSet } from '../ExerciseSet';
 import { useWorkoutExercise } from '../../../context/useWorkoutExercise';
 import { SimpleTextarea } from '~/components/shared/SimpleInput';
 import { useFormContext } from 'react-hook-form';
 import { ArrowDownIcon, PlusIcon } from 'lucide-react';
 import { getDefaultExerciseSet } from '~/utils/constants';
+import { ExerciseSet } from './ExerciseSet';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 export function CardBody() {
+    const [animationRef] = useAutoAnimate({ duration: 100 });
+
     const {
         fieldName,
         type,
@@ -42,26 +45,16 @@ export function CardBody() {
                             className="rounded-md border-none bg-transparent focus:bg-brand-200"
                         />
 
-                        <AnimatePresence initial={false}>
+                        <div ref={animationRef}>
                             {sets.fields.map((field, idx) => (
-                                <motion.div
+                                <ExerciseSet
                                     key={field.id}
-                                    initial={{ height: 0, opacity: 0 }}
-                                    animate={{ height: 'auto', opacity: 1 }}
-                                    exit={{ height: 0, opacity: 0 }}
-                                    transition={{
-                                        duration: 0.1,
-                                        ease: 'easeOut',
-                                    }}
-                                >
-                                    <ExerciseSet
-                                        setIdx={idx}
-                                        name={`${fieldName}.sets.${idx}`}
-                                        onRemove={() => removeSet(idx)}
-                                    />
-                                </motion.div>
+                                    setIdx={idx}
+                                    name={`${fieldName}.sets.${idx}`}
+                                    onRemove={() => removeSet(idx)}
+                                />
                             ))}
-                        </AnimatePresence>
+                        </div>
 
                         <div className="grid grid-cols-5 gap-x-2">
                             <Button
