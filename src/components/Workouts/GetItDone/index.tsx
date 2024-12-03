@@ -2,7 +2,7 @@ import { api } from '~/utils/api';
 import { Button } from '~/components/shared/Button';
 import { Form, useZodForm } from '~/components/shared/Form';
 import { useDebouncedWorkout } from './useDebouncedWorkout';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { usePartiallySaveWorkout } from './usePartiallySaveWorkout';
 import { useRouter } from 'next/router';
 import { useWatch } from 'react-hook-form';
@@ -41,6 +41,7 @@ export function GetItDone() {
     const router = useRouter();
 
     const queryClient = api.useUtils();
+    const persistedLocalStorage = usePersistedLocalStorage();
 
     const { data, isLoading } = api.workout.byId.useQuery(
         { workoutId: router.query.workoutId as string },
@@ -49,6 +50,8 @@ export function GetItDone() {
 
     const getItDone = api.workout.getItDone.useMutation({
         onSuccess(data) {
+            persistedLocalStorage.remove(data.id);
+
             queryClient.workout.infinite.invalidate();
             queryClient.exercise.allByCategory.invalidate();
 
@@ -56,14 +59,14 @@ export function GetItDone() {
         },
     });
 
-    const persistedLocalStorage = usePersistedLocalStorage();
     const form = useZodForm({ schema: getItDoneSchema });
 
     const [isSetupDone] = usePartiallySaveWorkout({ data, form });
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const workoutState = useWatch({ control: form.control });
 
-    const debouncedWorkoutState = useDebouncedWorkout(workoutState, 250);
+    const debouncedWorkoutState = useDebouncedWorkout(workoutState, 100);
 
     useEffect(() => {
         if (!data || !isSetupDone) {
@@ -88,10 +91,14 @@ export function GetItDone() {
             })),
         };
 
-        persistedLocalStorage.save(data.id, input);
+        if (!isSubmitted) {
+            persistedLocalStorage.save(data.id, input);
+        }
     }, [debouncedWorkoutState]);
 
     async function handleSubmit() {
+        setIsSubmitted(true);
+
         const values: z.infer<typeof getItDoneSchema> = form.getValues();
 
         const nonEmptyWorkoutExercises = values.workoutExercises.filter(
