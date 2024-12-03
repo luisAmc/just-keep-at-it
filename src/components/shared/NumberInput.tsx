@@ -11,7 +11,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             <label>
                 <input
                     className={cn(
-                        'w-16 appearance-none justify-center bg-brand-200 py-0.5 text-center text-xl outline-none',
+                        'h-10 w-16 appearance-none justify-center bg-brand-200 py-0.5 text-center text-xl outline-none',
                         'rounded-md border-2 border-transparent focus:border-brand-600 focus:ring-brand-500',
                         'placeholder:text-brand-500 disabled:bg-gray-500 disabled:bg-opacity-20 disabled:opacity-60',
                         className,
@@ -27,7 +27,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
                     {...props}
                 />
 
-                <div className="ml-1 text-sm font-medium">{label}</div>
+                <div className="text-center text-sm font-medium">{label}</div>
             </label>
         );
     },
