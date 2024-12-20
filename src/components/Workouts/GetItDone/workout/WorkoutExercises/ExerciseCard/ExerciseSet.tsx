@@ -73,7 +73,7 @@ function LastSession({ setIndex }: { setIndex: number }) {
     const form = useFormContext();
     const { fieldName, type, lastSession } = useWorkoutExercise();
 
-    if (!lastSession) {
+    if (!lastSession || type === ExerciseType.AEROBIC) {
         return null;
     }
 

@@ -18,6 +18,7 @@ export function CardBody() {
         isLast,
         isOpen,
         openNext,
+        lastSession,
     } = useWorkoutExercise();
     const form = useFormContext();
 
@@ -39,11 +40,16 @@ export function CardBody() {
                     transition={{ duration: 0.1, ease: 'easeOut' }}
                 >
                     <div className="pt-4">
-                        <SimpleTextarea
-                            {...form.register(`${fieldName}.notes`)}
-                            placeholder="Notas..."
-                            className="rounded-md border-none bg-transparent focus:bg-brand-200"
-                        />
+                        {lastSession?.notes && (
+                            <div className="my-2">
+                                <div className="text-xs font-bold">
+                                    La última vez:
+                                </div>
+                                <p className="whitespace-pre text-pretty text-xs">
+                                    {lastSession.notes}
+                                </p>
+                            </div>
+                        )}
 
                         <div ref={animationRef}>
                             {sets.fields.map((field, idx) => (
@@ -55,6 +61,12 @@ export function CardBody() {
                                 />
                             ))}
                         </div>
+
+                        <SimpleTextarea
+                            {...form.register(`${fieldName}.notes`)}
+                            placeholder="Notas..."
+                            className="rounded-md border-none bg-transparent focus:bg-brand-200"
+                        />
 
                         <div className="grid grid-cols-5 gap-x-2">
                             <Button
