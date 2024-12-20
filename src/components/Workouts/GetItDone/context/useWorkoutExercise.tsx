@@ -10,6 +10,7 @@ import { useDisclosure } from './useDisclosure';
 import { useWorkout } from './useWorkout';
 import { useExerciseHistoryDrawer } from '../workout/WorkoutExercises/ExerciseHistoryDrawer';
 import { getDefaultExerciseSet } from '~/utils/constants';
+import { ExerciseType as PrismaExerciseType } from '@prisma/client';
 
 interface WorkoutExerciseType {
     index: number;
@@ -82,11 +83,21 @@ export function WorkoutExerciseProvider({
     const label = index < 9 ? `0${workoutExercise.index + 1}` : `${index + 1}`;
 
     function changeExercise(newExerciseId: string) {
+        const newExercise = getExerciseById(newExerciseId)!;
+
         onChange(index, newExerciseId);
         setExerciseId(newExerciseId);
 
-        const defaultSet = getDefaultExerciseSet(exercise.type);
-        setsFieldArray.replace([defaultSet]);
+        const defaultSet = getDefaultExerciseSet(newExercise.type);
+
+        const lastSetCount = newExercise.lastSession?.sets.length ?? 1;
+
+        const sets =
+            newExercise.type === PrismaExerciseType.AEROBIC
+                ? [defaultSet]
+                : Array.from({ length: lastSetCount }).fill(defaultSet);
+
+        setsFieldArray.replace(sets);
     }
 
     return (

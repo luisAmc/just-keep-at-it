@@ -1,3 +1,4 @@
+import { ExerciseType } from '@prisma/client';
 import {
     createContext,
     useCallback,
@@ -11,7 +12,9 @@ import {
     UseFieldArrayReturn,
     useFormContext,
 } from 'react-hook-form';
+import { useExercises } from '~/contexts/useExercises';
 import { RouterOutputs } from '~/utils/api';
+import { getDefaultExerciseSet } from '~/utils/constants';
 
 type WorkoutType = RouterOutputs['workout']['byId'];
 export type MoveAction = 'up' | 'down' | 'first' | 'last';
@@ -46,6 +49,7 @@ interface WorkoutProviderProps {
 
 export function WorkoutProvider({ workout, children }: WorkoutProviderProps) {
     const [name, _setName] = useState(workout.name);
+    const { getExerciseById } = useExercises();
 
     const setName = useCallback((newName: string) => _setName(newName), []);
 
@@ -56,9 +60,19 @@ export function WorkoutProvider({ workout, children }: WorkoutProviderProps) {
     });
 
     function addExercise(exerciseId: string) {
+        const exercise = getExerciseById(exerciseId)!;
+
+        const defaultSet = getDefaultExerciseSet(exercise.type);
+        const lastSetCount = exercise.lastSession?.sets.length ?? 1;
+
+        const sets =
+            exercise.type === ExerciseType.AEROBIC
+                ? [defaultSet]
+                : Array.from({ length: lastSetCount }).fill(defaultSet);
+
         workoutExercisesFieldArray.append({
             exerciseId: exerciseId,
-            sets: [{}],
+            sets: sets,
             notes: '',
         });
     }
