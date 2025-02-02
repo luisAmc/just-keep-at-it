@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { CATEGORY_TYPE } from '~/components/Exercises';
 import { Button } from '~/components/shared/Button';
 import { Drawer } from '~/components/shared/Drawer';
-import { inputVariants } from '~/components/shared/Input';
+import { Input, inputVariants } from '~/components/shared/Input';
 import { useExercises } from '~/contexts/useExercises';
 import { CreateExerciseInline } from './CreateExerciseInline';
 import { CircleHelp, PlusIcon } from 'lucide-react';
@@ -77,16 +77,13 @@ export function AddOrChangeExercise({
             open={open}
             onClose={handleClose}
         >
-            <input
-                className={inputVariants({
-                    className:
-                        'border-gray-200 placeholder:text-gray-400 focus:border-gray-200 focus:ring-gray-600',
-                })}
+            <Input
                 onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder="Buscar por nombre / categoría..."
+                placeholder="Buscar por nombre o categoría..."
+                className="text-sm"
             />
 
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-brand-100">
                 {categories.map((category) => (
                     <CategorySection
                         key={category.id}
@@ -123,33 +120,36 @@ function CategorySection({ category, onExerciseClick }: CategorySectionProps) {
         <div className="py-4">
             <h3 className="font-medium">{category.name}</h3>
 
-            <div className="mt-2 space-y-2">
+            <div className="mb-2 mt-2 space-y-0.5">
                 {category.exercises.map((exercise) => (
                     <Button
                         key={exercise.id}
-                        className="w-full justify-start bg-gray-100 font-normal text-gray-900 hover:bg-gray-300"
+                        variant="secondary"
+                        className="h-12 w-full justify-start"
+                        // className="w-full justify-start bg-gray-100 font-normal text-gray-900 hover:bg-gray-300"
                         onClick={() => onExerciseClick(exercise.id)}
                     >
                         {exercise.name}
                     </Button>
                 ))}
-
-                {isCreating ? (
-                    <CreateExerciseInline
-                        categoryId={category.id}
-                        onClose={() => setIsCreating(false)}
-                    />
-                ) : (
-                    <Button
-                        variant="dashed"
-                        className="w-full border-gray-300 hover:bg-gray-300/90"
-                        onClick={() => setIsCreating(true)}
-                    >
-                        <PlusIcon className="mr-1 size-4" />
-                        <span>Crear un ejercicio</span>
-                    </Button>
-                )}
             </div>
+
+            {isCreating ? (
+                <CreateExerciseInline
+                    categoryId={category.id}
+                    onClose={() => setIsCreating(false)}
+                />
+            ) : (
+                <Button
+                    variant="dashed"
+                    className="h-12 w-full"
+                    // className="w-full border-gray-300 hover:bg-gray-300/90"
+                    onClick={() => setIsCreating(true)}
+                >
+                    <PlusIcon className="mr-1 size-4" />
+                    <span>Añadir uno nuevo</span>
+                </Button>
+            )}
         </div>
     );
 }

@@ -7,9 +7,10 @@ import {
     useForm,
     useFormContext,
     UseFormProps,
-    UseFormReturn
+    UseFormReturn,
 } from 'react-hook-form';
 import { TypeOf, ZodSchema } from 'zod';
+import { cn } from '~/utils/cn';
 
 interface UseZodFormProps<T extends ZodSchema<any>>
     extends UseFormProps<TypeOf<T>> {
@@ -23,7 +24,7 @@ export const useZodForm = <T extends ZodSchema<any>>({
     return useForm({
         ...formConfig,
         mode: 'all',
-        resolver: zodResolver(schema)
+        resolver: zodResolver(schema),
     });
 };
 
@@ -33,7 +34,7 @@ interface FieldErrorsProps {
 
 export function FieldError({ name }: FieldErrorsProps) {
     const {
-        formState: { errors }
+        formState: { errors },
     } = useFormContext();
 
     if (!name) return null;
@@ -61,6 +62,7 @@ export const Form = <T extends FieldValues>({
     onSubmit,
     children,
     disabled = false,
+    className,
     ...props
 }: FormProps<T>) => {
     return (
@@ -71,7 +73,7 @@ export const Form = <T extends FieldValues>({
                 className="flex-1"
             >
                 <fieldset
-                    className="flex h-full flex-col gap-y-4"
+                    className={cn('flex h-full flex-col gap-y-4', className)}
                     disabled={form.formState.isSubmitting || disabled}
                 >
                     {children}

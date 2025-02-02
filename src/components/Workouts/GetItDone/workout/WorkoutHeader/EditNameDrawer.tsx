@@ -34,7 +34,7 @@ export function EditNameDrawer() {
         <>
             <Button
                 variant="ghost"
-                className="text-2xl"
+                className="px-2 text-xl"
                 onClick={editNameDrawer.open}
             >
                 {name}

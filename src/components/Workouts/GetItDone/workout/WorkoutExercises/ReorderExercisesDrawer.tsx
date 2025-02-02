@@ -2,19 +2,19 @@ import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
 import { Button } from '~/components/shared/Button';
 import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
-import { Drawer, useDrawer } from '~/components/shared/Drawer';
+import { Drawer, DrawerProps } from '~/components/shared/Drawer';
 import { useEffect, useState } from 'react';
 import { useExercises } from '~/contexts/useExercises';
 import { useWorkout } from '../../context/useWorkout';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { ArrowUpDownIcon, CheckIcon } from 'lucide-react';
+import { CheckIcon } from 'lucide-react';
 
-export function ReorderExercisesDrawer() {
-    const reorderModal = useDrawer();
+type Props = Pick<DrawerProps, 'open' | 'onClose'>;
 
+export function ReorderExercisesDrawer(drawerProps: Props) {
     const form = useFormContext();
 
-    const { workoutExercisesFieldArray, workoutExerciseCount } = useWorkout();
+    const { workoutExercisesFieldArray } = useWorkout();
 
     const watchedWorkoutExercisesFieldArray = useWatch({
         control: form.control,
@@ -61,48 +61,28 @@ export function ReorderExercisesDrawer() {
     }
 
     return (
-        <>
-            <Button
-                disabled={workoutExerciseCount < 2}
-                variant="secondary"
-                className="bg-gray-200"
-                size="icon"
-                onClick={reorderModal.open}
-            >
-                <ArrowUpDownIcon className="size-5" />
-            </Button>
-
-            <Drawer
-                title="Reordenar"
-                dismissable={false}
-                {...reorderModal.props}
-            >
-                <div className="space-y-2">
-                    <DndContext
-                        collisionDetection={closestCenter}
-                        onDragEnd={handleDragEnd}
-                    >
-                        <SortableContext items={items}>
-                            {items.map((item) => (
-                                <SortableCard
-                                    key={item.id}
-                                    workoutExercise={item}
-                                />
-                            ))}
-                        </SortableContext>
-                    </DndContext>
-                </div>
-
-                <Button
-                    variant="secondary"
-                    className="bg-gray-200"
-                    onClick={reorderModal.close}
+        <Drawer title="Reordenar" dismissable={false} {...drawerProps}>
+            <div className="space-y-0.5">
+                <DndContext
+                    collisionDetection={closestCenter}
+                    onDragEnd={handleDragEnd}
                 >
-                    <CheckIcon className="mr-1 size-4" />
-                    <span>Listo</span>
-                </Button>
-            </Drawer>
-        </>
+                    <SortableContext items={items}>
+                        {items.map((item) => (
+                            <SortableCard
+                                key={item.id}
+                                workoutExercise={item}
+                            />
+                        ))}
+                    </SortableContext>
+                </DndContext>
+            </div>
+
+            <Button variant="secondary" onClick={drawerProps.onClose}>
+                <CheckIcon className="mr-1 size-4" />
+                <span>Listo</span>
+            </Button>
+        </Drawer>
     );
 }
 
@@ -132,7 +112,7 @@ function SortableCard({ workoutExercise }: SortableCardProps) {
             ref={setNodeRef}
             {...attributes}
             {...listeners}
-            className="select-none rounded-md bg-brand-100 px-4 py-4 text-sm font-medium"
+            className="select-none rounded-md bg-brand-300 px-4 py-4 text-sm font-medium"
             style={{
                 transform: CSS.Transform.toString(transform),
                 transition,

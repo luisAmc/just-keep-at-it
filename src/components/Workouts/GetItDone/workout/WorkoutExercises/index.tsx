@@ -1,13 +1,11 @@
-import { ExerciseCard } from './ExerciseCard';
-import { WorkoutExerciseProvider } from '../../context/useWorkoutExercise';
-import { DisclosureProvider } from '../../context/useDisclosure';
-import { useWorkout } from '../../context/useWorkout';
-import { motion } from 'framer-motion';
 import { AddExerciseDrawer } from './AddExerciseDrawer';
-import {
-    ExerciseHistoryDrawer,
-    useExerciseHistoryDrawer,
-} from './ExerciseHistoryDrawer';
+import { DeleteDrawer } from './DeleteDrawer';
+import { DisclosureProvider } from '../../context/useDisclosure';
+import { ExerciseCard } from './ExerciseCard';
+import { ExerciseHistoryDrawer, useExerciseHistoryDrawer, } from './ExerciseHistoryDrawer';
+import { motion } from 'framer-motion';
+import { useWorkout } from '../../context/useWorkout';
+import { WorkoutExerciseProvider } from '../../context/useWorkoutExercise';
 
 export function WorkoutExercises() {
     const { workoutExercisesFieldArray } = useWorkout();
@@ -41,6 +39,8 @@ export function WorkoutExercises() {
                 )}
 
                 <AddExerciseDrawer />
+
+                <DeleteDrawer />
 
                 <ExerciseHistoryDrawer {...historyDrawer.props} />
             </div>

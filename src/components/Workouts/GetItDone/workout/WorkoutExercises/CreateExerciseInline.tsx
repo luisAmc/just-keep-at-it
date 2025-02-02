@@ -57,7 +57,6 @@ export function CreateExerciseInline({
                 <Input
                     {...form.register('name')}
                     placeholder="Nombre del nuevo ejercicio..."
-                    className="border-gray-400 placeholder:text-gray-400 focus:border-gray-200 focus:ring-gray-600"
                 />
 
                 <div className="flex items-center gap-x-2">
@@ -74,7 +73,8 @@ export function CreateExerciseInline({
                     <Button
                         variant="secondary"
                         onClick={onClose}
-                        className="w-full bg-gray-200"
+                        className="w-full"
+                        // className="w-full bg-gray-200"
                     >
                         <XIcon className="mr-1 size-4" />
                         <span>Cancelar</span>

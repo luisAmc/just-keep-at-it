@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss';
 import colors from 'tailwindcss/colors';
 
-const brand = colors.teal;
+const brand = colors.rose;
 
 const config: Config = {
     content: ['./src/**/*.{ts,tsx}'],
