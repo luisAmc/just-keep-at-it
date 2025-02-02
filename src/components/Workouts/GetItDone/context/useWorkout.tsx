@@ -34,8 +34,6 @@ interface WorkoutContextType {
     workoutExerciseCount: number;
     addExercise: (exerciseId: string) => void;
 
-    // Workout exercise's position
-    onMove: (index: number, action: MoveAction) => number;
     onChange: (index: number, newExerciseId: string) => void;
     onRemove: (index: number) => void;
 }
@@ -77,26 +75,6 @@ export function WorkoutProvider({ workout, children }: WorkoutProviderProps) {
         });
     }
 
-    function onMove(index: number, action: MoveAction) {
-        if (action === 'first') {
-            workoutExercisesFieldArray.move(index, 0);
-
-            return 0;
-        } else if (action === 'last') {
-            const lastIndex = workoutExercisesFieldArray.fields.length - 1;
-            workoutExercisesFieldArray.move(index, lastIndex);
-
-            return lastIndex;
-        } else {
-            const moveStep = action === 'up' ? -1 : 1;
-            const updatedIndex = index + moveStep;
-
-            workoutExercisesFieldArray.move(index, updatedIndex);
-
-            return updatedIndex;
-        }
-    }
-
     function onChange(index: number, newExerciseId: string) {
         // Using setValue instead of formField.update to prevent rerender.
         //
@@ -122,7 +100,6 @@ export function WorkoutProvider({ workout, children }: WorkoutProviderProps) {
                 workoutExerciseCount: workoutExercisesFieldArray.fields.length,
                 addExercise,
 
-                onMove,
                 onChange,
                 onRemove,
             }}

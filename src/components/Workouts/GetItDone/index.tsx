@@ -153,8 +153,8 @@ export function GetItDone() {
         };
 
         toast.promise(getItDone.mutateAsync(input), {
-            loading: 'Completando rútina...',
-            success: '¡Rútina completada!',
+            loading: 'Finalizando rútina...',
+            success: '¡Rútina finalizada!',
             error: 'No se pudo completar la rútina.',
         });
     }
@@ -167,21 +167,23 @@ export function GetItDone() {
             />
 
             {!isLoading && isSetupDone && data && (
-                <Form form={form} onSubmit={() => {}}>
+                <Form form={form} onSubmit={() => {}} className="gap-y-2">
                     <WorkoutProvider workout={data}>
-                        <WorkoutHeader />
+                        <WorkoutHeader
+                            action={
+                                <Button
+                                    size="sm"
+                                    onClick={handleSubmit}
+                                    disabled={!form.formState.isValid}
+                                >
+                                    <CheckIcon className="mr-1 size-4" />
+                                    <span>Finalizar</span>
+                                </Button>
+                            }
+                        />
 
                         <div className="flex flex-col gap-y-4 px-2">
                             <WorkoutExercises />
-
-                            <Button
-                                disabled={!form.formState.isValid}
-                                className="h-12"
-                                onClick={handleSubmit}
-                            >
-                                <CheckIcon className="mr-1 size-4" />
-                                <span>Finalizar</span>
-                            </Button>
                         </div>
                     </WorkoutProvider>
                 </Form>

@@ -42,7 +42,7 @@ function SmallButton({ onClick }: { onClick: () => void }) {
 function BigButton({ onClick }: { onClick: () => void }) {
     return (
         <Button
-            variant="secondary"
+            variant="dashed"
             className="h-auto w-full flex-col px-6 py-8"
             onClick={onClick}
         >

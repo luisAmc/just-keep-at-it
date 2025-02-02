@@ -103,7 +103,7 @@ function LastSession({ setIndex }: { setIndex: number }) {
                             <span className="text-xs">lbs</span>
                         </span>
 
-                        <span className="text-sm text-slate-500">x</span>
+                        <span className="text-sm text-brand-300">x</span>
 
                         <span>
                             <span className="text-sm">

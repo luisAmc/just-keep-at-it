@@ -3,8 +3,8 @@ import { Button } from '~/components/shared/Button';
 import { Drawer, useDrawer } from '~/components/shared/Drawer';
 import { useRouter } from 'next/router';
 import { useWorkout } from '../../context/useWorkout';
-import toast from 'react-hot-toast';
 import { Trash2Icon } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export function DeleteDrawer() {
     const { workoutId } = useWorkout();
@@ -24,18 +24,21 @@ export function DeleteDrawer() {
         <>
             <Button
                 variant="destructive"
-                size="icon"
                 onClick={deleteDrawer.open}
+                className="w-full"
             >
-                <Trash2Icon className="size-5" />
+                <Trash2Icon className="mr-1 size-4" />
+                <span>Descartar rútina</span>
             </Button>
 
             <Drawer {...deleteDrawer.props}>
-                <div className="rounded-xl p-4 text-rose-700 ring-2 ring-rose-400">
-                    <h2 className="mb-6 text-xl font-medium">Borrar rútina</h2>
+                <div className="rounded-xl p-4 text-sm text-rose-700 ring-2 ring-rose-400">
+                    <h2 className="mb-4 text-lg font-medium">
+                        Descartar rútina
+                    </h2>
 
                     <p className="text-center">
-                        ¿Estás seguro(a) de borrar esta rútina?
+                        ¿Estás seguro(a) de descartar esta rútina?
                     </p>
 
                     <p className="text-center font-medium underline">
@@ -51,9 +54,9 @@ export function DeleteDrawer() {
                                 workoutId: workoutId,
                             }),
                             {
-                                loading: 'Borrando rútina...',
-                                success: '¡Rútina borrada!',
-                                error: 'No se pudo borrar la rútina.',
+                                loading: 'Descartando rútina...',
+                                success: '¡Rútina descartada!',
+                                error: 'No se pudo descartar la rútina.',
                             },
                         )
                     }
