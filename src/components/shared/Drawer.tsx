@@ -17,7 +17,7 @@ export function useDrawer() {
     };
 }
 
-interface DrawerProps {
+export interface DrawerProps {
     title?: string;
     size?: 'small' | 'tall';
     open: boolean;
@@ -66,18 +66,18 @@ export function Drawer({
                 >
                     <div
                         className={cn(
-                            'h-full flex-1 rounded-t-xl bg-white p-4 pb-8',
+                            'h-full flex-1 rounded-t-xl bg-brand-50 p-4 pb-8',
                             scrollable && 'overflow-y-auto',
                         )}
                     >
-                        <div className="mx-auto mb-6 h-2 w-[100px] flex-shrink-0 rounded-full bg-gray-200" />
+                        <div className="mx-auto mb-4 h-2 w-[100px] flex-shrink-0 rounded-full bg-brand-300" />
 
-                        <div className="mx-auto w-full max-w-sm">
-                            <VaulDrawer.Title className="text-xl font-medium">
+                        <div className="mx-auto w-full max-w-sm rounded-xl">
+                            <VaulDrawer.Title className="text-lg font-medium">
                                 {title}
                             </VaulDrawer.Title>
 
-                            <div className="mt-6 flex flex-col gap-y-4">
+                            <div className="mt-4 flex flex-col gap-y-4">
                                 {children}
                             </div>
                         </div>
