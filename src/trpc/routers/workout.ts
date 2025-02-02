@@ -212,10 +212,8 @@ export const workoutRouter = createTRPCRouter({
 
             if (workout.status === WorkoutStatus.DONE) {
                 throw new ValidationError(
-                    'La rútina ya habia sido completada anteriormente.',
-                    {
-                        workoutId: workout.id,
-                    },
+                    'La rútina ya habia sido finalizado anteriormente.',
+                    { workoutId: workout.id },
                 );
             }
 

@@ -13,7 +13,7 @@ import { api } from '~/utils/api';
 import { Shimmer } from './Shimmer';
 import { Button } from '~/components/shared/Button';
 import {
-    ChevronLeftIcon,
+    ArrowLeftIcon,
     EllipsisVerticalIcon,
     RefreshCcw,
     Trash2Icon,
@@ -52,7 +52,7 @@ export function ViewWorkout() {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-x-1.5">
                             <Button href="/" variant="ghost" size="icon">
-                                <ChevronLeftIcon className="size-5 stroke-2" />
+                                <ArrowLeftIcon className="size-5 stroke-2" />
                             </Button>
 
                             <h1 className="text-2xl">{data.name}</h1>
