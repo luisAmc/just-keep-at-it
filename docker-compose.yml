@@ -10,7 +10,26 @@ services:
     ports:
       - "15432:5432"
     volumes:
-      - "postgresData:/var/lib/postgresql/data/"
+      - "pgData:/var/lib/postgresql/data/"
+
+  next:
+    container_name: justKeepAtIt-next
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run dev:next
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/workspace:rw
+    working_dir: /workspace
+    env_file: .env
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@justKeepAtIt-postgres/postgres
+    depends_on:
+      - postgres
+    
 
 volumes:
-  postgresData: {}
+  pgData: {}

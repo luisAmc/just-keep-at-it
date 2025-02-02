@@ -5,13 +5,12 @@
     "scripts": {
         "dev": "concurrently -c green.bold,blue.bold 'pnpm:dev:next' 'pnpm:dev:docker'",
         "dev:docker": "docker compose up",
-        "dev:next": "next dev",
+        "dev:next": "npx prisma db push && npx prisma db seed && next dev",
         "build": "next build",
         "start": "next start",
         "typecheck": "tsc --noEmit",
         "lint": "next lint",
-        "test": "jest --config jest.config.ts",
-        "postinstall": "prisma generate"
+        "test": "jest --config jest.config.ts"
     },
     "prisma": {
         "seed": "ts-node --transpile-only prisma/seed.ts"
