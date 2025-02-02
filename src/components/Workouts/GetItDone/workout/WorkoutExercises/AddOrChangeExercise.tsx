@@ -80,7 +80,6 @@ export function AddOrChangeExercise({
             <Input
                 onChange={(event) => setSearchQuery(event.target.value)}
                 placeholder="Buscar por nombre o categoría..."
-                className="text-sm"
             />
 
             <div className="divide-y divide-brand-100">

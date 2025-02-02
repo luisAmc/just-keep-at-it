@@ -62,7 +62,7 @@ export function ReorderExercisesDrawer(drawerProps: Props) {
 
     return (
         <Drawer title="Reordenar" dismissable={false} {...drawerProps}>
-            <div className="space-y-0.5">
+            <div className="flex flex-col space-y-2">
                 <DndContext
                     collisionDetection={closestCenter}
                     onDragEnd={handleDragEnd}
@@ -112,7 +112,7 @@ function SortableCard({ workoutExercise }: SortableCardProps) {
             ref={setNodeRef}
             {...attributes}
             {...listeners}
-            className="select-none rounded-md bg-brand-300 px-4 py-4 text-sm font-medium"
+            className="inline-flex h-12 select-none items-center rounded-md bg-brand-300 px-4 py-2 text-sm font-medium text-brand-900"
             style={{
                 transform: CSS.Transform.toString(transform),
                 transition,
