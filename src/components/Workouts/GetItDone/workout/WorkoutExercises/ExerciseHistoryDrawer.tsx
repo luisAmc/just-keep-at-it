@@ -86,7 +86,7 @@ export function ExerciseHistoryDrawer({
 
                 <Button
                     variant="secondary"
-                    className="w-full bg-gray-200"
+                    className="w-full"
                     onClick={onClose}
                 >
                     Cerrar
