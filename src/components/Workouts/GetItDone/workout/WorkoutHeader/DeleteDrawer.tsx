@@ -22,13 +22,9 @@ export function DeleteDrawer() {
 
     return (
         <>
-            <Button
-                variant="destructive"
-                onClick={deleteDrawer.open}
-                className="w-full"
-            >
+            <Button variant="destructive" onClick={deleteDrawer.open}>
                 <Trash2Icon className="mr-1 size-4" />
-                <span>Descartar rútina</span>
+                <span>Descartar</span>
             </Button>
 
             <Drawer {...deleteDrawer.props}>

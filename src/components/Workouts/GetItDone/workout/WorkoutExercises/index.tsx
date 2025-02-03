@@ -1,8 +1,10 @@
 import { AddExerciseDrawer } from './AddExerciseDrawer';
-import { DeleteDrawer } from './DeleteDrawer';
 import { DisclosureProvider } from '../../context/useDisclosure';
 import { ExerciseCard } from './ExerciseCard';
-import { ExerciseHistoryDrawer, useExerciseHistoryDrawer, } from './ExerciseHistoryDrawer';
+import {
+    ExerciseHistoryDrawer,
+    useExerciseHistoryDrawer,
+} from './ExerciseHistoryDrawer';
 import { motion } from 'framer-motion';
 import { useWorkout } from '../../context/useWorkout';
 import { WorkoutExerciseProvider } from '../../context/useWorkoutExercise';
@@ -39,8 +41,6 @@ export function WorkoutExercises() {
                 )}
 
                 <AddExerciseDrawer />
-
-                <DeleteDrawer />
 
                 <ExerciseHistoryDrawer {...historyDrawer.props} />
             </div>
