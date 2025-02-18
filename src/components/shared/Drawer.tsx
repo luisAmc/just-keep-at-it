@@ -43,6 +43,7 @@ export function Drawer({
             open={open}
             onClose={onClose}
             dismissible={dismissable}
+            repositionInputs={false}
         >
             <VaulDrawer.Portal>
                 <VaulDrawer.Overlay

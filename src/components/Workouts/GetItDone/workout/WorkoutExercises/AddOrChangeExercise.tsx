@@ -123,7 +123,7 @@ function CategorySection({ category, onExerciseClick }: CategorySectionProps) {
                 {category.exercises.map((exercise) => (
                     <Button
                         key={exercise.id}
-                        variant="secondary"
+                        variant="muted"
                         className="h-12 w-full justify-start"
                         // className="w-full justify-start bg-gray-100 font-normal text-gray-900 hover:bg-gray-300"
                         onClick={() => onExerciseClick(exercise.id)}

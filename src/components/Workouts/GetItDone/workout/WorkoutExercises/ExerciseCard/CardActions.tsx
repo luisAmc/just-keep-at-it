@@ -28,7 +28,7 @@ export function CardActions() {
             <Drawer title={name} {...actionDrawer.props}>
                 <section className="flex flex-col gap-y-2">
                     <Button
-                        variant="secondary"
+                        variant="muted"
                         className="h-12 justify-start"
                         onClick={changeExerciseDrawer.open}
                     >
@@ -37,7 +37,7 @@ export function CardActions() {
                     </Button>
 
                     <Button
-                        variant="secondary"
+                        variant="muted"
                         className="h-12 justify-start"
                         disabled={workoutExerciseCount === 1}
                         onClick={reorderDrawer.open}
@@ -67,8 +67,8 @@ export function CardActions() {
                     <ReorderExercisesDrawer
                         {...reorderDrawer.props}
                         onClose={() => {
-                            reorderDrawer.close();
                             actionDrawer.close();
+                            reorderDrawer.close();
                         }}
                     />
                 </section>

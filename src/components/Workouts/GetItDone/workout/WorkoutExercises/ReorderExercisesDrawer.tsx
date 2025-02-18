@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useExercises } from '~/contexts/useExercises';
 import { useWorkout } from '../../context/useWorkout';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { CheckIcon } from 'lucide-react';
+import { CheckIcon, GripIcon } from 'lucide-react';
 
 type Props = Pick<DrawerProps, 'open' | 'onClose'>;
 
@@ -110,15 +110,25 @@ function SortableCard({ workoutExercise }: SortableCardProps) {
     return (
         <div
             ref={setNodeRef}
-            {...attributes}
-            {...listeners}
-            className="inline-flex h-12 select-none items-center rounded-md bg-brand-300 px-4 py-2 text-sm font-medium text-brand-900"
+            className="flex h-12 select-none rounded-md bg-brand-200 px-4 py-2 text-sm font-medium text-brand-900"
             style={{
                 transform: CSS.Transform.toString(transform),
                 transition,
+                touchAction: 'none',
             }}
         >
-            {exercise.name}
+            <div className="flex flex-1 items-center justify-between">
+                <span>{exercise.name}</span>
+
+                <Button
+                    size="icon"
+                    variant="ghost"
+                    {...attributes}
+                    {...listeners}
+                >
+                    <GripIcon className="size-4" />
+                </Button>
+            </div>
         </div>
     );
 }

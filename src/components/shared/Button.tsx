@@ -10,6 +10,7 @@ export const buttonVariants = cva(
             variant: {
                 default: 'bg-brand-700 text-brand-50 hover:bg-brand-700/90',
                 secondary: 'bg-brand-300 text-brand-900 hover:bg-brand-300/80',
+                muted: 'bg-brand-200 text-brand-900 hover:bg-brand-200/80',
                 destructive: 'bg-red-500 text-red-50 hover:bg-red-500/90',
                 'destructive-dashed':
                     'border-2 border-dashed border-red-500  text-red-600 hover:border-transparent hover:bg-red-200',
