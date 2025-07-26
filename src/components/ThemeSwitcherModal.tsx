@@ -12,11 +12,11 @@ export function ThemeSwitcherModal({ open, onClose }: ThemeSwitcherModalProps) {
             <div className="flex flex-col gap-y-1">
                 <Button
                     size="lg"
-                    className="justify-start bg-sky-300 text-sky-900 hover:bg-sky-300/80"
+                    className="justify-start bg-teal-300 text-teal-900 hover:bg-teal-300/80"
                     onClick={() => setTheme('default')}
                 >
-                    <span className="mr-1 size-4 rounded-full bg-sky-500"></span>
-                    <span>Celeste</span>
+                    <span className="mr-1 size-4 rounded-full bg-teal-500"></span>
+                    <span>Verde azulado</span>
                 </Button>
 
                 <Button
@@ -30,11 +30,11 @@ export function ThemeSwitcherModal({ open, onClose }: ThemeSwitcherModalProps) {
 
                 <Button
                     size="lg"
-                    className="justify-start bg-teal-300 text-teal-900 hover:bg-teal-300/80"
-                    onClick={() => setTheme('teal')}
+                    className="justify-start bg-sky-300 text-sky-900 hover:bg-sky-300/80"
+                    onClick={() => setTheme('sky')}
                 >
-                    <span className="mr-1 size-4 rounded-full bg-teal-500"></span>
-                    <span>Verde azulado</span>
+                    <span className="mr-1 size-4 rounded-full bg-sky-500"></span>
+                    <span>Celeste</span>
                 </Button>
 
                 <Button
