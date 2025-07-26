@@ -4,7 +4,15 @@ import { useRouter } from 'next/router';
 import { Dropdown, DropdownGroup, DropdownItem } from './shared/Dropdown';
 import { api } from '~/utils/api';
 import { useAuthRedirect } from '~/utils/useAuthRedirect';
-import { BookDashedIcon, SettingsIcon, ListIcon, LogOutIcon } from 'lucide-react';
+import {
+    BookDashedIcon,
+    SettingsIcon,
+    ListIcon,
+    LogOutIcon,
+    PaletteIcon,
+} from 'lucide-react';
+import { useModal } from './shared/Modal';
+import { ThemeSwitcherModal } from './ThemeSwitcherModal';
 
 interface LayoutProps {
     children: ReactNode;
@@ -13,6 +21,7 @@ interface LayoutProps {
 export function Layout({ children }: LayoutProps) {
     const router = useRouter();
     const authRedirect = useAuthRedirect();
+    const themeSwitcherModal = useModal();
 
     const logout = api.auth.logout.useMutation({
         onSuccess() {
@@ -29,6 +38,7 @@ export function Layout({ children }: LayoutProps) {
                 >
                     Just keep at it!
                 </Link>
+
                 <Dropdown
                     className="mx-4"
                     trigger={<SettingsIcon className="size-6 text-brand-600" />}
@@ -48,6 +58,11 @@ export function Layout({ children }: LayoutProps) {
                             <span>Bocetos</span>
                         </DropdownItem>
 
+                        <DropdownItem onSelect={themeSwitcherModal.open}>
+                            <PaletteIcon className="mr-1 size-4" />
+                            <span>Cambiar color</span>
+                        </DropdownItem>
+
                         <DropdownItem
                             onSelect={() => logout.mutateAsync()}
                             className="text-red-600"
@@ -57,6 +72,8 @@ export function Layout({ children }: LayoutProps) {
                         </DropdownItem>
                     </DropdownGroup>
                 </Dropdown>
+
+                <ThemeSwitcherModal {...themeSwitcherModal.props} />
             </nav>
 
             <main className="relative">{children}</main>

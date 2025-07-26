@@ -4,12 +4,13 @@ import { NProgress } from '~/components/NProgress';
 import { UserProvider } from '~/contexts/useUser';
 import { ExercisesProvider } from '~/contexts/useExercises';
 import { Toaster } from 'react-hot-toast';
-import '~/styles/globals.css';
 import { Layout } from '~/components/Layout';
+import { ThemeProvider } from '~/contexts/useTheme';
+import '~/styles/globals.css';
 
 function App({ Component, pageProps }: AppProps) {
     return (
-        <>
+        <ThemeProvider>
             <NProgress />
             <Toaster
                 position="bottom-center"
@@ -29,7 +30,7 @@ function App({ Component, pageProps }: AppProps) {
             ) : (
                 <Component {...pageProps} />
             )}
-        </>
+        </ThemeProvider>
     );
 }
 

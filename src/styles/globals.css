@@ -7,16 +7,59 @@
     --background-start-rgb: 214, 219, 220;
     --background-end-rgb: 255, 255, 255;
 
-    --color-brand-100: theme(colors.brand.100);
-    --color-brand-200: theme(colors.brand.200);
-    --color-brand-300: theme(colors.brand.300);
-    --color-brand-400: theme(colors.brand.400);
-    --color-brand-500: theme(colors.brand.500);
-    --color-brand-600: theme(colors.brand.600);
-    --color-brand-700: theme(colors.brand.700);
-    --color-brand-800: theme(colors.brand.800);
-    --color-brand-900: theme(colors.brand.900);
-    --color-brand-950: theme(colors.brand.950);
+    --color-brand-50: theme(colors.sky.50);
+    --color-brand-100: theme(colors.sky.100);
+    --color-brand-200: theme(colors.sky.200);
+    --color-brand-300: theme(colors.sky.300);
+    --color-brand-400: theme(colors.sky.400);
+    --color-brand-500: theme(colors.sky.500);
+    --color-brand-600: theme(colors.sky.600);
+    --color-brand-700: theme(colors.sky.700);
+    --color-brand-800: theme(colors.sky.800);
+    --color-brand-900: theme(colors.sky.900);
+    --color-brand-950: theme(colors.sky.950);
+}
+
+[data-theme='gray'] {
+    --color-brand-50: theme(colors.gray.50);
+    --color-brand-100: theme(colors.gray.100);
+    --color-brand-200: theme(colors.gray.200);
+    --color-brand-300: theme(colors.gray.300);
+    --color-brand-400: theme(colors.gray.400);
+    --color-brand-500: theme(colors.gray.500);
+    --color-brand-600: theme(colors.gray.600);
+    --color-brand-700: theme(colors.gray.700);
+    --color-brand-800: theme(colors.gray.800);
+    --color-brand-900: theme(colors.gray.900);
+    --color-brand-950: theme(colors.gray.950);
+}
+
+[data-theme='teal'] {
+    --color-brand-50: theme(colors.teal.50);
+    --color-brand-100: theme(colors.teal.100);
+    --color-brand-200: theme(colors.teal.200);
+    --color-brand-300: theme(colors.teal.300);
+    --color-brand-400: theme(colors.teal.400);
+    --color-brand-500: theme(colors.teal.500);
+    --color-brand-600: theme(colors.teal.600);
+    --color-brand-700: theme(colors.teal.700);
+    --color-brand-800: theme(colors.teal.800);
+    --color-brand-900: theme(colors.teal.900);
+    --color-brand-950: theme(colors.teal.950);
+}
+
+[data-theme='rose'] {
+    --color-brand-50: theme(colors.rose.50);
+    --color-brand-100: theme(colors.rose.100);
+    --color-brand-200: theme(colors.rose.200);
+    --color-brand-300: theme(colors.rose.300);
+    --color-brand-400: theme(colors.rose.400);
+    --color-brand-500: theme(colors.rose.500);
+    --color-brand-600: theme(colors.rose.600);
+    --color-brand-700: theme(colors.rose.700);
+    --color-brand-800: theme(colors.rose.800);
+    --color-brand-900: theme(colors.rose.900);
+    --color-brand-950: theme(colors.rose.950);
 }
 
 @media (prefers-color-scheme: dark) {

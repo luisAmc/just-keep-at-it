@@ -135,9 +135,12 @@ importers:
       postcss:
         specifier: ^8.4.48
         version: 8.4.48
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
       prettier-plugin-tailwindcss:
         specifier: ^0.5.14
-        version: 0.5.14(prettier@3.2.5)
+        version: 0.5.14(prettier@3.6.2)
       prisma:
         specifier: ^5.22.0
         version: 5.22.0
@@ -3071,8 +3074,8 @@ packages:
       prettier-plugin-svelte:
         optional: true
 
-  prettier@3.2.5:
-    resolution: {integrity: sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==}
+  prettier@3.6.2:
+    resolution: {integrity: sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -6932,11 +6935,11 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-tailwindcss@0.5.14(prettier@3.2.5):
+  prettier-plugin-tailwindcss@0.5.14(prettier@3.6.2):
     dependencies:
-      prettier: 3.2.5
+      prettier: 3.6.2
 
-  prettier@3.2.5: {}
+  prettier@3.6.2: {}
 
   pretty-bytes@5.6.0: {}
 
