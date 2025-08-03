@@ -22,7 +22,7 @@ export function DeleteDrawer() {
 
     return (
         <>
-            <Button variant="destructive" onClick={deleteDrawer.open}>
+            <Button variant="destructive" size="xs" onClick={deleteDrawer.open}>
                 <Trash2Icon className="mr-1 size-4" />
                 <span>Descartar</span>
             </Button>

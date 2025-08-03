@@ -46,9 +46,9 @@ export function DisclosureProvider({ children }: DisclosureProviderProps) {
         setOpenedDisclosures([...updatedOpenedDisclosures, index + 1]);
     }
 
-    function swapOpen(form: number, to: number) {
+    function swapOpen(from: number, to: number) {
         const updatedOpenedDisclosures = openedDisclosures.filter(
-            (openedIndex) => openedIndex !== form,
+            (openedIndex) => openedIndex !== from,
         );
 
         setOpenedDisclosures([...updatedOpenedDisclosures, to]);

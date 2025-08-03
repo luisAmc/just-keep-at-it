@@ -1,5 +1,5 @@
 import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
-import { Button } from '~/components/shared/Button';
+import { Button, buttonVariants } from '~/components/shared/Button';
 import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import { Drawer, DrawerProps } from '~/components/shared/Drawer';
@@ -61,8 +61,8 @@ export function ReorderExercisesDrawer(drawerProps: Props) {
     }
 
     return (
-        <Drawer title="Reordenar" dismissable={false} {...drawerProps}>
-            <div className="flex flex-col space-y-2">
+        <Drawer stacked title="Reordenar" {...drawerProps}>
+            <div className="flex flex-col gap-y-1">
                 <DndContext
                     collisionDetection={closestCenter}
                     onDragEnd={handleDragEnd}
@@ -110,7 +110,7 @@ function SortableCard({ workoutExercise }: SortableCardProps) {
     return (
         <div
             ref={setNodeRef}
-            className="flex h-12 select-none rounded-md bg-brand-200 px-4 py-2 text-sm font-medium text-brand-900"
+            className={buttonVariants({ variant: 'muted' })}
             style={{
                 transform: CSS.Transform.toString(transform),
                 transition,

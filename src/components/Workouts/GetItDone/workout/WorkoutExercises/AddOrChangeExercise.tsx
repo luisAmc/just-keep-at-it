@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { CATEGORY_TYPE } from '~/components/Exercises';
 import { Button } from '~/components/shared/Button';
 import { Drawer } from '~/components/shared/Drawer';
-import { Input, inputVariants } from '~/components/shared/Input';
+import { Input } from '~/components/shared/Input';
 import { useExercises } from '~/contexts/useExercises';
 import { CreateExerciseInline } from './CreateExerciseInline';
 import { CircleHelp, PlusIcon } from 'lucide-react';
@@ -124,8 +124,8 @@ function CategorySection({ category, onExerciseClick }: CategorySectionProps) {
                     <Button
                         key={exercise.id}
                         variant="muted"
-                        className="h-12 w-full justify-start"
-                        // className="w-full justify-start bg-gray-100 font-normal text-gray-900 hover:bg-gray-300"
+                        size="lg"
+                        className="w-full justify-start px-4"
                         onClick={() => onExerciseClick(exercise.id)}
                     >
                         {exercise.name}
@@ -141,8 +141,7 @@ function CategorySection({ category, onExerciseClick }: CategorySectionProps) {
             ) : (
                 <Button
                     variant="dashed"
-                    className="h-12 w-full"
-                    // className="w-full border-gray-300 hover:bg-gray-300/90"
+                    className="w-full"
                     onClick={() => setIsCreating(true)}
                 >
                     <PlusIcon className="mr-1 size-4" />
