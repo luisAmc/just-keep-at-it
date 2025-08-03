@@ -217,8 +217,8 @@ export default function Document() {
                     href="/splash_screens/8.3__iPad_Mini_portrait.png"
                 />
 
+                {/* This allows the splash screens to appear on iOS */}
                 <meta name="apple-mobile-web-app-capable" content="yes" />
-                <meta name="mobile-web-app-capable" content="yes" />
             </Head>
             <body>
                 <Main />
