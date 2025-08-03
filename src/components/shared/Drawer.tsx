@@ -38,8 +38,14 @@ export function Drawer({
     scrollable = false,
     dismissable = true,
 }: DrawerProps) {
+    // We use `NestedRoot` for the inside drawer to get the "stacked cards" effect.
+    // Is not necessary, but looks cool.
+    //
+    // We leverage the `stacked` prop for this.
+    const NestedOrFlatRoot = stacked ? VaulDrawer.NestedRoot : VaulDrawer.Root;
+
     return (
-        <VaulDrawer.Root
+        <NestedOrFlatRoot
             open={open}
             onClose={onClose}
             dismissible={dismissable}
@@ -57,7 +63,7 @@ export function Drawer({
                 <VaulDrawer.Content
                     aria-describedby={undefined}
                     className={cn(
-                        'fixed bottom-0 left-0 right-0 mt-24 flex max-h-[96%] flex-col rounded-t-xl bg-gray-100',
+                        'fixed bottom-0 left-0 right-0 mt-24 flex max-h-[96%] flex-col rounded-t-xl bg-white',
                         {
                             'h-full': size === 'tall',
                             'h-auto': size === 'small',
@@ -67,11 +73,11 @@ export function Drawer({
                 >
                     <div
                         className={cn(
-                            'h-full flex-1 rounded-t-xl bg-brand-50 p-4 pb-8',
+                            'h-full flex-1 rounded-t-xl p-4 pb-8',
                             scrollable && 'overflow-y-auto',
                         )}
                     >
-                        <div className="mx-auto mb-4 h-2 w-[100px] flex-shrink-0 rounded-full bg-brand-300" />
+                        <div className="mx-auto mb-4 h-2 w-20 flex-shrink-0 rounded-full bg-gray-300" />
 
                         <div className="mx-auto w-full max-w-sm rounded-xl">
                             <VaulDrawer.Title className="text-lg font-medium">
@@ -85,6 +91,6 @@ export function Drawer({
                     </div>
                 </VaulDrawer.Content>
             </VaulDrawer.Portal>
-        </VaulDrawer.Root>
+        </NestedOrFlatRoot>
     );
 }
