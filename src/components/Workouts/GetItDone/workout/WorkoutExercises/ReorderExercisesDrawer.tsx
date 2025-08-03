@@ -111,6 +111,7 @@ function SortableCard({ workoutExercise }: SortableCardProps) {
         <div
             ref={setNodeRef}
             className={buttonVariants({ variant: 'muted' })}
+            onPointerDown={(e) => e.stopPropagation()}
             style={{
                 transform: CSS.Transform.toString(transform),
                 transition,
