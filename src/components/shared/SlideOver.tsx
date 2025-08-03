@@ -3,8 +3,10 @@ import {
     DialogBackdrop,
     DialogPanel,
     DialogTitle,
+    Transition,
+    TransitionChild,
 } from '@headlessui/react';
-import { type ReactNode, useState } from 'react';
+import { Fragment, type ReactNode, useState } from 'react';
 import { Button } from './Button';
 import { cn } from '~/utils/cn';
 import { XIcon } from 'lucide-react';
@@ -42,51 +44,73 @@ export function SlideOver({
     children,
 }: SlideOverProps) {
     return (
-        <Dialog open={open} className="relative z-10" onClose={onClose}>
-            <DialogBackdrop className="fixed inset-0 bg-black/30" />
+        <Transition show={open} as={Fragment}>
+            <Dialog className="relative z-10" onClose={onClose}>
+                <TransitionChild
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                >
+                    <DialogBackdrop className="fixed inset-0 bg-black/30" />
+                </TransitionChild>
 
-            <div className="fixed inset-0 overflow-hidden">
-                <div className="absolute inset-0 overflow-hidden">
-                    <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-                        <DialogPanel className="pointer-events-auto relative w-screen max-w-md">
-                            <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                                <div
-                                    className={cn(
-                                        'sticky top-0 z-10 bg-white px-4 pb-4 pt-6 sm:px-6',
-                                        top && 'space-y-4 border-b',
-                                    )}
-                                >
-                                    <div className="flex items-center justify-between">
-                                        <DialogTitle className="text-lg font-semibold leading-6 text-brand-900">
-                                            {title}
-                                        </DialogTitle>
-
-                                        <Button
-                                            variant="ghost"
-                                            size="icon"
-                                            onClick={onClose}
+                <div className="fixed inset-0 overflow-hidden">
+                    <div className="absolute inset-0 overflow-hidden">
+                        <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+                            <TransitionChild
+                                as={Fragment}
+                                enter="ease-in-out duration-300"
+                                enterFrom="translate-x-full"
+                                enterTo="translate-x-0"
+                                leave="ease-in-out duration-200"
+                                leaveFrom="translate-x-0"
+                                leaveTo="translate-x-full"
+                            >
+                                <DialogPanel className="pointer-events-auto relative w-screen max-w-md">
+                                    <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                                        <div
+                                            className={cn(
+                                                'sticky top-0 z-10 bg-white px-4 pb-4 pt-6 sm:px-6',
+                                                top && 'space-y-4 border-b',
+                                            )}
                                         >
-                                            <XIcon className="size-6" />
-                                        </Button>
+                                            <div className="flex items-center justify-between">
+                                                <DialogTitle className="text-lg font-semibold leading-6 text-brand-900">
+                                                    {title}
+                                                </DialogTitle>
+
+                                                <Button
+                                                    variant="ghost"
+                                                    size="icon"
+                                                    onClick={onClose}
+                                                >
+                                                    <XIcon className="size-6" />
+                                                </Button>
+                                            </div>
+
+                                            {top}
+                                        </div>
+
+                                        <div className="relative mt-4 flex-1 px-4 sm:px-6">
+                                            {children}
+                                        </div>
+
+                                        {bottom && (
+                                            <div className="sticky bottom-0 z-10 mt-4 border-t bg-white px-4 pb-6 pt-4 sm:px-6 ">
+                                                {bottom}
+                                            </div>
+                                        )}
                                     </div>
-
-                                    {top}
-                                </div>
-
-                                <div className="relative mt-4 flex-1 px-4 sm:px-6">
-                                    {children}
-                                </div>
-
-                                {bottom && (
-                                    <div className="sticky bottom-0 z-10 mt-4 border-t bg-white px-4 pb-6 pt-4 sm:px-6 ">
-                                        {bottom}
-                                    </div>
-                                )}
-                            </div>
-                        </DialogPanel>
+                                </DialogPanel>
+                            </TransitionChild>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Dialog>
+            </Dialog>
+        </Transition>
     );
 }
