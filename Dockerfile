@@ -14,8 +14,10 @@ COPY package.json pnpm-lock.yaml ./
 # Copy Prisma schema 
 COPY prisma ./prisma
 
-# Install dependencies using pnpm (postinstall generates the prisma client)
+# Install dependencies using pnpm
 RUN pnpm install --frozen-lockfile
+
+RUN npx prisma generate
 
 # Copy application source
 FROM node:20-alpine AS builder
@@ -23,6 +25,8 @@ WORKDIR /app
 
 # Install pnpm again
 RUN npm install -g pnpm
+
+RUN apk add --no-cache openssl
 
 # Copy node_modules and prisma client
 COPY --from=deps /app/node_modules ./node_modules
@@ -46,12 +50,16 @@ ENV PORT=3000
 # Install pnpm
 RUN npm install -g pnpm
 
+RUN apk add --no-cache openssl
+
 # Copy only what's needed to run the app
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/prisma ./prisma
+
+RUN npx prisma generate
 
 EXPOSE ${PORT}
 
