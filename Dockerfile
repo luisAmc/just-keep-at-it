@@ -1,5 +1,5 @@
 # Base dependencies stage
-FROM node:18-alpine AS deps
+FROM node:20-alpine3.20 AS deps
 WORKDIR /app
 
 # Install pnpm globally
@@ -11,15 +11,14 @@ RUN apk add --no-cache openssl
 # Copy package and lock files
 COPY package.json pnpm-lock.yaml ./
 
+# Copy Prisma schema 
+COPY prisma ./prisma
+
 # Install dependencies using pnpm
 RUN pnpm install
 
-# Copy Prisma schema and generate client
-# COPY prisma ./prisma
-# RUN pnpm prisma generate
-
 # Copy application source
-FROM node:18-alpine AS builder
+FROM node:20-alpine3.20 AS builder
 WORKDIR /app
 
 # Install pnpm again
@@ -38,7 +37,7 @@ COPY . .
 RUN pnpm build
 
 # Final production image
-FROM node:18-alpine AS runner
+FROM node:20-alpine3.20 AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
