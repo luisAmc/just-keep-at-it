@@ -7,7 +7,7 @@
         "dev:docker": "docker compose up",
         "dev:next": "next dev",
         "build": "next build",
-        "start": "next start",
+        "start": "pnpm:prisma:db:push && next start",
         "typecheck": "tsc --noEmit",
         "lint": "next lint",
         "test": "jest --config jest.config.ts",
