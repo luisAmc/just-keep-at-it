@@ -15,8 +15,8 @@ COPY package.json pnpm-lock.yaml ./
 RUN pnpm install
 
 # Copy Prisma schema and generate client
-COPY prisma ./prisma
-RUN pnpm prisma generate
+# COPY prisma ./prisma
+# RUN pnpm prisma generate
 
 # Copy application source
 FROM node:18-alpine AS builder
@@ -42,7 +42,7 @@ FROM node:18-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
-ENV PORT 3000
+ENV PORT=3000
 
 # Install pnpm
 RUN npm install -g pnpm
