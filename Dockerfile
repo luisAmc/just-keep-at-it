@@ -1,5 +1,5 @@
 # Base dependencies stage
-FROM node:20-alpine3.20 AS deps
+FROM node:20-alpine AS deps
 WORKDIR /app
 
 # Install pnpm globally
@@ -14,11 +14,11 @@ COPY package.json pnpm-lock.yaml ./
 # Copy Prisma schema 
 COPY prisma ./prisma
 
-# Install dependencies using pnpm
-RUN pnpm install
+# Install dependencies using pnpm (postinstall generates the prisma client)
+RUN pnpm install --frozen-lockfile
 
 # Copy application source
-FROM node:20-alpine3.20 AS builder
+FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Install pnpm again
@@ -37,7 +37,7 @@ COPY . .
 RUN pnpm build
 
 # Final production image
-FROM node:20-alpine3.20 AS runner
+FROM node:20-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -52,8 +52,6 @@ COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/prisma ./prisma
-
-RUN pnpm prisma generate
 
 EXPOSE ${PORT}
 
