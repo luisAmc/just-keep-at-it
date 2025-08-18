@@ -12,7 +12,7 @@ export async function verifyPassword(hashedPassword: Buffer, password: string) {
     try {
         return await securePassword.verify(
             Buffer.from(password),
-            hashedPassword
+            hashedPassword,
         );
     } catch (error) {
         return SecurePassword.INVALID;
@@ -24,11 +24,14 @@ export async function authenticateUser(username: string, password: string) {
 
     if (!user || !user.hashedPassword) {
         throw new ValidationError('Usuario no encontrado.', {
-            username: 'Usuario no encontrado.'
+            username: 'Usuario no encontrado.',
         });
     }
 
-    const passwordStatus = await verifyPassword(user.hashedPassword, password);
+    const passwordStatus = await verifyPassword(
+        Buffer.from(user.hashedPassword),
+        password,
+    );
 
     switch (passwordStatus) {
         case SecurePassword.VALID:
@@ -39,14 +42,14 @@ export async function authenticateUser(username: string, password: string) {
 
             await db.user.update({
                 where: { id: user.id },
-                data: { hashedPassword: improvedHash }
+                data: { hashedPassword: improvedHash },
             });
 
             break;
 
         default:
             throw new ValidationError('Contraseña incorrecta.', {
-                password: 'La contraseña es incorrecta.'
+                password: 'La contraseña es incorrecta.',
             });
     }
 
