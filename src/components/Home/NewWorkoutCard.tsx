@@ -9,7 +9,7 @@ export function NewWorkoutCard() {
 
     return (
         <>
-            <div className="relative flex h-52 flex-col overflow-hidden rounded-lg bg-gradient-to-b from-brand-300 to-brand-100 shadow-sm">
+            <div className="relative flex h-52 flex-col overflow-hidden rounded-lg bg-linear-to-b from-brand-300 to-brand-100 shadow-sm">
                 <MountainsSVG />
 
                 <div className="relative h-full w-full px-6 py-8">

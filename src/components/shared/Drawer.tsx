@@ -77,7 +77,7 @@ export function Drawer({
                             scrollable && 'overflow-y-auto',
                         )}
                     >
-                        <div className="mx-auto mb-4 h-2 w-20 flex-shrink-0 rounded-full bg-gray-300" />
+                        <div className="mx-auto mb-4 h-2 w-20 shrink-0 rounded-full bg-gray-300" />
 
                         <div className="mx-auto w-full max-w-sm rounded-xl">
                             <VaulDrawer.Title className="text-lg font-medium">
