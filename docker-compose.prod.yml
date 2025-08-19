@@ -19,17 +19,17 @@ services:
         build:
             context: .next
             dockerfile: Dockerfile
-            environment:
-                DATABASE_URL: ${DATABASE_URL}
-                COOKIE_SECRET: ${COOKIE_SECRET}
-            restart: always
-            depends_on:
-                postgres:
-                    condition: service_started
-            ports:
-                - 3000:3000
-            networks:
-                - dokploy-network
+        environment:
+            DATABASE_URL: ${DATABASE_URL}
+            COOKIE_SECRET: ${COOKIE_SECRET}
+        restart: always
+        depends_on:
+            postgres:
+                condition: service_started
+        ports:
+            - 3000:3000
+        networks:
+            - dokploy-network
 
 volumes:
     postgresData: {}
