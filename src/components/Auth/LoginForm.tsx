@@ -78,14 +78,14 @@ export function LoginForm() {
                         <Link href="/auth/signup">Crear cuenta</Link>
                     </div>
 
-                    <p className="mt-4 text-center text-xs font-medium">
+                    {/* <p className="mt-4 text-center text-xs font-medium">
                         Illustration by{' '}
                         <a href="https://icons8.com/illustrations/author/HzkZD6h9f9qm">
                             AsIa Vitalyevna
                         </a>{' '}
                         from{' '}
                         <a href="https://icons8.com/illustrations">Ouch!</a>
-                    </p>
+                    </p> */}
                 </div>
             </div>
         </div>
