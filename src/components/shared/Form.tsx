@@ -9,22 +9,22 @@ import {
     UseFormProps,
     UseFormReturn,
 } from 'react-hook-form';
-import { TypeOf, ZodSchema } from 'zod';
+import z, { ZodObject, ZodType } from 'zod';
 import { cn } from '~/utils/cn';
 
-interface UseZodFormProps<T extends ZodSchema<any>>
-    extends UseFormProps<TypeOf<T>> {
+interface UseZodFormProps<T extends ZodType<any, any>>
+    extends UseFormProps<z.infer<T>> {
     schema: T;
 }
 
-export const useZodForm = <T extends ZodSchema<any>>({
+export const useZodForm = <T extends ZodObject<any, any>>({
     schema,
     ...formConfig
 }: UseZodFormProps<T>) => {
     return useForm({
         ...formConfig,
         mode: 'all',
-        resolver: zodResolver(schema),
+        resolver: zodResolver(schema) as any, // Mmm
     });
 };
 
