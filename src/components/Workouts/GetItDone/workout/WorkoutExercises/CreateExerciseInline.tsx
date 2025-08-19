@@ -61,7 +61,7 @@ export function CreateExerciseInline({
 
                 <div className="flex items-center gap-x-2">
                     <Button
-                        loading={createExercise.isLoading}
+                        loading={createExercise.isPending}
                         disabled={!form.formState.isValid}
                         className="w-full"
                         onClick={handleSubmit}

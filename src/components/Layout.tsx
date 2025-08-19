@@ -34,7 +34,7 @@ export function Layout({ children }: LayoutProps) {
             <nav className="sticky top-0 z-10 flex items-center justify-end bg-white p-4">
                 <Link
                     href="/"
-                    className="absolute left-1/2 -translate-x-1/2 bg-gradient-to-r from-brand-400 to-brand-700 bg-clip-text text-2xl font-semibold tracking-tight text-transparent"
+                    className="absolute left-1/2 -translate-x-1/2 bg-linear-to-r from-brand-400 to-brand-700 bg-clip-text text-2xl font-semibold tracking-tight text-transparent"
                 >
                     Just keep at it!
                 </Link>
