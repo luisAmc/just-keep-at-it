@@ -9,9 +9,9 @@ interface Props {
 
 const ROOT_MARGIN = '150px';
 
-function useObserver(ref: RefObject<HTMLDivElement>) {
+function useObserver(ref: RefObject<HTMLDivElement | null>) {
     const [entry, setEntry] = useState<IntersectionObserverEntry | undefined>();
-    const observerRef = useRef<IntersectionObserver>();
+    const observerRef = useRef<IntersectionObserver>(null);
 
     if (!observerRef.current && typeof IntersectionObserver !== 'undefined') {
         observerRef.current = new IntersectionObserver(
@@ -20,8 +20,8 @@ function useObserver(ref: RefObject<HTMLDivElement>) {
             },
             {
                 rootMargin: ROOT_MARGIN,
-                threshold: 1
-            }
+                threshold: 1,
+            },
         );
     }
 
@@ -71,7 +71,7 @@ function Loader() {
     return (
         <div className="flex justify-center">
             <svg
-                className="-ml-1 mr-3 h-7 w-7 animate-spin text-brand-700"
+                className="text-brand-700 -ml-1 mr-3 h-7 w-7 animate-spin"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
