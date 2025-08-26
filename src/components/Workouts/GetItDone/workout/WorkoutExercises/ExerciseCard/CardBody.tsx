@@ -20,6 +20,7 @@ export function CardBody() {
         openNext,
         lastSession,
     } = useWorkoutExercise();
+    
     const form = useFormContext();
 
     function addSet() {

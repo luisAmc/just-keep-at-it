@@ -19,6 +19,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
                     ref={ref}
                     type="number"
                     inputMode="decimal"
+                    placeholder='0'
                     onFocus={(e) => e.target.select()}
                     onWheel={(event) =>
                         event.target instanceof HTMLElement &&
