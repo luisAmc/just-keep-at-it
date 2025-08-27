@@ -1,4 +1,4 @@
-import { AddOrChangeExercise } from './AddOrChangeExercise';
+import { AddOrChangeExerciseDrawer } from './AddOrChangeExerciseDrawer';
 import { Button } from '~/components/shared/Button';
 import { useDrawer } from '~/components/shared/Drawer';
 import { useWorkout } from '../../context/useWorkout';
@@ -22,7 +22,7 @@ export function AddExerciseDrawer() {
                 <BigButton onClick={addExerciseDrawer.open} />
             )}
 
-            <AddOrChangeExercise
+            <AddOrChangeExerciseDrawer
                 onExerciseClick={onExerciseClick}
                 {...addExerciseDrawer.props}
             />

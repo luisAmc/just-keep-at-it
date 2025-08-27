@@ -14,7 +14,9 @@ export function WorkoutExercises() {
     const historyDrawer = useExerciseHistoryDrawer();
 
     return (
-        <DisclosureProvider>
+        <DisclosureProvider
+            initialCount={workoutExercisesFieldArray.fields.length}
+        >
             <div className="space-y-2">
                 {workoutExercisesFieldArray.fields.map(
                     (workoutExerciseField, idx) => {
@@ -27,7 +29,8 @@ export function WorkoutExercises() {
                         return (
                             <motion.div
                                 key={workoutExerciseField.id}
-                                layoutId={workoutExerciseField.id}
+                                layout={'preserve-aspect'}
+                                // layoutId={workoutExerciseField.id}
                             >
                                 <WorkoutExerciseProvider
                                     workoutExercise={workoutExercise}

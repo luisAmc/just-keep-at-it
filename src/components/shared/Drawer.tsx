@@ -63,7 +63,7 @@ export function Drawer({
                 <VaulDrawer.Content
                     aria-describedby={undefined}
                     className={cn(
-                        'fixed bottom-0 left-0 right-0 mt-24 flex max-h-[96%] flex-col rounded-t-xl bg-white',
+                        'fixed right-0 bottom-0 left-0 mt-24 flex max-h-[96%] flex-col rounded-t-xl bg-white',
                         {
                             'h-full': size === 'tall',
                             'h-auto': size === 'small',

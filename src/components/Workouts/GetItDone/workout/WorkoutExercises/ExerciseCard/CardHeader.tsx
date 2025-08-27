@@ -12,15 +12,15 @@ export function CardHeader() {
         <div className="flex items-center justify-between">
             {/* Left */}
             <div className="flex items-center gap-x-2">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full border-2 border-brand-600">
-                    <span className="space-x-0.5 text-xs font-semibold text-brand-600">
+                <span className="border-brand-600 flex size-9 shrink-0 items-center justify-center rounded-full border-2">
+                    <span className="text-brand-600 space-x-0.5 text-xs font-semibold">
                         <span>{label}</span>
                     </span>
                 </span>
 
                 <Button
                     variant="ghost"
-                    className="text-wrap px-1.5 text-start text-base"
+                    className="px-1.5 text-start text-base text-wrap"
                     onClick={onHistory}
                 >
                     {name}

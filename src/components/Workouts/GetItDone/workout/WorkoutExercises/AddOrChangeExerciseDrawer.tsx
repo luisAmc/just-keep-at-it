@@ -7,15 +7,39 @@ import { useExercises } from '~/contexts/useExercises';
 import { CreateExerciseInline } from './CreateExerciseInline';
 import { CircleHelp, PlusIcon } from 'lucide-react';
 
-interface AddOrChangeExerciseProps {
+interface AddOrChangeExerciseDrawerProps extends AddOrChangeExerciseProps {
     open: boolean;
     onClose: () => void;
+}
+
+export function AddOrChangeExerciseDrawer({
+    open,
+    onClose,
+    onExerciseClick,
+}: AddOrChangeExerciseDrawerProps) {
+    function handleClose() {
+        onClose();
+    }
+
+    return (
+        <Drawer
+            title="Añadir otro ejercicio"
+            size="tall"
+            stacked
+            scrollable
+            open={open}
+            onClose={handleClose}
+        >
+            <AddOrChangeExercise onExerciseClick={onExerciseClick} />
+        </Drawer>
+    );
+}
+
+interface AddOrChangeExerciseProps {
     onExerciseClick: (exerciseId: string) => void;
 }
 
 export function AddOrChangeExercise({
-    open,
-    onClose,
     onExerciseClick,
 }: AddOrChangeExerciseProps) {
     const [searchQuery, setSearchQuery] = useState<string | null>(null);
@@ -63,26 +87,14 @@ export function AddOrChangeExercise({
         onExerciseClick(exerciseId);
     }
 
-    function handleClose() {
-        setSearchQuery(null);
-        onClose();
-    }
-
     return (
-        <Drawer
-            title="Añadir otro ejercicio"
-            size="tall"
-            stacked
-            scrollable
-            open={open}
-            onClose={handleClose}
-        >
+        <>
             <Input
                 onChange={(event) => setSearchQuery(event.target.value)}
                 placeholder="Buscar por nombre o categoría..."
             />
 
-            <div className="divide-y divide-brand-100">
+            <div className="divide-brand-100 divide-y">
                 {categories.map((category) => (
                     <CategorySection
                         key={category.id}
@@ -92,18 +104,18 @@ export function AddOrChangeExercise({
                 ))}
 
                 {searchQuery && categories.length === 0 && (
-                    <div className="flex flex-col divide-brand-700 rounded-lg bg-brand-50 px-4 py-6">
-                        <div className="flex flex-col items-center space-y-3 rounded-md text-brand-600">
+                    <div className="divide-brand-700 bg-brand-50 flex flex-col rounded-lg px-4 py-6">
+                        <div className="text-brand-600 flex flex-col items-center space-y-3 rounded-md">
                             <CircleHelp className="size-10" />
 
-                            <p className="text-pretty text-center text-sm font-semibold">
+                            <p className="text-center text-sm font-semibold text-pretty">
                                 No hay ejercicios que cumplan con la búsqueda...
                             </p>
                         </div>
                     </div>
                 )}
             </div>
-        </Drawer>
+        </>
     );
 }
 
@@ -119,7 +131,7 @@ function CategorySection({ category, onExerciseClick }: CategorySectionProps) {
         <div className="py-4">
             <h3 className="font-medium">{category.name}</h3>
 
-            <div className="mb-2 mt-2 space-y-0.5">
+            <div className="mt-2 mb-2 space-y-0.5">
                 {category.exercises.map((exercise) => (
                     <Button
                         key={exercise.id}
