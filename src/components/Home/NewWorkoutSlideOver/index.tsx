@@ -2,7 +2,7 @@ import { RouterOutputs, api } from '~/utils/api';
 import { SlideOver, SlideOverProps } from '~/components/shared/SlideOver';
 import { CreateWorkoutButton } from './CreateWorkoutButton';
 import { EmptyTemplates } from './EmptyTemplates';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { useState } from 'react';
 import { Button } from '~/components/shared/Button';
 import { useRouter } from 'next/router';

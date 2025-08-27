@@ -7,7 +7,7 @@ import { Input } from '~/components/shared/Input';
 import { SubmitButton } from '~/components/shared/SubmitButton';
 import { useWorkout } from '../../context/useWorkout';
 import { z } from 'zod';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 
 const editNameSchema = z.object({
     name: z.string().trim().min(1, 'Ingrese el nuevo nombre.'),

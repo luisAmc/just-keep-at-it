@@ -5,7 +5,7 @@ import { Form, useZodForm } from '../shared/Form';
 import { api } from '~/utils/api';
 import { SubmitButton } from '../shared/SubmitButton';
 import { Input } from '../shared/Input';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 
 export function useEditExerciseNameModal() {
     const [data, setData] = useState<

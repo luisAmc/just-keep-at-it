@@ -3,21 +3,16 @@ import { api } from '~/utils/api';
 import { NProgress } from '~/components/NProgress';
 import { UserProvider } from '~/contexts/useUser';
 import { ExercisesProvider } from '~/contexts/useExercises';
-import { Toaster } from 'react-hot-toast';
 import { Layout } from '~/components/Layout';
 import { ThemeProvider } from '~/contexts/useTheme';
 import '~/styles/globals.css';
+import { Toaster } from 'sonner';
 
 function App({ Component, pageProps }: AppProps) {
     return (
         <ThemeProvider>
             <NProgress />
-            <Toaster
-                position="bottom-center"
-                toastOptions={{
-                    style: { padding: '1rem 1.5rem' },
-                }}
-            />
+            <Toaster richColors />
 
             {pageProps.viewer ? (
                 <UserProvider viewer={pageProps.viewer}>

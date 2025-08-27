@@ -10,7 +10,7 @@ import { WorkoutExercises } from './workout/WorkoutExercises';
 import { WorkoutHeader } from './workout/WorkoutHeader';
 import { WorkoutProvider } from './context/useWorkout';
 import { z } from 'zod';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { ErrorMessage } from '~/components/shared/ErrorMessage';
 import { CheckIcon } from 'lucide-react';
 import {

@@ -11,7 +11,7 @@ import {
 } from './AddExerciseSlideOver';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { api } from '~/utils/api';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { ErrorMessage } from '../shared/ErrorMessage';
 import { CatIcon, PlusIcon, Trash2Icon } from 'lucide-react';
 

@@ -4,7 +4,7 @@ import { ErrorMessage } from '~/components/shared/ErrorMessage';
 import { Form, useZodForm } from '~/components/shared/Form';
 import { Input } from '~/components/shared/Input';
 import { z } from 'zod';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { CheckIcon, XIcon } from 'lucide-react';
 
 const createExerciseSchema = z.object({
@@ -48,7 +48,7 @@ export function CreateExerciseInline({
 
     return (
         <Form form={form} onSubmit={handleSubmit}>
-            <div className="space-y-2 border-t border-gray-200 pt-2">
+            <div className="flex flex-col gap-2 border-t border-gray-200 pt-2">
                 <ErrorMessage
                     title="Ocurrió un error..."
                     error={createExercise.error?.message}

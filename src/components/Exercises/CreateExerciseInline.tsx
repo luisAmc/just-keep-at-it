@@ -5,7 +5,7 @@ import { Form, useZodForm } from '~/components/shared/Form';
 import { Input } from '~/components/shared/Input';
 import { z } from 'zod';
 import { SubmitButton } from '../shared/SubmitButton';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { XIcon } from 'lucide-react';
 
 const createExerciseSchema = z.object({

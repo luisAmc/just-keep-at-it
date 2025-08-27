@@ -4,7 +4,7 @@ import { Drawer, useDrawer } from '~/components/shared/Drawer';
 import { useRouter } from 'next/router';
 import { useWorkout } from '../../context/useWorkout';
 import { Trash2Icon } from 'lucide-react';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 
 export function DeleteDrawer() {
     const { workoutId } = useWorkout();
