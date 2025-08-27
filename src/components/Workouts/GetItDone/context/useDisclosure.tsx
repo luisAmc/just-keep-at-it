@@ -2,6 +2,7 @@ import { createContext, type ReactNode, useContext, useState } from 'react';
 
 interface DisclosureContextType {
     isOpen: (index: number) => boolean;
+    open: (indexes: number[]) => void;
     toggle: (index: number) => void;
     openNext: (index: number) => void;
     swapOpen: (from: number, to: number) => void;
@@ -12,51 +13,59 @@ const DisclosureContext = createContext<DisclosureContextType | undefined>(
 );
 
 interface DisclosureProviderProps {
+    initialCount: number;
     children: ReactNode;
 }
 
-export function DisclosureProvider({ children }: DisclosureProviderProps) {
-    const [openedDisclosures, setOpenedDisclosures] = useState<Array<number>>([
-        0,
-    ]);
+export function DisclosureProvider({
+    initialCount,
+    children,
+}: DisclosureProviderProps) {
+    const [openedDisclosures, setOpenedDisclosures] = useState<Set<number>>(
+        () => new Set(Array.from({ length: initialCount }).map((_, i) => i)),
+    );
 
     function isOpen(index: number) {
-        return openedDisclosures.includes(index);
+        return openedDisclosures.has(index);
+    }
+
+    function open(indexes: number[]) {
+        setOpenedDisclosures(new Set([...openedDisclosures, ...indexes]));
     }
 
     function toggle(index: number) {
-        const isOpen = openedDisclosures.includes(index);
+        const isOpen = openedDisclosures.has(index);
 
         if (!isOpen) {
-            setOpenedDisclosures([...openedDisclosures, index]);
+            setOpenedDisclosures(new Set([...openedDisclosures, index]));
         } else {
-            const updatedOpenedDisclosures = openedDisclosures.filter(
-                (openedIndex) => openedIndex !== index,
-            );
+            const updatedOpenedDisclosures = openedDisclosures
+                .values()
+                .filter((openedIndex) => openedIndex !== index);
 
-            setOpenedDisclosures(updatedOpenedDisclosures);
+            setOpenedDisclosures(new Set(updatedOpenedDisclosures));
         }
     }
 
     function openNext(index: number) {
-        const updatedOpenedDisclosures = openedDisclosures.filter(
-            (openedIndex) => openedIndex !== index,
-        );
+        const updatedOpenedDisclosures = openedDisclosures
+            .values()
+            .filter((openedIndex) => openedIndex !== index);
 
-        setOpenedDisclosures([...updatedOpenedDisclosures, index + 1]);
+        setOpenedDisclosures(new Set([...updatedOpenedDisclosures, index + 1]));
     }
 
     function swapOpen(from: number, to: number) {
-        const updatedOpenedDisclosures = openedDisclosures.filter(
-            (openedIndex) => openedIndex !== from,
-        );
+        const updatedOpenedDisclosures = openedDisclosures
+            .values()
+            .filter((openedIndex) => openedIndex !== from);
 
-        setOpenedDisclosures([...updatedOpenedDisclosures, to]);
+        setOpenedDisclosures(new Set([...updatedOpenedDisclosures, to]));
     }
 
     return (
         <DisclosureContext.Provider
-            value={{ isOpen, toggle, openNext, swapOpen }}
+            value={{ isOpen, open, toggle, openNext, swapOpen }}
         >
             {children}
         </DisclosureContext.Provider>
