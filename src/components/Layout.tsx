@@ -34,14 +34,14 @@ export function Layout({ children }: LayoutProps) {
             <nav className="sticky top-0 z-10 flex items-center justify-end bg-white p-4">
                 <Link
                     href="/"
-                    className="absolute left-1/2 -translate-x-1/2 bg-linear-to-r from-brand-400 to-brand-700 bg-clip-text text-2xl font-semibold tracking-tight text-transparent"
+                    className="from-brand-400 to-brand-700 absolute left-1/2 -translate-x-1/2 bg-linear-to-r bg-clip-text text-2xl font-semibold tracking-tight text-transparent"
                 >
                     Just keep at it!
                 </Link>
 
                 <Dropdown
-                    className="mx-4"
-                    trigger={<SettingsIcon className="size-6 text-brand-600" />}
+                    className="mx-4 border-gray-300 shadow-md"
+                    trigger={<SettingsIcon className="text-brand-600 size-6" />}
                 >
                     <DropdownGroup>
                         <DropdownItem
