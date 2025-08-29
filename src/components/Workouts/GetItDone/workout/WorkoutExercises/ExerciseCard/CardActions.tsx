@@ -5,6 +5,7 @@ import {
     EllipsisVerticalIcon,
     RefreshCwIcon,
     Trash2Icon,
+    XIcon,
 } from 'lucide-react';
 import { Button } from '~/components/shared/Button';
 import { Drawer, useDrawer } from '~/components/shared/Drawer';
@@ -45,6 +46,7 @@ export function CardActions() {
             <Drawer
                 title={DrawerTitle[selectedAction] ?? name}
                 scrollable
+                size={selectedAction === 'change-exercise' ? 'tall' : 'small'}
                 {...actionDrawer.props}
             >
                 <AnimatePresence mode="wait">
@@ -112,6 +114,13 @@ export function CardActions() {
                         </motion.section>
                     )}
                 </AnimatePresence>
+
+                {selectedAction !== 'default' && (
+                    <Button variant="secondary" onClick={actionDrawer.close}>
+                        <XIcon className="mr-1 size-4" />
+                        <span>Cerrar</span>
+                    </Button>
+                )}
             </Drawer>
         </>
     );
