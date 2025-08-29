@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '~/components/shared/Button';
 import { useWorkoutExercise } from '../../../context/useWorkoutExercise';
-import { SimpleTextarea } from '~/components/shared/SimpleInput';
+import { SimpleTextarea } from '~/components/shared/SimpleTextarea';
 import { useFormContext } from 'react-hook-form';
 import { ArrowDownIcon, PlusIcon } from 'lucide-react';
 import { getDefaultExerciseSet } from '~/utils/constants';
