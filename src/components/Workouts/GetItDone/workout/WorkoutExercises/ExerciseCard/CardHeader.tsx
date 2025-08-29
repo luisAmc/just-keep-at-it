@@ -20,7 +20,7 @@ export function CardHeader() {
 
                 <Button
                     variant="ghost"
-                    className="whitespace-wrap px-1.5 text-start text-base text-wrap"
+                    className="whitespace-normal px-1.5 text-start text-base text-wrap"
                     onClick={onHistory}
                 >
                     {name}
