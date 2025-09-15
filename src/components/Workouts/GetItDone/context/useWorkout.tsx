@@ -15,6 +15,7 @@ import {
 import { useExercises } from '~/contexts/useExercises';
 import { RouterOutputs } from '~/utils/api';
 import { getDefaultExerciseSet } from '~/utils/constants';
+import { v4 as uuidV4 } from 'uuid';
 
 type WorkoutType = RouterOutputs['workout']['byId'];
 export type MoveAction = 'up' | 'down' | 'first' | 'last';
@@ -69,6 +70,7 @@ export function WorkoutProvider({ workout, children }: WorkoutProviderProps) {
                 : Array.from({ length: lastSetCount }).fill(defaultSet);
 
         workoutExercisesFieldArray.append({
+            uid: uuidV4(),
             exerciseId: exerciseId,
             sets: sets,
             notes: '',

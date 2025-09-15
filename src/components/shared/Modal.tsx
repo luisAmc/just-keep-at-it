@@ -35,7 +35,7 @@ export interface ModalProps {
 export function Modal({ title, open, onClose, children }: ModalProps) {
     return (
         <Transition show={open}>
-            <Dialog className="relative z-30" onClose={onClose}>
+            <Dialog className="relative z-40" onClose={onClose}>
                 <TransitionChild
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -48,7 +48,7 @@ export function Modal({ title, open, onClose, children }: ModalProps) {
                     <DialogBackdrop className="fixed inset-0 bg-black/30" />
                 </TransitionChild>
 
-                <div className="fixed inset-0 z-40 overflow-y-auto">
+                <div className="fixed inset-0 z-50 overflow-y-auto">
                     <div className="flex min-h-full items-end justify-center p-4 pb-8 text-center sm:items-center sm:p-0">
                         <TransitionChild
                             as={Fragment}

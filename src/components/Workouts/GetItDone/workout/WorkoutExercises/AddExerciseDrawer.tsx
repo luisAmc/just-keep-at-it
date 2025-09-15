@@ -3,15 +3,18 @@ import { Button } from '~/components/shared/Button';
 import { useDrawer } from '~/components/shared/Drawer';
 import { useWorkout } from '../../context/useWorkout';
 import { CatIcon, PlusIcon } from 'lucide-react';
+import { useDisclosure } from '../../context/useDisclosure';
 
 export function AddExerciseDrawer() {
     const addExerciseDrawer = useDrawer();
 
     const { addExercise, workoutExerciseCount } = useWorkout();
+    const { open } = useDisclosure();
 
     function onExerciseClick(exerciseId: string) {
         addExercise(exerciseId);
         addExerciseDrawer.close();
+        open([workoutExerciseCount]);
     }
 
     return (

@@ -13,10 +13,24 @@ import { SortableContext, useSortable } from '@dnd-kit/sortable';
 import { useDisclosure } from '../../context/useDisclosure';
 import { useExercises } from '~/contexts/useExercises';
 import { useWorkout } from '../../context/useWorkout';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 export function ReorderExercises() {
-    const { workoutExercisesFieldArray } = useWorkout();
+    const { workoutExercisesFieldArray: fieldArray } = useWorkout();
     const { open } = useDisclosure();
+
+    const form = useFormContext();
+    const watchedWorkoutExercisesFieldArray: Array<any> = useWatch({
+        control: form.control,
+        name: 'workoutExercises',
+    });
+
+    const workoutExercisesWithId = watchedWorkoutExercisesFieldArray.map(
+        (item) => ({
+            ...item,
+            id: item.uid,
+        }),
+    );
 
     const sensors = useSensors(useSensor(PointerSensor));
 
@@ -29,7 +43,7 @@ export function ReorderExercises() {
 
             open([oldIndex, newIndex]);
 
-            workoutExercisesFieldArray.move(oldIndex, newIndex);
+            fieldArray.move(oldIndex, newIndex);
         }
     }
 
@@ -40,8 +54,8 @@ export function ReorderExercises() {
                 collisionDetection={closestCenter}
                 onDragEnd={handleDragEnd}
             >
-                <SortableContext items={workoutExercisesFieldArray.fields}>
-                    {workoutExercisesFieldArray.fields.map((item) => (
+                <SortableContext items={workoutExercisesWithId}>
+                    {workoutExercisesWithId.map((item) => (
                         <SortableCard
                             key={item.id}
                             workoutExercise={item as any}

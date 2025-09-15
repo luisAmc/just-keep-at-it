@@ -17,7 +17,6 @@ import {
     LocalDataType,
     usePersistedLocalStorage,
 } from '~/utils/usePersistedLocalStorage';
-import { Shimmer } from './Shimmer';
 
 export const getItDoneSchema = z.object({
     workoutExercises: z.array(
@@ -82,11 +81,11 @@ export function GetItDone() {
                 exerciseId: we.exerciseId,
                 notes: we.notes,
                 sets: (we.sets as any[]).map((set) => ({
-                    mins: Number(set.mins ?? 0),
-                    distance: Number(set.distance ?? 0),
-                    kcal: Number(set.kcal ?? 0),
-                    reps: Number(set.reps ?? 0),
-                    lbs: Number(set.lbs ?? 0),
+                    mins: Number(set.mins) ?? '',
+                    distance: Number(set.distance) ?? '',
+                    kcal: Number(set.kcal) ?? '',
+                    reps: Number(set.reps) ?? '',
+                    lbs: Number(set.lbs) ?? '',
                 })),
             })),
         };
@@ -171,7 +170,7 @@ export function GetItDone() {
                     <WorkoutProvider workout={data}>
                         <WorkoutHeader />
 
-                        <div className="flex flex-col gap-y-4 px-2">
+                        <div className="flex flex-col gap-y-4 px-1">
                             <WorkoutExercises />
 
                             <Button

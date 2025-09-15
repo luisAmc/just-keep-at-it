@@ -2,12 +2,6 @@ import { ExerciseType } from '@prisma/client';
 import { useRouter } from 'next/router';
 import { toast } from 'sonner';
 import { ConfirmationModal } from '~/components/shared/ConfirmationModal';
-import {
-    Dropdown,
-    DropdownGroup,
-    DropdownItem,
-    DropdownLabel,
-} from '~/components/shared/Dropdown';
 import { useModal } from '~/components/shared/Modal';
 import { api } from '~/utils/api';
 import { Shimmer } from './Shimmer';
@@ -15,12 +9,19 @@ import { Button } from '~/components/shared/Button';
 import {
     ArrowLeftIcon,
     EllipsisVerticalIcon,
+    NotebookPenIcon,
     RefreshCcw,
     Trash2Icon,
 } from 'lucide-react';
+import { Drawer, useDrawer } from '~/components/shared/Drawer';
+import { useState } from 'react';
+
+type Action = 'default' | 'create-template';
 
 export function ViewWorkout() {
     const router = useRouter();
+
+    const [_selectedAction, setSelectedAction] = useState<Action>('default');
 
     const { data, isLoading } = api.workout.byId.useQuery({
         workoutId: router.query.workoutId as string,
@@ -42,13 +43,19 @@ export function ViewWorkout() {
     });
 
     const confirmationModal = useModal();
+    const actionDrawer = useDrawer();
+
+    function handleDrawerClose() {
+        confirmationModal.close();
+        actionDrawer.close();
+    }
 
     return (
         <div className="flex flex-col gap-y-4">
             {isLoading && <Shimmer />}
 
             {data && (
-                <div className="space-y-4 rounded-xl bg-brand-50 px-4 pb-8 pt-4">
+                <div className="bg-brand-50 space-y-4 rounded-xl px-4 pt-4 pb-8">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-x-1.5">
                             <Button href="/" variant="ghost" size="icon">
@@ -58,16 +65,27 @@ export function ViewWorkout() {
                             <h1 className="text-2xl">{data.name}</h1>
                         </div>
 
-                        <Dropdown
-                            className="mx-4"
-                            trigger={
-                                <EllipsisVerticalIcon className="size-5" />
-                            }
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => {
+                                setSelectedAction('default');
+                                actionDrawer.open();
+                            }}
                         >
-                            <DropdownLabel>Acciones</DropdownLabel>
-                            <DropdownGroup>
-                                <DropdownItem
-                                    onSelect={() =>
+                            <EllipsisVerticalIcon className="size-5" />
+                        </Button>
+
+                        <Drawer
+                            title={data.name}
+                            {...actionDrawer.props}
+                            onClose={() => handleDrawerClose()}
+                        >
+                            <div className="flex flex-col gap-y-1">
+                                <Button
+                                    variant="muted"
+                                    className="h-12 justify-start"
+                                    onClick={() =>
                                         toast.promise(
                                             doItAgain.mutateAsync({
                                                 workoutId: data.id,
@@ -81,21 +99,28 @@ export function ViewWorkout() {
                                     }
                                 >
                                     <RefreshCcw className="mr-1 size-4" />
-                                    <span>Crear de nuevo</span>
-                                </DropdownItem>
-                            </DropdownGroup>
+                                    <span>Repetir rútina</span>
+                                </Button>
 
-                            <DropdownLabel>Peligro</DropdownLabel>
-                            <DropdownGroup>
-                                <DropdownItem
-                                    onSelect={confirmationModal.open}
-                                    className="text-red-600"
+                                <Button
+                                    disabled
+                                    variant="muted"
+                                    className="h-12 justify-start"
+                                >
+                                    <NotebookPenIcon className="mr-1 size-4" />
+                                    <span>Converitr en boceto</span>
+                                </Button>
+
+                                <Button
+                                    variant="destructive"
+                                    className="mt-2 h-12 justify-start"
+                                    onClick={confirmationModal.open}
                                 >
                                     <Trash2Icon className="mr-1 size-4" />
-                                    <span>Remover ejercicio</span>
-                                </DropdownItem>
-                            </DropdownGroup>
-                        </Dropdown>
+                                    <span>Borrar rútina</span>
+                                </Button>
+                            </div>
+                        </Drawer>
 
                         <ConfirmationModal
                             {...confirmationModal.props}
@@ -125,7 +150,7 @@ export function ViewWorkout() {
                             return (
                                 <div
                                     key={workoutExercise.id}
-                                    className="rounded-xl bg-brand-100 p-4"
+                                    className="bg-brand-100 rounded-xl p-4"
                                 >
                                     {/* Header */}
                                     <div className="flex items-center justify-between">
@@ -159,7 +184,7 @@ export function ViewWorkout() {
                                             <div className="text-xs font-bold">
                                                 Notas:
                                             </div>
-                                            <p className="whitespace-pre text-pretty text-xs">
+                                            <p className="text-xs text-pretty whitespace-pre">
                                                 {workoutExercise.notes}
                                             </p>
                                         </div>

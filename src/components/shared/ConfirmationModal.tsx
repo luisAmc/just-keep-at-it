@@ -29,7 +29,7 @@ export function ConfirmationModal({
                         <span>Confirmar</span>
                     </Button>
 
-                    <Button variant="secondary" onClick={onClose}>
+                    <Button variant="secondary" className='bg-gray-200' onClick={onClose}>
                         <XIcon className="mr-1 size-4" />
                         <span>Cancelar</span>
                     </Button>

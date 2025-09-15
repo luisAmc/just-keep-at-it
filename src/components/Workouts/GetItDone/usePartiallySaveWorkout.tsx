@@ -4,6 +4,7 @@ import { useExercises } from '~/contexts/useExercises';
 import { RouterOutputs } from '~/utils/api';
 import { getDefaultExerciseSet } from '~/utils/constants';
 import { usePersistedLocalStorage } from '~/utils/usePersistedLocalStorage';
+import { v4 as uuidV4 } from 'uuid';
 
 type RemoveDataType = Pick<
     RouterOutputs['workout']['byId'],
@@ -42,11 +43,11 @@ export function usePartiallySaveWorkout({ data, form }: Params) {
 
         for (const workoutExercise of sortedWorkoutExercises) {
             const sets = workoutExercise.sets.map((set) => ({
-                mins: (set.mins ?? 0).toString(),
-                distance: (set.distance ?? 0).toString(),
-                kcal: (set.kcal ?? 0).toString(),
-                reps: (set.reps ?? 0).toString(),
-                lbs: (set.lbs ?? 0).toString(),
+                mins: String(set.mins),
+                distance: String(set.distance),
+                kcal: String(set.kcal),
+                reps: String(set.reps),
+                lbs: String(set.lbs),
             }));
 
             const exerciseId =
@@ -76,6 +77,7 @@ export function usePartiallySaveWorkout({ data, form }: Params) {
             }
 
             workoutExercises.push({
+                uid: uuidV4(),
                 exerciseId: exerciseId,
                 notes: workoutExercise.notes ?? '',
                 sets: sets,

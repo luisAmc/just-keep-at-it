@@ -12,7 +12,7 @@ function App({ Component, pageProps }: AppProps) {
     return (
         <ThemeProvider>
             <NProgress />
-            <Toaster className="mb-4" />
+            <Toaster richColors className="mb-4" />
 
             {pageProps.viewer ? (
                 <UserProvider viewer={pageProps.viewer}>

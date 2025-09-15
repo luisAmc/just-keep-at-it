@@ -80,7 +80,7 @@ export function WorkoutExerciseProvider({
     const setCount = setsFieldArray.fields.length;
 
     const index = workoutExercise.index;
-    const label = index < 9 ? `0${workoutExercise.index + 1}` : `${index + 1}`;
+    const label = String(index + 1).padStart(2, '0');
 
     function changeExercise(newExerciseId: string) {
         const newExercise = getExerciseById(newExerciseId)!;

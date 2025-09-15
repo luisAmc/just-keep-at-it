@@ -17,7 +17,7 @@ export function WorkoutExercises() {
         <DisclosureProvider
             initialCount={workoutExercisesFieldArray.fields.length}
         >
-            <div className="space-y-2">
+            <div className="flex flex-col gap-y-1">
                 {workoutExercisesFieldArray.fields.map(
                     (workoutExerciseField, idx) => {
                         const workoutExercise = {
