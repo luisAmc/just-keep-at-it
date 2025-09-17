@@ -43,11 +43,11 @@ export function usePartiallySaveWorkout({ data, form }: Params) {
 
         for (const workoutExercise of sortedWorkoutExercises) {
             const sets = workoutExercise.sets.map((set) => ({
-                mins: String(set.mins),
-                distance: String(set.distance),
-                kcal: String(set.kcal),
-                reps: String(set.reps),
-                lbs: String(set.lbs),
+                mins: set.mins ?? undefined,
+                distance: set.distance ?? undefined,
+                kcal: set.kcal ?? undefined,
+                reps: set.reps ?? undefined,
+                lbs: set.lbs ?? undefined,
             }));
 
             const exerciseId =
@@ -85,6 +85,8 @@ export function usePartiallySaveWorkout({ data, form }: Params) {
         }
 
         form.reset({ workoutExercises: workoutExercises });
+
+        form.trigger();
 
         setIsSetupDone(true);
     }, [data]);

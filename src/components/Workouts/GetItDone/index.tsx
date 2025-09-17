@@ -17,6 +17,7 @@ import {
     LocalDataType,
     usePersistedLocalStorage,
 } from '~/utils/usePersistedLocalStorage';
+import { numberShape } from '~/utils/shapes';
 
 export const getItDoneSchema = z.object({
     workoutExercises: z.array(
@@ -24,11 +25,11 @@ export const getItDoneSchema = z.object({
             exerciseId: z.string(),
             sets: z.array(
                 z.object({
-                    mins: z.coerce.number().optional(),
-                    distance: z.coerce.number().optional(),
-                    kcal: z.coerce.number().optional(),
-                    reps: z.coerce.number().optional(),
-                    lbs: z.coerce.number().optional(),
+                    mins: numberShape.optional(),
+                    distance: numberShape.optional(),
+                    kcal: numberShape.optional(),
+                    reps: numberShape.optional(),
+                    lbs: numberShape.optional(),
                 }),
             ),
             notes: z.string().trim().optional(),
@@ -81,11 +82,11 @@ export function GetItDone() {
                 exerciseId: we.exerciseId,
                 notes: we.notes,
                 sets: (we.sets as any[]).map((set) => ({
-                    mins: Number(set.mins) ?? '',
-                    distance: Number(set.distance) ?? '',
-                    kcal: Number(set.kcal) ?? '',
-                    reps: Number(set.reps) ?? '',
-                    lbs: Number(set.lbs) ?? '',
+                    mins: Number(set.mins) ?? 0,
+                    distance: Number(set.distance) ?? 0,
+                    kcal: Number(set.kcal) ?? 0,
+                    reps: Number(set.reps) ?? 0,
+                    lbs: Number(set.lbs) ?? 0,
                 })),
             })),
         };
