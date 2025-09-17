@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Dropdown, DropdownGroup, DropdownItem } from './shared/Dropdown';
@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { useModal } from './shared/Modal';
 import { ThemeSwitcherModal } from './ThemeSwitcherModal';
+import { cn } from '~/utils/cn';
 
 interface LayoutProps {
     children: ReactNode;
@@ -22,6 +23,19 @@ export function Layout({ children }: LayoutProps) {
     const router = useRouter();
     const authRedirect = useAuthRedirect();
     const themeSwitcherModal = useModal();
+    const [onTopOfPage, setOnTopOfPage] = useState(true);
+
+    useEffect(() => {
+        const handler = () => {
+            setOnTopOfPage(window.scrollY <= 0);
+        };
+
+        window.addEventListener('scroll', handler);
+
+        return () => {
+            window.removeEventListener('scroll', handler);
+        };
+    }, []);
 
     const logout = api.auth.logout.useMutation({
         onSuccess() {
@@ -31,7 +45,12 @@ export function Layout({ children }: LayoutProps) {
 
     return (
         <div className="relative mx-auto w-full max-w-xl">
-            <nav className="sticky top-0 z-10 flex items-center justify-end bg-white p-4">
+            <nav
+                className={cn(
+                    'sticky top-0 z-10 flex items-center justify-end bg-white/50 p-4 backdrop-blur-md',
+                    !onTopOfPage && 'shadow-md',
+                )}
+            >
                 <Link
                     href="/"
                     className="from-brand-400 to-brand-700 absolute left-1/2 -translate-x-1/2 bg-linear-to-r bg-clip-text text-2xl font-semibold tracking-tight text-transparent"

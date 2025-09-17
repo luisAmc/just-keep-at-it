@@ -74,9 +74,9 @@ function WorkoutCard({ workout }: WorkoutCardProps) {
         >
             <div
                 className={cn(
-                    'w-full rounded-lg border border-brand-500 p-4 text-start shadow-sm',
+                    'border-brand-300 w-full rounded-lg p-4 text-start shadow-sm',
                     workout.status === WorkoutStatus.DRAFTED
-                        ? 'border-2 border-dashed bg-brand-100'
+                        ? 'bg-brand-100 border-2 border-dashed'
                         : 'bg-brand-200',
                 )}
             >
@@ -133,7 +133,7 @@ function WorkoutCard({ workout }: WorkoutCardProps) {
 
 function EmptyWorkouts() {
     return (
-        <div className="flex flex-col items-center space-y-2 rounded-md bg-brand-100 p-8 text-brand-700">
+        <div className="bg-brand-100 text-brand-700 flex flex-col items-center space-y-2 rounded-md p-8">
             <CatIcon className="h-10 w-10" />
             <p className="text-sm font-semibold">No se han creado rutinas...</p>
         </div>
@@ -146,20 +146,20 @@ function Shimmer() {
             {Array.from({ length: 3 }).map((_, i) => (
                 <div
                     key={`shimmer-div-${i}`}
-                    className="rounded-lg bg-brand-200 px-5 py-4"
+                    className="bg-brand-200 rounded-lg px-5 py-4"
                 >
                     <div className="flex flex-col space-y-2">
                         <div className="mb-2 flex flex-col gap-y-1">
-                            <div className="h-4 w-40 rounded-md bg-brand-400"></div>
-                            <div className="h-3 w-20 rounded-md bg-brand-400"></div>
+                            <div className="bg-brand-400 h-4 w-40 rounded-md"></div>
+                            <div className="bg-brand-400 h-3 w-20 rounded-md"></div>
                         </div>
 
-                        <div className="h-3 w-52 rounded-md bg-brand-400"></div>
-                        <div className="h-3 w-52 rounded-md bg-brand-400"></div>
-                        <div className="h-3 w-52 rounded-md bg-brand-400"></div>
-                        <div className="h-3 w-52 rounded-md bg-brand-400"></div>
-                        <div className="h-3 w-52 rounded-md bg-brand-400"></div>
-                        <div className="h-3 w-52 rounded-md bg-brand-400"></div>
+                        <div className="bg-brand-400 h-3 w-52 rounded-md"></div>
+                        <div className="bg-brand-400 h-3 w-52 rounded-md"></div>
+                        <div className="bg-brand-400 h-3 w-52 rounded-md"></div>
+                        <div className="bg-brand-400 h-3 w-52 rounded-md"></div>
+                        <div className="bg-brand-400 h-3 w-52 rounded-md"></div>
+                        <div className="bg-brand-400 h-3 w-52 rounded-md"></div>
                     </div>
                 </div>
             ))}

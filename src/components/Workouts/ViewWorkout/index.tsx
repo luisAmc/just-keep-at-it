@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { Drawer, useDrawer } from '~/components/shared/Drawer';
 import { useState } from 'react';
+import { Page } from '~/components/shared/Page';
 
 type Action = 'default' | 'create-template';
 
@@ -51,11 +52,11 @@ export function ViewWorkout() {
     }
 
     return (
-        <div className="flex flex-col gap-y-4">
+        <Page>
             {isLoading && <Shimmer />}
 
             {data && (
-                <div className="bg-brand-50 space-y-4 rounded-xl px-4 pt-4 pb-8">
+                <div className="space-y-4 rounded-xl pt-4 pb-8">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-x-1.5">
                             <Button href="/" variant="ghost" size="icon">
@@ -150,7 +151,7 @@ export function ViewWorkout() {
                             return (
                                 <div
                                     key={workoutExercise.id}
-                                    className="bg-brand-100 rounded-xl p-4"
+                                    className="bg-brand-100 rounded-lg p-4"
                                 >
                                     {/* Header */}
                                     <div className="flex items-center justify-between">
@@ -195,7 +196,7 @@ export function ViewWorkout() {
                     </div>
                 </div>
             )}
-        </div>
+        </Page>
     );
 }
 
