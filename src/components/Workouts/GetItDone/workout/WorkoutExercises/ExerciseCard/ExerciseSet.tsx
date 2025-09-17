@@ -17,7 +17,7 @@ export function ExerciseSet({ name, setIdx, onRemove }: ExerciseSetProps) {
     return (
         <div className="flex justify-between py-2">
             <div className="flex space-x-2">
-                <span className="ml-2 mt-2 text-xs font-medium text-brand-600">
+                <span className="text-brand-600 mt-2 ml-2 text-xs font-medium">
                     <span>S{setIdx + 1}</span>
                 </span>
 
@@ -51,9 +51,18 @@ function Aerobic({ name }: { name: string }) {
 
     return (
         <>
-            <NumberInput {...form.register(`${name}.mins`)} label="mins" />
-            <NumberInput {...form.register(`${name}.distance`)} label="dist" />
-            <NumberInput {...form.register(`${name}.kcal`)} label="kcal" />
+            <NumberInput
+                {...form.register(`${name}.mins`, { valueAsNumber: true })}
+                label="mins"
+            />
+            <NumberInput
+                {...form.register(`${name}.distance`, { valueAsNumber: true })}
+                label="dist"
+            />
+            <NumberInput
+                {...form.register(`${name}.kcal`, { valueAsNumber: true })}
+                label="kcal"
+            />
         </>
     );
 }
@@ -63,8 +72,14 @@ function Strength({ name }: { name: string }) {
 
     return (
         <>
-            <NumberInput {...form.register(`${name}.lbs`)} label="lbs" />
-            <NumberInput {...form.register(`${name}.reps`)} label="reps" />
+            <NumberInput
+                {...form.register(`${name}.lbs`, { valueAsNumber: true })}
+                label="lbs"
+            />
+            <NumberInput
+                {...form.register(`${name}.reps`, { valueAsNumber: true })}
+                label="reps"
+            />
         </>
     );
 }
@@ -103,7 +118,7 @@ function LastSession({ setIndex }: { setIndex: number }) {
                             <span className="text-xs">lbs</span>
                         </span>
 
-                        <span className="text-sm text-brand-300">x</span>
+                        <span className="text-brand-300 text-sm">x</span>
 
                         <span>
                             <span className="text-sm">

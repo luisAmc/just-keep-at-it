@@ -12,12 +12,13 @@ import { WorkoutProvider } from './context/useWorkout';
 import { z } from 'zod';
 import { toast } from 'sonner';
 import { ErrorMessage } from '~/components/shared/ErrorMessage';
-import { CheckIcon } from 'lucide-react';
+import { CheckIcon, PandaIcon } from 'lucide-react';
 import {
     LocalDataType,
     usePersistedLocalStorage,
 } from '~/utils/usePersistedLocalStorage';
 import { numberShape } from '~/utils/shapes';
+import { Drawer, useDrawer } from '~/components/shared/Drawer';
 
 export const getItDoneSchema = z.object({
     workoutExercises: z.array(
@@ -39,6 +40,8 @@ export const getItDoneSchema = z.object({
 
 export function GetItDone() {
     const router = useRouter();
+
+    const finishDrawer = useDrawer();
 
     const queryClient = api.useUtils();
     const persistedLocalStorage = usePersistedLocalStorage();
@@ -175,12 +178,27 @@ export function GetItDone() {
                             <WorkoutExercises />
 
                             <Button
-                                onClick={handleSubmit}
+                                onClick={finishDrawer.open}
                                 disabled={!form.formState.isValid}
                             >
                                 <CheckIcon className="mr-1 size-4" />
                                 <span>Finalizar</span>
                             </Button>
+
+                            <Drawer {...finishDrawer.props}>
+                                <div className="flex flex-col items-center gap-y-2">
+                                    <PandaIcon className="text-brand-700 size-20" />
+
+                                    <p className="text-center">
+                                        ¿Finalizar esta rútina?
+                                    </p>
+                                </div>
+
+                                <Button onClick={handleSubmit}>
+                                    <CheckIcon className="mr-1 size-4" />
+                                    <span>Sí, quiero finalizarla</span>
+                                </Button>
+                            </Drawer>
                         </div>
                     </WorkoutProvider>
                 </Form>

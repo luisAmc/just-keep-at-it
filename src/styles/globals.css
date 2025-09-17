@@ -71,10 +71,12 @@
     }
 }
 
-html,
-body,
-#__next {
-    @reference h-dvh scroll-smooth bg-white font-sans text-brand-900 antialiased;
+@layer base {
+    html,
+    body,
+    #__next {
+        @apply h-dvh scroll-smooth bg-white font-sans text-brand-900 antialiased;
+    }
 }
 
 @layer utilities {
