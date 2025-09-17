@@ -27,7 +27,7 @@ export function Layout({ children }: LayoutProps) {
 
     useEffect(() => {
         const handler = () => {
-            setOnTopOfPage(window.scrollY <= 0);
+            setOnTopOfPage(window.scrollY === 0);
         };
 
         window.addEventListener('scroll', handler);
