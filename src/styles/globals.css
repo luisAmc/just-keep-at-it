@@ -2,7 +2,7 @@
 
 :root {
     --background: theme(--color-white);
-    --foreground: theme(--color-brand-950);
+    --foreground: theme(--color-brand-900);
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -12,64 +12,78 @@
     }
 } */
 
+[data-theme='default'] {
+    /* Teal */
+    --brand-50: theme(--color-teal-50);
+    --brand-100: theme(--color-teal-100);
+    --brand-200: theme(--color-teal-200);
+    --brand-300: theme(--color-teal-300);
+    --brand-400: theme(--color-teal-400);
+    --brand-500: theme(--color-teal-500);
+    --brand-600: theme(--color-teal-600);
+    --brand-700: theme(--color-teal-700);
+    --brand-800: theme(--color-teal-800);
+    --brand-900: theme(--color-teal-900);
+    --brand-950: theme(--color-teal-950);
+}
+
+[data-theme='gray'] {
+    --brand-50: theme(--color-gray-50);
+    --brand-100: theme(--color-gray-100);
+    --brand-200: theme(--color-gray-200);
+    --brand-300: theme(--color-gray-300);
+    --brand-400: theme(--color-gray-400);
+    --brand-500: theme(--color-gray-500);
+    --brand-600: theme(--color-gray-600);
+    --brand-700: theme(--color-gray-700);
+    --brand-800: theme(--color-gray-800);
+    --brand-900: theme(--color-gray-900);
+    --brand-950: theme(--color-gray-950);
+}
+
+[data-theme='sky'] {
+    --brand-50: theme(--color-sky-50);
+    --brand-100: theme(--color-sky-100);
+    --brand-200: theme(--color-sky-200);
+    --brand-300: theme(--color-sky-300);
+    --brand-400: theme(--color-sky-400);
+    --brand-500: theme(--color-sky-500);
+    --brand-600: theme(--color-sky-600);
+    --brand-700: theme(--color-sky-700);
+    --brand-800: theme(--color-sky-800);
+    --brand-900: theme(--color-sky-900);
+    --brand-950: theme(--color-sky-950);
+}
+
+[data-theme='rose'] {
+    --brand-50: theme(--color-rose-50);
+    --brand-100: theme(--color-rose-100);
+    --brand-200: theme(--color-rose-200);
+    --brand-300: theme(--color-rose-300);
+    --brand-400: theme(--color-rose-400);
+    --brand-500: theme(--color-rose-500);
+    --brand-600: theme(--color-rose-600);
+    --brand-700: theme(--color-rose-700);
+    --brand-800: theme(--color-rose-800);
+    --brand-900: theme(--color-rose-900);
+    --brand-950: theme(--color-rose-950);
+}
+
 @theme {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
 
-    /* Teal */
-    --color-brand-50: oklch(0.984 0.014 180.72);
-    --color-brand-100: oklch(0.953 0.051 180.801);
-    --color-brand-200: oklch(0.91 0.096 180.426);
-    --color-brand-300: oklch(0.855 0.138 181.071);
-    --color-brand-400: oklch(0.777 0.152 181.912);
-    --color-brand-500: oklch(0.704 0.14 182.503);
-    --color-brand-600: oklch(0.6 0.118 184.704);
-    --color-brand-700: oklch(0.511 0.096 186.391);
-    --color-brand-800: oklch(0.437 0.078 188.216);
-    --color-brand-900: oklch(0.386 0.063 188.416);
-    --color-brand-950: oklch(0.277 0.046 192.524);
-}
-
-[data-theme='gray'] {
-    --color-brand-50: theme(--color-gray-50);
-    --color-brand-100: theme(--color-gray-100);
-    --color-brand-200: theme(--color-gray-200);
-    --color-brand-300: theme(--color-gray-300);
-    --color-brand-400: theme(--color-gray-400);
-    --color-brand-500: theme(--color-gray-500);
-    --color-brand-600: theme(--color-gray-600);
-    --color-brand-700: theme(--color-gray-700);
-    --color-brand-800: theme(--color-gray-800);
-    --color-brand-900: theme(--color-gray-900);
-    --color-brand-950: theme(--color-gray-950);
-}
-
-[data-theme='sky'] {
-    --color-brand-50: theme(--color-sky-50);
-    --color-brand-100: theme(--color-sky-100);
-    --color-brand-200: theme(--color-sky-200);
-    --color-brand-300: theme(--color-sky-300);
-    --color-brand-400: theme(--color-sky-400);
-    --color-brand-500: theme(--color-sky-500);
-    --color-brand-600: theme(--color-sky-600);
-    --color-brand-700: theme(--color-sky-700);
-    --color-brand-800: theme(--color-sky-800);
-    --color-brand-900: theme(--color-sky-900);
-    --color-brand-950: theme(--color-sky-950);
-}
-
-[data-theme='rose'] {
-    --color-brand-50: theme(--color-rose-50);
-    --color-brand-100: theme(--color-rose-100);
-    --color-brand-200: theme(--color-rose-200);
-    --color-brand-300: theme(--color-rose-300);
-    --color-brand-400: theme(--color-rose-400);
-    --color-brand-500: theme(--color-rose-500);
-    --color-brand-600: theme(--color-rose-600);
-    --color-brand-700: theme(--color-rose-700);
-    --color-brand-800: theme(--color-rose-800);
-    --color-brand-900: theme(--color-rose-900);
-    --color-brand-950: theme(--color-rose-950);
+    --color-brand-50: var(--brand-50);
+    --color-brand-100: var(--brand-100);
+    --color-brand-200: var(--brand-200);
+    --color-brand-300: var(--brand-300);
+    --color-brand-400: var(--brand-400);
+    --color-brand-500: var(--brand-500);
+    --color-brand-600: var(--brand-600);
+    --color-brand-700: var(--brand-700);
+    --color-brand-800: var(--brand-800);
+    --color-brand-900: var(--brand-900);
+    --color-brand-950: var(--brand-950);
 }
 
 @layer base {
