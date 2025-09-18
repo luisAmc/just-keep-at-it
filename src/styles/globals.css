@@ -108,10 +108,11 @@
 
 /* This correctly styles the minimal progress bar that is displayed when navigating between pages */
 #nprogress {
-    @reference pointer-events-none z-50;
+    @apply pointer-events-none z-50;
 }
+
 #nprogress .bar {
-    @reference fixed left-0 top-0 z-50 h-0.5 w-full bg-brand-500;
+    @apply bg-brand-200 fixed top-0 left-0 z-50 h-0.5 w-full;
 }
 
 @keyframes swaying {

@@ -23,6 +23,7 @@ export function NProgress() {
         router.events.on('routeChangeStart', start);
         router.events.on('routeChangeComplete', done);
         router.events.on('routeChangeError', done);
+        
         return () => {
             done();
             router.events.off('routeChangeStart', start);
