@@ -11,15 +11,15 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             <label className="flex flex-col space-y-0.5">
                 <input
                     className={cn(
-                        'w-16 h-10 appearance-none justify-center bg-brand-200 py-0.5 text-center text-xl outline-none',
-                        'rounded-md border-2 border-transparent focus:border-brand-600 focus:ring-brand-500',
-                        'placeholder:text-brand-500 disabled:bg-gray-500 disabled:bg-opacity-20 disabled:opacity-60',
+                        'bg-brand-200 h-10 w-16 appearance-none justify-center py-0.5 text-center text-xl outline-none',
+                        'focus:border-brand-600 focus:ring-brand-500 rounded-md border-2 border-transparent',
+                        'placeholder:text-brand-400 disabled:bg-opacity-20 disabled:bg-gray-500 disabled:opacity-60',
                         className,
                     )}
                     ref={ref}
                     type="number"
                     inputMode="decimal"
-                    placeholder='0'
+                    placeholder="0"
                     onFocus={(e) => e.target.select()}
                     onWheel={(event) =>
                         event.target instanceof HTMLElement &&

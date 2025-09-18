@@ -59,7 +59,7 @@ export function Modal({ title, open, onClose, children }: ModalProps) {
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                            <DialogPanel className="relative w-full max-w-md transform rounded-xl bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:p-6">
+                            <DialogPanel className="bg-background relative w-full max-w-md transform rounded-xl px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:p-6">
                                 <div className="flex items-center justify-between">
                                     <DialogTitle className="text-xl font-medium">
                                         {title}

@@ -1,9 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { Dropdown, DropdownGroup, DropdownItem } from './shared/Dropdown';
 import { api } from '~/utils/api';
-import { useAuthRedirect } from '~/utils/useAuthRedirect';
 import {
     BookDashedIcon,
     SettingsIcon,
@@ -11,9 +6,14 @@ import {
     LogOutIcon,
     PaletteIcon,
 } from 'lucide-react';
-import { useModal } from './shared/Modal';
-import { ThemeSwitcherModal } from './ThemeSwitcherModal';
 import { cn } from '~/utils/cn';
+import { Dropdown, DropdownGroup, DropdownItem } from './shared/Dropdown';
+import { ThemeSwitcherModal } from './ThemeSwitcherModal';
+import { useAuthRedirect } from '~/utils/useAuthRedirect';
+import { useEffect, useState, type ReactNode } from 'react';
+import { useModal } from './shared/Modal';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 interface LayoutProps {
     children: ReactNode;
@@ -27,7 +27,7 @@ export function Layout({ children }: LayoutProps) {
 
     useEffect(() => {
         const handler = () => {
-            setOnTopOfPage(window.scrollY === 0);
+            setOnTopOfPage(window.scrollY <= 10);
         };
 
         window.addEventListener('scroll', handler);
@@ -47,7 +47,7 @@ export function Layout({ children }: LayoutProps) {
         <div className="relative mx-auto w-full max-w-xl">
             <nav
                 className={cn(
-                    'sticky top-0 z-10 flex items-center justify-end bg-white/50 p-4 backdrop-blur-md',
+                    'sticky top-0 z-10 flex items-center justify-end bg-background/50 p-4 backdrop-blur-md',
                     !onTopOfPage && 'shadow-md',
                 )}
             >

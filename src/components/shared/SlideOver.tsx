@@ -71,15 +71,15 @@ export function SlideOver({
                                 leaveTo="translate-x-full"
                             >
                                 <DialogPanel className="pointer-events-auto relative w-screen max-w-md">
-                                    <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                                    <div className="bg-background flex h-full flex-col overflow-y-scroll shadow-xl">
                                         <div
                                             className={cn(
-                                                'sticky top-0 z-10 bg-white px-4 pb-4 pt-6 sm:px-6',
+                                                'bg-background sticky top-0 z-10 px-4 pt-6 pb-4 sm:px-6',
                                                 top && 'space-y-4 border-b',
                                             )}
                                         >
                                             <div className="flex items-center justify-between">
-                                                <DialogTitle className="text-lg font-semibold leading-6 text-brand-900">
+                                                <DialogTitle className="text-brand-900 text-lg leading-6 font-semibold">
                                                     {title}
                                                 </DialogTitle>
 
@@ -100,7 +100,7 @@ export function SlideOver({
                                         </div>
 
                                         {bottom && (
-                                            <div className="sticky bottom-0 z-10 mt-4 border-t bg-white px-4 pb-6 pt-4 sm:px-6 ">
+                                            <div className="bg-background sticky bottom-0 z-10 mt-4 border-t px-4 pt-4 pb-6 sm:px-6">
                                                 {bottom}
                                             </div>
                                         )}
