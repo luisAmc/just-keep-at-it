@@ -59,13 +59,13 @@ export function Layout({ children }: LayoutProps) {
         <div className="relative mx-auto w-full max-w-xl">
             <nav
                 className={cn(
-                    'bg-background/50 sticky top-0 z-10 flex items-center justify-end p-4 backdrop-blur-md',
+                    'bg-background/90 sticky top-0 z-10 flex items-center justify-between p-4 backdrop-blur-lg',
                     !onTopOfPage && 'shadow-md',
                 )}
             >
                 <Link
                     href="/"
-                    className="from-brand-400 to-brand-700 absolute left-1/2 -translate-x-1/2 bg-linear-to-r bg-clip-text text-2xl font-semibold tracking-tight text-transparent"
+                    className="from-brand-400 to-brand-700 bg-linear-to-r bg-clip-text text-2xl font-semibold tracking-tight text-transparent"
                 >
                     Just keep at it!
                 </Link>
