@@ -52,7 +52,7 @@ export function CardActions() {
                 <AnimatePresence mode="wait">
                     {selectedAction === 'default' && (
                         <section
-                            key="defautl"
+                            key="default"
                             className="flex flex-col gap-y-1"
                         >
                             <Button
@@ -88,6 +88,7 @@ export function CardActions() {
                             </Button>
                         </section>
                     )}
+
                     {selectedAction === 'change-exercise' && (
                         <motion.section
                             key="change-exercise"
@@ -103,6 +104,7 @@ export function CardActions() {
                             />
                         </motion.section>
                     )}
+
                     {selectedAction === 'reorder-exercises' && (
                         <motion.section
                             key="reorder-exercises"

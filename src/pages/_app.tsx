@@ -5,8 +5,8 @@ import { UserProvider } from '~/contexts/useUser';
 import { ExercisesProvider } from '~/contexts/useExercises';
 import { Layout } from '~/components/Layout';
 import { ThemeProvider } from '~/contexts/useTheme';
-import '~/styles/globals.css';
 import { Toaster } from 'sonner';
+import '~/styles/globals.css';
 
 function App({ Component, pageProps }: AppProps) {
     return (

@@ -18,7 +18,6 @@ export const authRouter = createTRPCRouter({
             await createSession(ctx.ironSession, user);
 
             return {
-                id: user.id,
                 username: user.username,
             };
         }),
