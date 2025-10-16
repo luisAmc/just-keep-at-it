@@ -119,16 +119,14 @@ export function GetItDone() {
         const workoutExercises = nonEmptyWorkoutExercises
             .map((workoutExercise, idx) => {
                 const nonEmptySets = workoutExercise.sets.filter((set) => {
-                    const fullAerobicFields =
+                    const validAerobicFields =
                         Number(set.mins ?? 0) !== 0 &&
                         Number(set.distance ?? 0) !== 0 &&
                         Number(set.kcal ?? 0) !== 0;
 
-                    const fullStrengthFields =
-                        Number(set.lbs ?? 0) !== 0 &&
-                        Number(set.reps ?? 0) !== 0;
+                    const validStrengthFields = Number(set.reps ?? 0) !== 0;
 
-                    if (fullAerobicFields || fullStrengthFields) {
+                    if (validAerobicFields || validStrengthFields) {
                         return true;
                     }
 
