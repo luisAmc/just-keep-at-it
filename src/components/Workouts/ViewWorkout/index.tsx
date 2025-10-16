@@ -1,8 +1,6 @@
 import { ExerciseType } from '@prisma/client';
 import { useRouter } from 'next/router';
 import { toast } from 'sonner';
-import { ConfirmationModal } from '~/components/shared/ConfirmationModal';
-import { useModal } from '~/components/shared/Modal';
 import { api } from '~/utils/api';
 import { Shimmer } from './Shimmer';
 import { Button } from '~/components/shared/Button';
@@ -16,13 +14,14 @@ import {
 import { Drawer, useDrawer } from '~/components/shared/Drawer';
 import { useState } from 'react';
 import { Page } from '~/components/shared/Page';
+import { AnimatePresence, motion } from 'framer-motion';
 
-type Action = 'default' | 'create-template';
+type Action = 'default' | 'create-template' | 'delete-workout';
 
 export function ViewWorkout() {
     const router = useRouter();
 
-    const [_selectedAction, setSelectedAction] = useState<Action>('default');
+    const [selectedAction, setSelectedAction] = useState<Action>('default');
 
     const { data, isLoading } = api.workout.byId.useQuery({
         workoutId: router.query.workoutId as string,
@@ -43,11 +42,10 @@ export function ViewWorkout() {
         },
     });
 
-    const confirmationModal = useModal();
     const actionDrawer = useDrawer();
 
     function handleDrawerClose() {
-        confirmationModal.close();
+        setSelectedAction('default');
         actionDrawer.close();
     }
 
@@ -82,64 +80,105 @@ export function ViewWorkout() {
                             {...actionDrawer.props}
                             onClose={() => handleDrawerClose()}
                         >
-                            <div className="flex flex-col gap-y-1">
-                                <Button
-                                    variant="muted"
-                                    className="h-12 justify-start"
-                                    onClick={() =>
-                                        toast.promise(
-                                            doItAgain.mutateAsync({
-                                                workoutId: data.id,
-                                            }),
-                                            {
-                                                loading: 'Creando rútina...',
-                                                success: '¡Rútina creada!',
-                                                error: 'No se pudo creada la rútina.',
-                                            },
-                                        )
-                                    }
-                                >
-                                    <RefreshCcw className="mr-1 size-4" />
-                                    <span>Repetir rútina</span>
-                                </Button>
+                            <AnimatePresence mode="wait">
+                                {selectedAction === 'default' && (
+                                    <div
+                                        key="default"
+                                        className="flex flex-col gap-y-1"
+                                    >
+                                        <Button
+                                            variant="muted"
+                                            className="h-12 justify-start"
+                                            onClick={() =>
+                                                toast.promise(
+                                                    doItAgain.mutateAsync({
+                                                        workoutId: data.id,
+                                                    }),
+                                                    {
+                                                        loading:
+                                                            'Creando rútina...',
+                                                        success:
+                                                            '¡Rútina creada!',
+                                                        error: 'No se pudo creada la rútina.',
+                                                    },
+                                                )
+                                            }
+                                        >
+                                            <RefreshCcw className="mr-1 size-4" />
+                                            <span>Repetir rútina</span>
+                                        </Button>
 
-                                <Button
-                                    disabled
-                                    variant="muted"
-                                    className="h-12 justify-start"
-                                >
-                                    <NotebookPenIcon className="mr-1 size-4" />
-                                    <span>Converitr en boceto</span>
-                                </Button>
+                                        <Button
+                                            disabled
+                                            variant="muted"
+                                            className="h-12 justify-start"
+                                        >
+                                            <NotebookPenIcon className="mr-1 size-4" />
+                                            <span>Converitr en boceto</span>
+                                        </Button>
 
-                                <Button
-                                    variant="destructive"
-                                    className="mt-2 h-12 justify-start"
-                                    onClick={confirmationModal.open}
-                                >
-                                    <Trash2Icon className="mr-1 size-4" />
-                                    <span>Borrar rútina</span>
-                                </Button>
-                            </div>
+                                        <Button
+                                            variant="destructive"
+                                            className="mt-2 h-12 justify-start"
+                                            onClick={() =>
+                                                setSelectedAction(
+                                                    'delete-workout',
+                                                )
+                                            }
+                                        >
+                                            <Trash2Icon className="mr-1 size-4" />
+                                            <span>Borrar rútina</span>
+                                        </Button>
+                                    </div>
+                                )}
+
+                                {selectedAction === 'delete-workout' && (
+                                    <motion.div
+                                        key="delete-workout"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 1 }}
+                                        className="flex flex-col gap-y-4"
+                                    >
+                                        <div className="rounded-xl p-4 text-sm text-rose-700 ring-2 ring-rose-400">
+                                            <h2 className="mb-4 text-lg font-medium">
+                                                Borrar rútina
+                                            </h2>
+
+                                            <p className="text-center">
+                                                ¿Estás seguro(a) de borrar esta
+                                                rútina?
+                                            </p>
+
+                                            <p className="text-center font-medium underline">
+                                                Esta acción será irreversible.
+                                            </p>
+                                        </div>
+
+                                        <Button
+                                            variant="destructive"
+                                            onClick={() =>
+                                                toast.promise(
+                                                    deleteWorkout.mutateAsync({
+                                                        workoutId: data.id,
+                                                    }),
+                                                    {
+                                                        loading:
+                                                            'Borrando rútina...',
+                                                        success:
+                                                            '¡Rútina borrada!',
+                                                        error: 'No se pudo borrar la rútina.',
+                                                    },
+                                                )
+                                            }
+                                        >
+                                            <Trash2Icon className="mr-1 size-4" />
+                                            <span>Confirmar</span>
+                                        </Button>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </Drawer>
-
-                        <ConfirmationModal
-                            {...confirmationModal.props}
-                            onConfirm={() =>
-                                toast.promise(
-                                    deleteWorkout.mutateAsync({
-                                        workoutId: data.id,
-                                    }),
-                                    {
-                                        loading: 'Borrando rútina...',
-                                        success: '¡Rútina borrada!',
-                                        error: 'No se pudo borrar la rútina.',
-                                    },
-                                )
-                            }
-                        >
-                            ¿Está seguro(a) de borrar la rútina?
-                        </ConfirmationModal>
                     </div>
 
                     <div className="space-y-2">
