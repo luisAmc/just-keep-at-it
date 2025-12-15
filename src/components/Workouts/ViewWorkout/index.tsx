@@ -89,6 +89,10 @@ export function ViewWorkout() {
                                         <Button
                                             variant="muted"
                                             className="h-12 justify-start"
+                                            disabled={
+                                                doItAgain.isPending ||
+                                                doItAgain.isSuccess
+                                            }
                                             onClick={() =>
                                                 toast.promise(
                                                     doItAgain.mutateAsync({
@@ -170,6 +174,10 @@ export function ViewWorkout() {
                                                         error: 'No se pudo borrar la rútina.',
                                                     },
                                                 )
+                                            }
+                                            disabled={
+                                                deleteWorkout.isPending ||
+                                                deleteWorkout.isSuccess
                                             }
                                         >
                                             <Trash2Icon className="mr-1 size-4" />
