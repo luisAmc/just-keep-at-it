@@ -1,45 +1,5 @@
 @import 'tailwindcss';
 
-/* :root {
-    --background: theme(--color-white);
-    --foreground: theme(--color-teal-900);
-
-    --gid-card: theme(--color-teal-100);
-    --gid-card-foreground: theme(--color-teal-900);
-
-    --primary: theme(--color-teal-700);
-    --primary-foreground: theme(--color-teal-50);
-
-    --secondary: theme(--color-teal-300);
-    --secondary-foreground: theme(--color-teal-800);
-
-    --muted: theme(--color-teal-100);
-    --muted-foreground: theme(--color-teal-700);
-
-    --input: theme(--color-teal-200);
-    --placeholder: theme(--color-teal-600);
-
-    --input-foreground: theme(--color-teal-900);
-
-    --border: theme(--color-teal-600);
-    --ring: theme(--color-teal-600);
-
-    --destructive: theme(--color-rose-50);
-    --destructive-foreground: theme(--color-rose-600);
-
-    --header-start: theme(--color-teal-400);
-    --header-end: theme(--color-teal-700);
-
-    --mountains-1-8: theme(--color-teal-300);
-    --mountains-2-8: theme(--color-teal-400);
-    --mountains-3-8: theme(--color-teal-500);
-    --mountains-4-8: theme(--color-teal-600);
-    --mountains-5-8: theme(--color-teal-700);
-    --mountains-6-8: theme(--color-teal-800);
-    --mountains-7-8: theme(--color-teal-900);
-    --mountains-8-8: theme(--color-teal-950);
-} */
-
 [data-theme='default'] {
     /* Teal */
     --background: theme(--color-teal-50);
