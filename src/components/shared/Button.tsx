@@ -8,16 +8,19 @@ export const buttonVariants = cva(
     {
         variants: {
             variant: {
-                default: 'bg-brand-700 text-brand-50 hover:bg-brand-700/90',
-                secondary: 'bg-brand-300 text-brand-900 hover:bg-brand-300/80',
-                muted: 'bg-brand-100 text-brand-900 hover:opacity-80',
-                destructive: 'bg-red-500 text-red-50 hover:bg-red-500/90',
+                default:
+                    'bg-primary text-primary-foreground hover:bg-primary/90',
+                secondary:
+                    'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+                muted: 'bg-muted text-muted-foreground hover:opacity-80',
+                destructive:
+                    'bg-destructive-foreground text-destructive hover:bg-destructive-foreground/90',
                 'destructive-dashed':
-                    'border-2 border-dashed border-red-500  text-red-600 hover:border-transparent hover:bg-red-200',
-                ghost: 'bg-transparent hover:bg-brand-200',
+                    'border-2 border-dashed border-destructive-foreground  text-destructive-foreground hover:border-transparent hover:bg-red-200',
+                ghost: 'bg-transparent hover:bg-secondary',
                 outline:
-                    'border border-brand-500 hover:border-brand-300 hover:bg-brand-100',
-                dashed: 'text-brand-800 border-2 border-dashed border-brand-500 hover:border-transparent hover:bg-brand-200',
+                    'border border-border hover:border-secondary hover:bg-muted',
+                dashed: 'text-muted-foreground border-2 border-dashed border-border hover:border-transparent hover:bg-muted',
             },
             size: {
                 default: 'h-10 px-4 py-2',

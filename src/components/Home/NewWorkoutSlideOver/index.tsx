@@ -78,7 +78,7 @@ function TemplateCard({ template, onClick }: TemplateCardProps) {
     const [showConfirmation, setShowConfirmation] = useState(false);
 
     return (
-        <div className="rounded-lg bg-brand-100 shadow-sm">
+        <div className="rounded-lg bg-muted shadow-sm">
             <button
                 className="w-full rounded-lg p-4 text-start"
                 onClick={() => setShowConfirmation(true)}
@@ -94,7 +94,7 @@ function TemplateCard({ template, onClick }: TemplateCardProps) {
             </button>
 
             {showConfirmation && (
-                <div className="border-t border-brand-200 p-4">
+                <div className="border-t border-border p-4">
                     <p className="text-center text-sm font-semibold">
                         ¿Crear una rútina con este boceto?
                     </p>

@@ -17,7 +17,7 @@ export function ExerciseSet({ name, setIdx, onRemove }: ExerciseSetProps) {
     return (
         <div className="flex justify-between py-2">
             <div className="flex space-x-2">
-                <span className="text-brand-600 mt-2 ml-2 text-xs font-medium">
+                <span className="text-secondary-foreground mt-2 ml-2 text-xs font-medium">
                     <span>S{setIdx + 1}</span>
                 </span>
 
@@ -118,7 +118,7 @@ function LastSession({ setIndex }: { setIndex: number }) {
                             <span className="text-xs">lbs</span>
                         </span>
 
-                        <span className="text-brand-300 text-sm">x</span>
+                        <span className="text-placeholder text-sm">x</span>
 
                         <span>
                             <span className="text-sm">

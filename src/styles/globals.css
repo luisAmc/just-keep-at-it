@@ -1,89 +1,284 @@
 @import 'tailwindcss';
 
-:root {
+/* :root {
     --background: theme(--color-white);
-    --foreground: theme(--color-brand-900);
-}
+    --foreground: theme(--color-teal-900);
 
-/* @media (prefers-color-scheme: dark) {
-    :root {
-        --background: oklch(0.145 0 0);
-        --foreground: oklch(0.985 0 0);
-    }
+    --gid-card: theme(--color-teal-100);
+    --gid-card-foreground: theme(--color-teal-900);
+
+    --primary: theme(--color-teal-700);
+    --primary-foreground: theme(--color-teal-50);
+
+    --secondary: theme(--color-teal-300);
+    --secondary-foreground: theme(--color-teal-800);
+
+    --muted: theme(--color-teal-100);
+    --muted-foreground: theme(--color-teal-700);
+
+    --input: theme(--color-teal-200);
+    --placeholder: theme(--color-teal-600);
+
+    --input-foreground: theme(--color-teal-900);
+
+    --border: theme(--color-teal-600);
+    --ring: theme(--color-teal-600);
+
+    --destructive: theme(--color-rose-50);
+    --destructive-foreground: theme(--color-rose-600);
+
+    --header-start: theme(--color-teal-400);
+    --header-end: theme(--color-teal-700);
+
+    --mountains-1-8: theme(--color-teal-300);
+    --mountains-2-8: theme(--color-teal-400);
+    --mountains-3-8: theme(--color-teal-500);
+    --mountains-4-8: theme(--color-teal-600);
+    --mountains-5-8: theme(--color-teal-700);
+    --mountains-6-8: theme(--color-teal-800);
+    --mountains-7-8: theme(--color-teal-900);
+    --mountains-8-8: theme(--color-teal-950);
 } */
 
 [data-theme='default'] {
     /* Teal */
-    --brand-50: theme(--color-teal-50);
-    --brand-100: theme(--color-teal-100);
-    --brand-200: theme(--color-teal-200);
-    --brand-300: theme(--color-teal-300);
-    --brand-400: theme(--color-teal-400);
-    --brand-500: theme(--color-teal-500);
-    --brand-600: theme(--color-teal-600);
-    --brand-700: theme(--color-teal-700);
-    --brand-800: theme(--color-teal-800);
-    --brand-900: theme(--color-teal-900);
-    --brand-950: theme(--color-teal-950);
+    --background: theme(--color-teal-50);
+    --foreground: theme(--color-teal-900);
+
+    --gid-card: theme(--color-teal-100);
+    --gid-card-foreground: theme(--color-teal-900);
+
+    --primary: theme(--color-teal-700);
+    --primary-foreground: theme(--color-teal-50);
+
+    --secondary: theme(--color-teal-300);
+    --secondary-foreground: theme(--color-teal-800);
+
+    --muted: theme(--color-teal-100);
+    --muted-foreground: theme(--color-teal-700);
+
+    --input: theme(--color-teal-200);
+    --placeholder: theme(--color-teal-600);
+
+    --input-foreground: theme(--color-teal-900);
+
+    --border: theme(--color-teal-600);
+    --ring: theme(--color-teal-500);
+
+    --destructive: theme(--color-rose-50);
+    --destructive-foreground: theme(--color-rose-600);
+
+    --header-start: theme(--color-teal-400);
+    --header-end: theme(--color-teal-700);
+
+    --mountains-1-8: theme(--color-teal-300);
+    --mountains-2-8: theme(--color-teal-400);
+    --mountains-3-8: theme(--color-teal-500);
+    --mountains-4-8: theme(--color-teal-600);
+    --mountains-5-8: theme(--color-teal-700);
+    --mountains-6-8: theme(--color-teal-800);
+    --mountains-7-8: theme(--color-teal-900);
+    --mountains-8-8: theme(--color-teal-950);
 }
 
 [data-theme='gray'] {
-    --brand-50: theme(--color-gray-50);
-    --brand-100: theme(--color-gray-100);
-    --brand-200: theme(--color-gray-200);
-    --brand-300: theme(--color-gray-300);
-    --brand-400: theme(--color-gray-400);
-    --brand-500: theme(--color-gray-500);
-    --brand-600: theme(--color-gray-600);
-    --brand-700: theme(--color-gray-700);
-    --brand-800: theme(--color-gray-800);
-    --brand-900: theme(--color-gray-900);
-    --brand-950: theme(--color-gray-950);
+    --background: theme(--color-gray-50);
+    --foreground: theme(--color-gray-900);
+
+    --gid-card: theme(--color-gray-100);
+    --gid-card-foreground: theme(--color-gray-900);
+
+    --primary: theme(--color-gray-700);
+    --primary-foreground: theme(--color-gray-50);
+
+    --secondary: theme(--color-gray-300);
+    --secondary-foreground: theme(--color-gray-800);
+
+    --muted: theme(--color-gray-100);
+    --muted-foreground: theme(--color-gray-700);
+
+    --input: theme(--color-gray-200);
+    --placeholder: theme(--color-gray-600);
+
+    --input-foreground: theme(--color-gray-900);
+
+    --border: theme(--color-gray-600);
+    --ring: theme(--color-gray-500);
+
+    --destructive: theme(--color-rose-50);
+    --destructive-foreground: theme(--color-rose-600);
+
+    --header-start: theme(--color-gray-400);
+    --header-end: theme(--color-gray-700);
+
+    --mountains-1-8: theme(--color-gray-300);
+    --mountains-2-8: theme(--color-gray-400);
+    --mountains-3-8: theme(--color-gray-500);
+    --mountains-4-8: theme(--color-gray-600);
+    --mountains-5-8: theme(--color-gray-700);
+    --mountains-6-8: theme(--color-gray-800);
+    --mountains-7-8: theme(--color-gray-900);
+    --mountains-8-8: theme(--color-gray-950);
 }
 
 [data-theme='sky'] {
-    --brand-50: theme(--color-sky-50);
-    --brand-100: theme(--color-sky-100);
-    --brand-200: theme(--color-sky-200);
-    --brand-300: theme(--color-sky-300);
-    --brand-400: theme(--color-sky-400);
-    --brand-500: theme(--color-sky-500);
-    --brand-600: theme(--color-sky-600);
-    --brand-700: theme(--color-sky-700);
-    --brand-800: theme(--color-sky-800);
-    --brand-900: theme(--color-sky-900);
-    --brand-950: theme(--color-sky-950);
+    --background: theme(--color-sky-50);
+    --foreground: theme(--color-sky-900);
+
+    --gid-card: theme(--color-sky-100);
+    --gid-card-foreground: theme(--color-sky-900);
+
+    --primary: theme(--color-sky-700);
+    --primary-foreground: theme(--color-sky-50);
+
+    --secondary: theme(--color-sky-300);
+    --secondary-foreground: theme(--color-sky-800);
+
+    --muted: theme(--color-sky-100);
+    --muted-foreground: theme(--color-sky-700);
+
+    --input: theme(--color-sky-200);
+    --placeholder: theme(--color-sky-600);
+
+    --input-foreground: theme(--color-sky-900);
+
+    --border: theme(--color-sky-600);
+    --ring: theme(--color-sky-500);
+
+    --destructive: theme(--color-rose-50);
+    --destructive-foreground: theme(--color-rose-600);
+
+    --header-start: theme(--color-sky-400);
+    --header-end: theme(--color-sky-700);
+
+    --mountains-1-8: theme(--color-sky-300);
+    --mountains-2-8: theme(--color-sky-400);
+    --mountains-3-8: theme(--color-sky-500);
+    --mountains-4-8: theme(--color-sky-600);
+    --mountains-5-8: theme(--color-sky-700);
+    --mountains-6-8: theme(--color-sky-800);
+    --mountains-7-8: theme(--color-sky-900);
+    --mountains-8-8: theme(--color-sky-950);
 }
 
 [data-theme='rose'] {
-    --brand-50: theme(--color-rose-50);
-    --brand-100: theme(--color-rose-100);
-    --brand-200: theme(--color-rose-200);
-    --brand-300: theme(--color-rose-300);
-    --brand-400: theme(--color-rose-400);
-    --brand-500: theme(--color-rose-500);
-    --brand-600: theme(--color-rose-600);
-    --brand-700: theme(--color-rose-700);
-    --brand-800: theme(--color-rose-800);
-    --brand-900: theme(--color-rose-900);
-    --brand-950: theme(--color-rose-950);
+    --background: theme(--color-rose-50);
+    --foreground: theme(--color-rose-900);
+
+    --gid-card: theme(--color-rose-100);
+    --gid-card-foreground: theme(--color-rose-900);
+
+    --primary: theme(--color-rose-700);
+    --primary-foreground: theme(--color-rose-50);
+
+    --secondary: theme(--color-rose-300);
+    --secondary-foreground: theme(--color-rose-800);
+
+    --muted: theme(--color-rose-100);
+    --muted-foreground: theme(--color-rose-700);
+
+    --input: theme(--color-rose-200);
+    --placeholder: theme(--color-rose-600);
+
+    --input-foreground: theme(--color-rose-900);
+
+    --border: theme(--color-rose-600);
+    --ring: theme(--color-rose-500);
+
+    --destructive: theme(--color-red-50);
+    --destructive-foreground: theme(--color-red-600);
+
+    --header-start: theme(--color-rose-400);
+    --header-end: theme(--color-rose-700);
+
+    --mountains-1-8: theme(--color-rose-300);
+    --mountains-2-8: theme(--color-rose-400);
+    --mountains-3-8: theme(--color-rose-500);
+    --mountains-4-8: theme(--color-rose-600);
+    --mountains-5-8: theme(--color-rose-700);
+    --mountains-6-8: theme(--color-rose-800);
+    --mountains-7-8: theme(--color-rose-900);
+    --mountains-8-8: theme(--color-rose-950);
+}
+
+[data-theme='dark'] {
+    --background: theme(--color-slate-950);
+    --foreground: theme(--color-slate-50);
+
+    --gid-card: theme(--color-slate-900);
+    --gid-card-foreground: theme(--color-slate-50);
+
+    --primary: theme(--color-slate-700);
+    --primary-foreground: theme(--color-slate-50);
+
+    --secondary: theme(--color-slate-800);
+    --secondary-foreground: theme(--color-slate-100);
+
+    --muted: theme(--color-slate-900);
+    --muted-foreground: theme(--color-slate-50);
+
+    --input: theme(--color-slate-800);
+    --placeholder: theme(--color-slate-600);
+
+    --input-foreground: theme(--color-slate-900);
+
+    --border: theme(--color-slate-600);
+    --ring: theme(--color-slate-500);
+
+    --destructive: theme(--color-rose-50);
+    --destructive-foreground: theme(--color-rose-600);
+
+    --header-start: theme(--color-sky-500);
+    --header-end: theme(--color-sky-300);
+
+    --mountains-1-8: theme(--color-slate-500);
+    --mountains-2-8: theme(--color-slate-600);
+    --mountains-3-8: theme(--color-slate-400);
+    --mountains-4-8: theme(--color-slate-700);
+    --mountains-5-8: theme(--color-slate-600);
+    --mountains-6-8: theme(--color-slate-800);
+    --mountains-7-8: theme(--color-slate-800);
+    --mountains-8-8: theme(--color-slate-900);
 }
 
 @theme {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
 
-    --color-brand-50: var(--brand-50);
-    --color-brand-100: var(--brand-100);
-    --color-brand-200: var(--brand-200);
-    --color-brand-300: var(--brand-300);
-    --color-brand-400: var(--brand-400);
-    --color-brand-500: var(--brand-500);
-    --color-brand-600: var(--brand-600);
-    --color-brand-700: var(--brand-700);
-    --color-brand-800: var(--brand-800);
-    --color-brand-900: var(--brand-900);
-    --color-brand-950: var(--brand-950);
+    --color-gid-card: var(--gid-card);
+    --color-gid-card-foreground: var(--gid-card-foreground);
+
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+
+    --color-input: var(--input);
+    --color-placeholder: var(--placeholder);
+
+    --color-input-foreground: var(--input-foreground);
+
+    --color-border: var(--border);
+    --color-ring: var(--ring);
+
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+
+    --color-header-start: var(--header-start);
+    --color-header-end: var(--header-end);
+
+    --color-mountains-1-8: var(--mountains-1-8);
+    --color-mountains-2-8: var(--mountains-2-8);
+    --color-mountains-3-8: var(--mountains-3-8);
+    --color-mountains-4-8: var(--mountains-4-8);
+    --color-mountains-5-8: var(--mountains-5-8);
+    --color-mountains-6-8: var(--mountains-6-8);
+    --color-mountains-7-8: var(--mountains-7-8);
+    --color-mountains-8-8: var(--mountains-8-8);
 }
 
 @layer base {
@@ -112,7 +307,7 @@
 }
 
 #nprogress .bar {
-    @apply bg-brand-200 fixed top-0 left-0 z-50 h-0.5 w-full;
+    @apply bg-foreground fixed top-0 left-0 z-50 h-0.5 w-full;
 }
 
 @keyframes swaying {

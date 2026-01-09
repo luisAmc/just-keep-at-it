@@ -16,7 +16,7 @@ export function CategorySection({
     const [isCreating, setIsCreating] = useState(false);
 
     return (
-        <div className="rounded-lg bg-brand-100 p-4 shadow-sm">
+        <div className="bg-muted rounded-lg p-4 shadow-sm">
             <h3 className="text-lg font-medium tracking-tight">
                 {category.name}
             </h3>
@@ -26,14 +26,13 @@ export function CategorySection({
                     return (
                         <div
                             key={exercise.id}
-                            className="inline-flex h-14 w-full items-center justify-between rounded-lg bg-brand-200 px-4 py-2 text-sm font-medium"
+                            className="bg-secondary inline-flex h-14 w-full items-center justify-between rounded-lg px-4 py-2 text-sm font-medium"
                         >
                             <span>{exercise.name}</span>
 
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="hover:bg-brand-300"
                                 onClick={() =>
                                     onEditName(exercise.name, exercise.id)
                                 }

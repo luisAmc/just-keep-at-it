@@ -20,7 +20,7 @@ export function CardBody() {
         openNext,
         lastSession,
     } = useWorkoutExercise();
-    
+
     const form = useFormContext();
 
     function addSet() {
@@ -46,7 +46,7 @@ export function CardBody() {
                                 <div className="text-xs font-bold">
                                     La última vez:
                                 </div>
-                                <p className="whitespace-pre text-pretty text-xs">
+                                <p className="text-xs text-pretty whitespace-pre">
                                     {lastSession.notes}
                                 </p>
                             </div>
@@ -66,7 +66,7 @@ export function CardBody() {
                         <SimpleTextarea
                             {...form.register(`${fieldName}.notes`)}
                             placeholder="Notas..."
-                            className="rounded-md border-none bg-transparent focus:bg-brand-200"
+                            className="focus:bg-input rounded-md border-none bg-transparent"
                         />
 
                         <div className="grid grid-cols-5 gap-x-2">

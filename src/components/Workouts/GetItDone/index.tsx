@@ -107,12 +107,7 @@ export function GetItDone() {
         const nonEmptyWorkoutExercises = values.workoutExercises.filter(
             (workoutExercise) => {
                 const setsCount = workoutExercise.sets.length;
-
-                if (setsCount > 0) {
-                    return true;
-                }
-
-                return false;
+                return setsCount > 0;
             },
         );
 
@@ -126,6 +121,12 @@ export function GetItDone() {
 
                     const validStrengthFields = Number(set.reps ?? 0) !== 0;
 
+                    console.log({
+                        set,
+                        validAerobicFields,
+                        validStrengthFields,
+                    });
+
                     if (validAerobicFields || validStrengthFields) {
                         return true;
                     }
@@ -138,11 +139,11 @@ export function GetItDone() {
                     exerciseId: workoutExercise.exerciseId,
                     notes: workoutExercise.notes,
                     sets: nonEmptySets.map((set) => ({
-                        mins: Number(set.mins ?? 0),
-                        distance: Number(set.distance ?? 0),
-                        kcal: Number(set.kcal ?? 0),
-                        reps: Number(set.reps ?? 0),
-                        lbs: Number(set.lbs ?? 0),
+                        mins: Number(set.mins || 0),
+                        distance: Number(set.distance || 0),
+                        kcal: Number(set.kcal || 0),
+                        reps: Number(set.reps || 0),
+                        lbs: Number(set.lbs || 0),
                     })),
                 };
             })
@@ -185,7 +186,7 @@ export function GetItDone() {
 
                             <Drawer {...finishDrawer.props}>
                                 <div className="flex flex-col items-center gap-y-2">
-                                    <PandaIcon className="text-brand-700 size-20" />
+                                    <PandaIcon className="text-primary size-20" />
 
                                     <p className="text-center">
                                         ¿Finalizar esta rútina?

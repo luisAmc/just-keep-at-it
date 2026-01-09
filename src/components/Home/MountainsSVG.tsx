@@ -16,11 +16,11 @@ export function MountainsSVG() {
                 >
                     <stop
                         offset="0%"
-                        style={{ stopColor: 'var(--color-brand-300)' }}
+                        style={{ stopColor: 'var(--color-mountains-1-8)' }}
                     ></stop>
                     <stop
                         offset="100%"
-                        style={{ stopColor: 'var(--color-brand-400)' }}
+                        style={{ stopColor: 'var(--color-mountains-2-8)' }}
                     ></stop>
                 </linearGradient>
 
@@ -33,11 +33,11 @@ export function MountainsSVG() {
                 >
                     <stop
                         offset="0%"
-                        style={{ stopColor: 'var(--color-brand-500)' }}
+                        style={{ stopColor: 'var(--color-mountains-3-8)' }}
                     ></stop>
                     <stop
                         offset="100%"
-                        style={{ stopColor: 'var(--color-brand-600)' }}
+                        style={{ stopColor: 'var(--color-mountains-4-8)' }}
                     ></stop>
                 </linearGradient>
 
@@ -50,11 +50,11 @@ export function MountainsSVG() {
                 >
                     <stop
                         offset="0%"
-                        style={{ stopColor: 'var(--color-brand-700)' }}
+                        style={{ stopColor: 'var(--color-mountains-5-8)' }}
                     ></stop>
                     <stop
                         offset="100%"
-                        style={{ stopColor: 'var(--color-brand-800)' }}
+                        style={{ stopColor: 'var(--color-mountains-6-8)' }}
                     ></stop>
                 </linearGradient>
 
@@ -67,11 +67,11 @@ export function MountainsSVG() {
                 >
                     <stop
                         offset="0%"
-                        style={{ stopColor: 'var(--color-brand-900)' }}
+                        style={{ stopColor: 'var(--color-mountains-7-8)' }}
                     ></stop>
                     <stop
                         offset="100%"
-                        style={{ stopColor: 'var(--color-brand-950)' }}
+                        style={{ stopColor: 'var(--color-mountains-8-8)' }}
                     ></stop>
                 </linearGradient>
             </defs>

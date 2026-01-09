@@ -8,10 +8,8 @@ import {
     XIcon,
 } from 'lucide-react';
 import { cn } from '~/utils/cn';
-import { ThemeSwitcherModal } from './ThemeSwitcherModal';
 import { useAuthRedirect } from '~/utils/useAuthRedirect';
 import { useEffect, useState, type ReactNode } from 'react';
-import { useModal } from './shared/Modal';
 import { useRouter } from 'next/router';
 import { Drawer, useDrawer } from './shared/Drawer';
 import { Button } from './shared/Button';
@@ -30,7 +28,6 @@ export function Layout({ children }: LayoutProps) {
 
     const authRedirect = useAuthRedirect();
 
-    const themeSwitcherModal = useModal();
     const actionDrawer = useDrawer();
     const { setTheme } = useTheme();
 
@@ -65,7 +62,7 @@ export function Layout({ children }: LayoutProps) {
             >
                 <Link
                     href="/"
-                    className="from-brand-400 to-brand-700 bg-linear-to-r bg-clip-text text-2xl font-semibold tracking-tight text-transparent"
+                    className="from-header-start to-header-end bg-linear-to-r bg-clip-text text-2xl font-semibold tracking-tight text-transparent"
                 >
                     Just keep at it!
                 </Link>
@@ -78,7 +75,7 @@ export function Layout({ children }: LayoutProps) {
                         actionDrawer.open();
                     }}
                 >
-                    <SettingsIcon className="text-brand-600 size-6" />
+                    <SettingsIcon className="size-6" />
                 </Button>
 
                 <Drawer {...actionDrawer.props} onClose={actionDrawer.close}>
@@ -125,7 +122,7 @@ export function Layout({ children }: LayoutProps) {
 
                                 <Button
                                     variant="outline"
-                                    className="h-12 justify-start text-red-600"
+                                    className="border-destructive-foreground h-12 justify-start text-red-600"
                                     onClick={() => logout.mutateAsync()}
                                 >
                                     <LogOutIcon className="mr-1 size-4" />
@@ -177,6 +174,15 @@ export function Layout({ children }: LayoutProps) {
                                     <span className="mr-1 size-4 rounded-full bg-rose-500"></span>
                                     <span>Rosa</span>
                                 </Button>
+
+                                <Button
+                                    size="lg"
+                                    className="justify-start bg-[#141c30] text-[#F1F5FA] hover:bg-[#141c30]/80"
+                                    onClick={() => setTheme('dark')}
+                                >
+                                    <span className="mr-1 size-4 rounded-full bg-[#F1F5FA]"></span>
+                                    <span>Oscuro</span>
+                                </Button>
                             </motion.div>
                         )}
 
@@ -191,8 +197,6 @@ export function Layout({ children }: LayoutProps) {
                         )}
                     </AnimatePresence>
                 </Drawer>
-
-                <ThemeSwitcherModal {...themeSwitcherModal.props} />
             </nav>
 
             <main className="relative">{children}</main>

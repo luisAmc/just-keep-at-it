@@ -9,7 +9,7 @@ export function NewWorkoutCard() {
 
     return (
         <>
-            <div className="relative flex h-52 flex-col overflow-hidden rounded-lg bg-linear-to-b from-brand-300 to-brand-100 shadow-sm">
+            <div className="from-secondary to-muted relative flex h-52 flex-col overflow-hidden rounded-lg bg-linear-to-b shadow-sm">
                 <MountainsSVG />
 
                 <div className="relative h-full w-full px-6 py-8">
@@ -23,9 +23,9 @@ export function NewWorkoutCard() {
                         </div>
                     </div>
 
-                    <div className="absolute bottom-8 right-8">
+                    <div className="absolute right-8 bottom-8">
                         <button
-                            className="inline-flex items-center gap-x-2 font-medium text-brand-50"
+                            className="text-white inline-flex items-center gap-x-2 font-medium"
                             onClick={newWorkoutSlideOver.open}
                         >
                             <span className="text-xl">Comenzar</span>

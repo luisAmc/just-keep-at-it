@@ -38,13 +38,13 @@ export function Templates() {
                     templates.map((template) => (
                         <div
                             key={template.id}
-                            className="rounded-xl bg-brand-50 p-4"
+                            className="bg-muted rounded-xl p-4"
                         >
-                            <h4 className="mb-2 text-xl font-semibold text-brand-800">
+                            <h4 className="text-muted-foreground mb-2 text-xl font-semibold">
                                 {template.name}
                             </h4>
 
-                            <div className="divide-y divide-gray-200">
+                            <div className="divide-muted divide-y">
                                 {template.exercises.map((exercise, idx) => (
                                     <div
                                         key={exercise.id}
@@ -62,8 +62,8 @@ export function Templates() {
                         </div>
                     ))
                 ) : (
-                    <div className="flex flex-col divide-brand-700 rounded-lg bg-brand-50 px-4 py-6">
-                        <div className="flex flex-col items-center space-y-3 rounded-md text-brand-600">
+                    <div className="bg-muted flex flex-col rounded-lg px-4 py-6">
+                        <div className="text-muted-foreground flex flex-col items-center space-y-3 rounded-md">
                             <CatIcon className="size-8" />
 
                             <p className="text-sm font-semibold">

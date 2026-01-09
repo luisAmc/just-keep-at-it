@@ -79,7 +79,7 @@ export function SlideOver({
                                             )}
                                         >
                                             <div className="flex items-center justify-between">
-                                                <DialogTitle className="text-brand-900 text-lg leading-6 font-semibold">
+                                                <DialogTitle className="text-foreground text-lg leading-6 font-semibold">
                                                     {title}
                                                 </DialogTitle>
 

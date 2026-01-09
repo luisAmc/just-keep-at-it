@@ -71,7 +71,7 @@ function Loader() {
     return (
         <div className="flex justify-center">
             <svg
-                className="text-brand-700 -ml-1 mr-3 h-7 w-7 animate-spin"
+                className="text-foreground -ml-1 mr-3 h-7 w-7 animate-spin"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"

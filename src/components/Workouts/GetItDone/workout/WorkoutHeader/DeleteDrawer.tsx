@@ -28,7 +28,7 @@ export function DeleteDrawer() {
             </Button>
 
             <Drawer {...deleteDrawer.props}>
-                <div className="rounded-xl p-4 text-sm text-rose-700 ring-2 ring-rose-400">
+                <div className="text-destructive-foreground ring-destructive-foreground rounded-xl p-4 text-sm ring-2">
                     <h2 className="mb-4 text-lg font-medium">
                         Descartar rútina
                     </h2>

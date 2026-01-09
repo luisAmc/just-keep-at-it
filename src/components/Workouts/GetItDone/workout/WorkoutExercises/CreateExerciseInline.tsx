@@ -48,7 +48,7 @@ export function CreateExerciseInline({
 
     return (
         <Form form={form} onSubmit={handleSubmit}>
-            <div className="flex flex-col gap-2 border-t border-gray-200 pt-2">
+            <div className="flex flex-col gap-2 border-t border-muted pt-2">
                 <ErrorMessage
                     title="Ocurrió un error..."
                     error={createExercise.error?.message}

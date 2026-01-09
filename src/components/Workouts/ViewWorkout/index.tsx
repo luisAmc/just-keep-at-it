@@ -198,7 +198,7 @@ export function ViewWorkout() {
                             return (
                                 <div
                                     key={workoutExercise.id}
-                                    className="bg-brand-100 rounded-lg p-4"
+                                    className="bg-muted rounded-lg p-4"
                                 >
                                     {/* Header */}
                                     <div className="flex items-center justify-between">

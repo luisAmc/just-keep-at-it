@@ -72,11 +72,11 @@ export function ExerciseHistoryDrawer({
                             ))}
                         </div>
                     ) : (
-                        <div className="flex flex-col divide-brand-700 rounded-lg bg-brand-50 px-4 py-6">
-                            <div className="flex flex-col items-center space-y-3 rounded-md text-brand-600">
+                        <div className="divide-muted-foreground bg-muted flex flex-col rounded-lg px-4 py-6">
+                            <div className="text-muted-foreground flex flex-col items-center space-y-3 rounded-md">
                                 <CatIcon className="size-8" />
 
-                                <p className="text-pretty text-center text-sm font-medium">
+                                <p className="text-center text-sm font-medium text-pretty">
                                     No se han completado rútinas con este
                                     ejercicio...
                                 </p>
@@ -103,12 +103,12 @@ interface WorkoutExerciseProps {
 
 function WorkoutExercise({ isAerobic, workoutExercise }: WorkoutExerciseProps) {
     return (
-        <div className="rounded-xl bg-brand-100 px-8 py-4">
+        <div className="bg-muted rounded-xl px-8 py-4">
             <h3 className="text-lg font-semibold">
                 {workoutExercise.workout?.name}
             </h3>
 
-            <div className="text-xs font-semibold text-brand-700">
+            <div className="text-muted-foreground text-xs font-semibold">
                 {formatDate(
                     workoutExercise.completedAt!,
                     "dd MMMM yy 'a las' h:mm a",
@@ -136,7 +136,7 @@ function WorkoutExercise({ isAerobic, workoutExercise }: WorkoutExerciseProps) {
             {workoutExercise.notes && (
                 <div className="mt-2">
                     <div className="text-xs font-bold">Notas:</div>
-                    <p className="whitespace-pre text-pretty text-xs">
+                    <p className="text-xs text-pretty whitespace-pre">
                         {workoutExercise.notes}
                     </p>
                 </div>
@@ -159,14 +159,14 @@ function AerobicSet({ mins, distance, kcal }: AerobicSetProps) {
                 <span className="text-xs">mins</span>
             </span>
 
-            <span className="text-sm text-brand-400">x</span>
+            <span className="text-secondary text-sm">x</span>
 
             <span>
                 <span className="text-base">{distance}</span>
                 <span className="text-xs">dist</span>
             </span>
 
-            <span className="text-sm text-brand-400">x</span>
+            <span className="text-secondary text-sm">x</span>
 
             <span>
                 <span className="text-base">{kcal}</span>
@@ -189,7 +189,7 @@ function StrengthSet({ lbs, reps }: StrengthSetProps) {
                 <span className="text-xs">lbs</span>
             </span>
 
-            <span className="text-sm text-brand-700">x</span>
+            <span className="text-secondary text-sm">x</span>
 
             <span>
                 <span className="text-base">{reps}</span>
@@ -202,17 +202,17 @@ function StrengthSet({ lbs, reps }: StrengthSetProps) {
 function Shimmer() {
     return (
         <div className="flex animate-pulse flex-col space-y-4">
-            <div className="rounded-xl bg-brand-100 p-3">
+            <div className="bg-muted rounded-xl p-3">
                 <div className="flex flex-col space-y-2">
-                    <div className="h-4 w-1/2 rounded-md bg-brand-300"></div>
-                    <div className="h-3 w-3/4 rounded-md bg-brand-400"></div>
+                    <div className="bg-secondary h-4 w-1/2 rounded-md"></div>
+                    <div className="bg-secondary h-3 w-3/4 rounded-md"></div>
 
                     {/* Spacer */}
                     <div></div>
 
-                    <div className="h-4 w-3/5 rounded-md bg-brand-300"></div>
-                    <div className="h-4 w-3/5 rounded-md bg-brand-300"></div>
-                    <div className="h-4 w-3/5 rounded-md bg-brand-300"></div>
+                    <div className="bg-secondary h-4 w-3/5 rounded-md"></div>
+                    <div className="bg-secondary h-4 w-3/5 rounded-md"></div>
+                    <div className="bg-secondary h-4 w-3/5 rounded-md"></div>
                 </div>
             </div>
         </div>

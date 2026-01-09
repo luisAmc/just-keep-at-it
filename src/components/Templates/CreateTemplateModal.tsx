@@ -98,7 +98,7 @@ function SelectedExercises() {
 
     return (
         <>
-            <div className=" text-sm font-medium leading-none text-brand-800">
+            <div className=" text-sm font-medium leading-none text-foreground">
                 Ejercicios
             </div>
 
@@ -140,7 +140,7 @@ function SelectedExercises() {
                     </Button>
                 </div>
             ) : (
-                <div className="flex flex-col items-center space-y-3 rounded-xl bg-brand-50 p-4">
+                <div className="flex flex-col items-center space-y-3 rounded-xl bg-muted text-muted-foreground p-4">
                     <CatIcon className="size-8" />
 
                     <p className="text-sm font-semibold">

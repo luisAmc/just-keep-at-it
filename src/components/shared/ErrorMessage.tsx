@@ -7,11 +7,13 @@ export function ErrorMessage({ title, error }: Props) {
     if (!error) return null;
 
     return (
-        <div className="space-y-1 rounded-md border-2 border-red-500 border-opacity-50 bg-red-50 p-4">
+        <div className="border-destructive-foreground border-opacity-50 bg-destructive space-y-1 rounded-md border-2 p-4">
             {title && (
-                <h3 className="text-sm font-medium text-red-800">{title}</h3>
+                <h3 className="text-destructive-foreground text-sm font-medium">
+                    {title}
+                </h3>
             )}
-            <div className="text-sm text-red-700">{error}</div>
+            <div className="text-destructive-foreground text-sm">{error}</div>
         </div>
     );
 }

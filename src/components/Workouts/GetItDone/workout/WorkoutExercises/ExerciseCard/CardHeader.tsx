@@ -12,15 +12,15 @@ export function CardHeader() {
         <div className="flex items-center justify-between">
             {/* Left */}
             <div className="flex items-center gap-x-2">
-                <span className="border-brand-600 flex size-9 shrink-0 items-center justify-center rounded-full border-2">
-                    <span className="text-brand-600 space-x-0.5 text-xs font-semibold">
+                <span className="border-muted-foreground flex size-9 shrink-0 items-center justify-center rounded-full border-2">
+                    <span className="text-muted-foreground space-x-0.5 text-xs font-semibold">
                         <span>{label}</span>
                     </span>
                 </span>
 
                 <Button
                     variant="ghost"
-                    className="whitespace-normal px-1.5 text-start text-base text-wrap"
+                    className="text-gid-card-foreground px-1.5 text-start text-base text-wrap whitespace-normal"
                     onClick={onHistory}
                 >
                     {name}
