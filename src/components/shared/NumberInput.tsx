@@ -22,6 +22,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
                     inputMode="decimal"
                     placeholder="-"
                     min={0}
+                    step={0.1}
                     required
                     onFocus={(e) => e.target.select()}
                     onWheel={(event) =>
