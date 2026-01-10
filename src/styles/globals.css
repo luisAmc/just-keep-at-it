@@ -19,6 +19,7 @@
 
     --input: theme(--color-teal-200);
     --placeholder: theme(--color-teal-600);
+    --hint: theme(--color-teal-800);
 
     --input-foreground: theme(--color-teal-900);
 
@@ -59,6 +60,7 @@
 
     --input: theme(--color-gray-200);
     --placeholder: theme(--color-gray-600);
+    --hint: theme(--color-gray-800);
 
     --input-foreground: theme(--color-gray-900);
 
@@ -99,6 +101,7 @@
 
     --input: theme(--color-sky-200);
     --placeholder: theme(--color-sky-600);
+    --hint: theme(--color-sky-800);
 
     --input-foreground: theme(--color-sky-900);
 
@@ -139,6 +142,7 @@
 
     --input: theme(--color-rose-200);
     --placeholder: theme(--color-rose-600);
+    --hint: theme(--color-rose-800);
 
     --input-foreground: theme(--color-rose-900);
 
@@ -179,6 +183,7 @@
 
     --input: theme(--color-slate-800);
     --placeholder: theme(--color-slate-600);
+    --hint: theme(--color-slate-400);
 
     --input-foreground: theme(--color-slate-900);
 
@@ -219,6 +224,7 @@
 
     --color-input: var(--input);
     --color-placeholder: var(--placeholder);
+    --color-hint: var(--hint);
 
     --color-input-foreground: var(--input-foreground);
 

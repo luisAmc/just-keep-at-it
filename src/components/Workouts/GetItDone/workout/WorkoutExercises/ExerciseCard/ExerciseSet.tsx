@@ -108,7 +108,7 @@ function LastSession({ setIndex }: { setIndex: number }) {
 
     return (
         <div className="flex justify-end">
-            <Button variant="ghost" onClick={handleClick}>
+            <Button variant="ghost" className="text-hint" onClick={handleClick}>
                 {type === ExerciseType.STRENGTH && (
                     <>
                         <span>
